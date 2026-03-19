@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Health & Glow</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f0d0b;
+  --s1:#161310;
+  --s2:#1d1916;
+  --s3:#252018;
+  --b1:#2e2720;
+  --b2:#3a3028;
+  --t1:#f5efe8;
+  --t2:#7a6e65;
+  --t3:#3d3530;
+  --amber:#f5a623;
+  --ad:#1f1500;
+  --am:#7a4e00;
+  --coral:#ff7058;
+  --cd:#1f0a08;
+  --cm:#8a2a1a;
+  --teal:#3ecfb8;
+  --td:#041a17;
+  --tm:#1a7060;
+  --rose:#f2789f;
+  --rd2:#1f0a12;
+  --sky:#6ab4f0;
+  --skd:#071524;
+  --lavender:#b59af0;
+  --lad:#0e0a1f;
+  --serif:'Instrument Serif',serif;
+  --mono:'DM Mono',monospace;
+  --sans:'Nunito',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--t1);font-family:var(--sans);min-height:100vh;padding-bottom:70px;-webkit-tap-highlight-color:transparent;overscroll-behavior:none;}
+::-webkit-scrollbar{width:2px;height:2px;}
+::-webkit-scrollbar-thumb{background:var(--b2);}
+
+/* ── NAV ── */
+nav{position:fixed;bottom:0;left:0;right:0;background:rgba(15,13,11,.97);backdrop-filter:blur(20px);border-top:1px solid var(--b1);display:flex;z-index:50;}
+.nb{flex:1;padding:8px 4px 6px;background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--t3);font-family:var(--mono);font-size:7.5px;transition:color .15s;letter-spacing:.5px;}
+.nb.on{color:var(--amber);}
+.nb .ni{font-size:18px;line-height:1;}
+
+/* ── PAGES ── */
+.page{display:none;max-width:500px;margin:0 auto;padding-bottom:20px;}
+.page.on{display:block;}
+
+/* ── COMMON ── */
+.inp{background:var(--s2);border:1px solid var(--b1);border-radius:10px;padding:9px 12px;color:var(--t1);font-family:var(--mono);font-size:12px;outline:none;transition:border-color .15s;width:100%;}
+.inp:focus{border-color:var(--am);}
+.inp::placeholder{color:var(--t3);}
+.btn{font-family:var(--mono);border-radius:10px;cursor:pointer;transition:all .15s;border:none;letter-spacing:.3px;}
+.btn-a{background:var(--amber);color:#0f0d0b;font-size:12px;font-weight:700;padding:11px 18px;}
+.btn-a:active{opacity:.8;transform:scale(.97);}
+.btn-o{background:var(--s2);border:1px solid var(--b2);color:var(--t2);font-size:11px;padding:9px 14px;}
+.btn-r{background:var(--cd);border:1px solid #330d0d;color:var(--coral);font-size:10px;padding:5px 10px;}
+.sec-lbl{font-family:var(--mono);font-size:9px;font-weight:500;color:var(--t3);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;}
+
+/* ════════════════════════════════════
+   TODAY PAGE
+════════════════════════════════════ */
+#pg-today{padding:0;}
+
+.today-hero{
+  padding:32px 16px 20px;
+  position:relative;overflow:hidden;
+  border-bottom:1px solid var(--b1);
+}
+.today-hero::before{
+  content:'';position:absolute;
+  top:-80px;right:-60px;
+  width:260px;height:260px;
+  background:radial-gradient(circle,rgba(245,166,35,.07) 0%,transparent 65%);
+  pointer-events:none;
+}
+.today-hero::after{
+  content:'';position:absolute;
+  bottom:-40px;left:-30px;
+  width:160px;height:160px;
+  background:radial-gradient(circle,rgba(242,120,159,.05) 0%,transparent 65%);
+  pointer-events:none;
+}
+.th-eyebrow{font-family:var(--mono);font-size:8.5px;color:var(--t2);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;}
+.th-title{font-family:var(--serif);font-size:32px;font-style:italic;color:var(--amber);line-height:1.1;margin-bottom:14px;}
+.th-title span{color:var(--t1);font-style:normal;}
+
+/* Overall ring */
+.progress-ring-wrap{display:flex;align-items:center;gap:16px;margin-bottom:6px;}
+.ring-svg{flex-shrink:0;}
+.ring-bg{fill:none;stroke:var(--s3);stroke-width:5;}
+.ring-fill{fill:none;stroke:var(--amber);stroke-width:5;stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;transition:stroke-dashoffset .6s cubic-bezier(.34,1.1,.64,1);}
+.ring-pct{font-family:var(--serif);font-size:28px;text-anchor:middle;dominant-baseline:central;fill:var(--t1);}
+.ring-label{font-family:var(--mono);font-size:7px;text-anchor:middle;fill:var(--t2);letter-spacing:1px;}
+.streak-info{flex:1;}
+.streak-num{font-family:var(--serif);font-size:64px;line-height:.9;color:var(--t1);}
+.streak-sub{font-family:var(--mono);font-size:9px;color:var(--t2);letter-spacing:.5px;margin-top:4px;}
+.streak-best{font-family:var(--mono);font-size:8px;color:var(--t3);margin-top:3px;}
+
+/* CATEGORY WINS */
+.cat-wins{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-bottom:1px solid var(--b1);}
+.cw{
+  padding:12px 8px;text-align:center;
+  border-right:1px solid var(--b1);
+  transition:background .2s;
+  cursor:default;
+}
+.cw:last-child{border-right:none;}
+.cw.done{background:rgba(245,166,35,.07);}
+.cw-icon{font-size:20px;margin-bottom:4px;display:block;filter:grayscale(1);transition:filter .2s;}
+.cw.done .cw-icon{filter:none;}
+.cw-name{font-family:var(--mono);font-size:7px;color:var(--t3);letter-spacing:.5px;text-transform:uppercase;}
+.cw.done .cw-name{color:var(--amber);}
+
+/* SECTION BLOCKS */
+.sec-block{padding:16px;}
+.sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.sec-title{display:flex;align-items:center;gap:8px;}
+.sec-emoji{font-size:18px;}
+.sec-name{font-family:var(--serif);font-size:20px;font-style:italic;color:var(--t1);}
+.sec-pct{font-family:var(--mono);font-size:10px;color:var(--t2);}
+
+/* CHECKLIST ITEMS */
+.check-list{display:flex;flex-direction:column;gap:6px;}
+.check-item{
+  display:flex;align-items:center;gap:12px;
+  background:var(--s1);border:1px solid var(--b1);
+  border-radius:12px;padding:12px 14px;
+  cursor:pointer;transition:all .18s;
+  position:relative;overflow:hidden;
+}
+.check-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--b1);transition:background .2s;}
+.check-item:active{transform:scale(.98);}
+.check-item.done{background:rgba(245,166,35,.06);border-color:rgba(245,166,35,.25);}
+.check-item.done::before{background:var(--amber);}
+.check-item.done-teal{background:rgba(62,207,184,.06);border-color:rgba(62,207,184,.25);}
+.check-item.done-teal::before{background:var(--teal);}
+.check-item.done-coral{background:rgba(255,112,88,.06);border-color:rgba(255,112,88,.25);}
+.check-item.done-coral::before{background:var(--coral);}
+.check-item.done-rose{background:rgba(242,120,159,.06);border-color:rgba(242,120,159,.25);}
+.check-item.done-rose::before{background:var(--rose);}
+.check-item.done-sky{background:rgba(106,180,240,.06);border-color:rgba(106,180,240,.25);}
+.check-item.done-sky::before{background:var(--sky);}
+.check-item.done-lavender{background:rgba(181,154,240,.06);border-color:rgba(181,154,240,.25);}
+.check-item.done-lavender::before{background:var(--lavender);}
+
+.ci-check{
+  width:22px;height:22px;border-radius:50%;
+  border:2px solid var(--b2);background:var(--s2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:transparent;flex-shrink:0;
+  transition:all .2s;
+}
+.check-item.done .ci-check,.check-item.done-teal .ci-check,
+.check-item.done-coral .ci-check,.check-item.done-rose .ci-check,
+.check-item.done-sky .ci-check,.check-item.done-lavender .ci-check{
+  color:#0f0d0b;font-weight:700;
+}
+.check-item.done .ci-check{background:var(--amber);border-color:var(--amber);}
+.check-item.done-teal .ci-check{background:var(--teal);border-color:var(--teal);}
+.check-item.done-coral .ci-check{background:var(--coral);border-color:var(--coral);}
+.check-item.done-rose .ci-check{background:var(--rose);border-color:var(--rose);}
+.check-item.done-sky .ci-check{background:var(--sky);border-color:var(--sky);}
+.check-item.done-lavender .ci-check{background:var(--lavender);border-color:var(--lavender);}
+
+.ci-info{flex:1;}
+.ci-name{font-size:13px;font-weight:600;color:var(--t1);line-height:1.2;}
+.ci-sub{font-family:var(--mono);font-size:9px;color:var(--t2);margin-top:2px;}
+.ci-streak{font-family:var(--mono);font-size:9px;color:var(--t3);text-align:right;flex-shrink:0;}
+.ci-streak span{display:block;font-size:18px;font-weight:500;color:var(--amber);line-height:1;}
+
+/* SKINCARE STEPS */
+.skincare-steps{display:flex;flex-direction:column;gap:5px;}
+.sc-step{
+  display:flex;align-items:center;gap:10px;
+  background:var(--s1);border:1px solid var(--b1);
+  border-radius:10px;padding:10px 14px;
+  cursor:pointer;transition:all .18s;
+}
+.sc-step:active{transform:scale(.98);}
+.sc-step.done{background:rgba(242,120,159,.06);border-color:rgba(242,120,159,.25);}
+.sc-num{
+  width:20px;height:20px;border-radius:50%;
+  background:var(--s3);border:1px solid var(--b1);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:9px;color:var(--t3);flex-shrink:0;
+  transition:all .2s;
+}
+.sc-step.done .sc-num{background:var(--rose);border-color:var(--rose);color:#0f0d0b;font-weight:700;}
+.sc-step-name{flex:1;font-size:13px;font-weight:600;color:var(--t1);}
+.sc-step.done .sc-step-name{color:var(--rose);}
+.sc-step-emoji{font-size:16px;}
+.sc-step-del{background:none;border:none;color:var(--t3);cursor:pointer;padding:4px;font-size:12px;transition:color .15s;}
+.sc-step-del:hover{color:var(--coral);}
+
+.sc-add-row{display:flex;gap:6px;margin-top:8px;}
+.sc-progress-bar{height:3px;background:var(--s3);border-radius:2px;overflow:hidden;margin-bottom:10px;}
+.sc-progress-fill{height:100%;background:var(--rose);border-radius:2px;transition:width .4s cubic-bezier(.34,1.1,.64,1);}
+
+/* GYM/REST TOGGLE */
+.day-choice{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
+.dc{
+  padding:16px 12px;border-radius:12px;
+  border:1px solid var(--b1);background:var(--s1);
+  cursor:pointer;transition:all .2s;user-select:none;
+  display:flex;align-items:center;gap:10px;
+}
+.dc:active{transform:scale(.97);}
+.dc.gym-sel{background:rgba(245,166,35,.08);border-color:var(--am);}
+.dc.rest-sel{background:rgba(62,207,184,.08);border-color:var(--tm);}
+.dc-icon{font-size:22px;flex-shrink:0;}
+.dc-label{font-family:var(--serif);font-size:18px;font-style:italic;line-height:1;}
+.dc-sub{font-family:var(--mono);font-size:8px;color:var(--t2);margin-top:2px;}
+.dc.gym-sel .dc-label{color:var(--amber);}
+.dc.rest-sel .dc-label{color:var(--teal);}
+
+/* SPLIT CHIPS */
+.split-chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+.sc{font-family:var(--mono);font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid var(--b2);background:var(--s2);color:var(--t2);cursor:pointer;transition:all .15s;}
+.sc.on{background:rgba(245,166,35,.12);border-color:var(--am);color:var(--amber);}
+.split-logged{background:rgba(245,166,35,.06);border:1px solid rgba(245,166,35,.2);border-radius:10px;padding:10px 14px;font-family:var(--mono);font-size:10px;color:var(--amber);}
+
+/* NUTRITION */
+.meal-row{display:flex;gap:6px;margin-bottom:6px;}
+.meal-btn{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:14px 6px;border-radius:12px;border:1px solid var(--b1);background:var(--s1);
+  cursor:pointer;transition:all .18s;gap:4px;
+}
+.meal-btn.done{background:rgba(62,207,184,.07);border-color:rgba(62,207,184,.3);}
+.meal-btn:active{transform:scale(.96);}
+.meal-icon{font-size:22px;}
+.meal-name{font-family:var(--mono);font-size:8px;color:var(--t2);letter-spacing:.5px;text-transform:uppercase;}
+.meal-btn.done .meal-name{color:var(--teal);}
+.meal-check{font-size:10px;color:transparent;height:14px;}
+.meal-btn.done .meal-check{color:var(--teal);}
+
+/* HYDRATION */
+.hydration-row{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--s1);border:1px solid var(--b1);border-radius:12px;margin-bottom:6px;}
+.hydration-glasses{display:flex;gap:4px;flex:1;flex-wrap:wrap;}
+.glass{
+  width:28px;height:28px;border-radius:7px;
+  background:var(--s3);border:1px solid var(--b1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;cursor:pointer;transition:all .15s;
+  filter:grayscale(1);opacity:.4;
+}
+.glass.filled{filter:none;opacity:1;background:rgba(106,180,240,.15);border-color:rgba(106,180,240,.4);}
+.glass:active{transform:scale(.88);}
+.hydration-label{font-family:var(--mono);font-size:9px;color:var(--t2);text-align:right;min-width:40px;}
+
+/* SLEEP */
+.sleep-row{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--s1);border:1px solid var(--b1);border-radius:12px;}
+.sleep-label{font-family:var(--mono);font-size:9px;color:var(--t2);min-width:50px;}
+.sleep-btns{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
+.sleep-btn{
+  padding:5px 10px;border-radius:8px;border:1px solid var(--b1);
+  background:var(--s2);font-family:var(--mono);font-size:10px;color:var(--t2);
+  cursor:pointer;transition:all .15s;
+}
+.sleep-btn.on{background:rgba(181,154,240,.15);border-color:rgba(181,154,240,.4);color:var(--lavender);}
+
+/* SHAKE TOGGLE */
+.shake-row{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--s1);border:1px solid var(--b1);border-radius:12px;cursor:pointer;transition:all .18s;}
+.shake-row.done{background:rgba(62,207,184,.06);border-color:rgba(62,207,184,.3);}
+.shake-toggle{width:36px;height:20px;border-radius:10px;background:var(--s3);border:1px solid var(--b2);position:relative;flex-shrink:0;transition:all .2s;}
+.shake-toggle::after{content:'';position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:var(--t3);transition:all .2s;}
+.shake-row.done .shake-toggle{background:rgba(62,207,184,.3);border-color:var(--teal);}
+.shake-row.done .shake-toggle::after{left:18px;background:var(--teal);}
+.shake-info{flex:1;}
+.shake-name{font-size:13px;font-weight:600;color:var(--t1);}
+.shake-sub{font-family:var(--mono);font-size:9px;color:var(--t2);margin-top:2px;}
+
+/* divider */
+.sec-divider{height:1px;background:var(--b1);margin:0 16px;}
+
+/* ════════════════════════════════════
+   CHAIN / CALENDAR PAGE
+════════════════════════════════════ */
+#pg-chain{padding:0 16px;}
+.chain-hero{padding:32px 0 20px;}
+.chain-title-big{font-family:var(--serif);font-size:48px;font-style:italic;line-height:.95;color:var(--t1);margin-bottom:4px;}
+.chain-title-big span{color:var(--amber);}
+.chain-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px;}
+.cstat{background:var(--s1);border:1px solid var(--b1);border-radius:12px;padding:12px 10px;text-align:center;}
+.cstat-v{font-family:var(--serif);font-size:36px;line-height:1;color:var(--t1);}
+.cstat-l{font-family:var(--mono);font-size:7.5px;color:var(--t2);margin-top:3px;letter-spacing:.5px;text-transform:uppercase;}
+
+/* category filter tabs */
+.cat-tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:14px;}
+.cat-tab{font-family:var(--mono);font-size:9px;padding:5px 11px;border-radius:20px;border:1px solid var(--b2);background:var(--s2);color:var(--t2);cursor:pointer;transition:all .15s;}
+.cat-tab.on{border-color:var(--am);color:var(--amber);background:rgba(245,166,35,.1);}
+
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.cal-mnth{font-family:var(--serif);font-size:22px;font-style:italic;color:var(--t1);}
+.cal-nbtn{background:var(--s2);border:1px solid var(--b1);border-radius:8px;padding:6px 14px;color:var(--t1);font-family:var(--mono);font-size:10px;cursor:pointer;transition:all .15s;}
+.cal-nbtn:hover{border-color:var(--am);}
+
+.dow-row{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:4px;}
+.dow-c{text-align:center;font-family:var(--mono);font-size:7.5px;color:var(--t3);padding:3px 0;}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;}
+.cc{
+  aspect-ratio:1;border-radius:8px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:9px;
+  background:var(--s2);border:1px solid transparent;
+  color:var(--t3);position:relative;transition:all .15s;cursor:pointer;
+  gap:1px;
+}
+.cc.empty{background:transparent;border-color:transparent;cursor:default;pointer-events:none;}
+.cc.future{background:var(--s1);opacity:.4;cursor:default;pointer-events:none;}
+.cc.today{border:1.5px solid var(--t2) !important;}
+.cc.full{background:rgba(245,166,35,.15);border-color:rgba(245,166,35,.4);}
+.cc.full::after{content:'✕';position:absolute;font-size:15px;font-weight:900;font-family:var(--serif);top:50%;left:50%;transform:translate(-50%,-54%);color:var(--amber);opacity:.6;line-height:1;}
+.cc.partial{background:rgba(245,166,35,.05);border-color:rgba(245,166,35,.15);}
+.cc.partial .cc-dots{display:flex;}
+.cc-dots{display:none;gap:2px;justify-content:center;position:absolute;bottom:3px;flex-wrap:wrap;padding:0 2px;}
+.cc-dot{width:4px;height:4px;border-radius:50%;}
+.cc-num{position:relative;z-index:1;}
+
+.cal-legend{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap;}
+.leg{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:8px;color:var(--t2);}
+.leg-dot{width:9px;height:9px;border-radius:3px;}
+
+/* ════════════════════════════════════
+   STATS PAGE
+════════════════════════════════════ */
+#pg-stats{padding:0 16px;}
+.stats-hero{padding:32px 0 16px;}
+.stats-title{font-family:var(--serif);font-size:40px;font-style:italic;color:var(--t1);line-height:1;}
+.stats-title span{color:var(--amber);}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;}
+.stat-card{background:var(--s1);border:1px solid var(--b1);border-radius:12px;padding:14px 14px;}
+.stat-card-n{font-family:var(--serif);font-size:38px;line-height:1;color:var(--t1);}
+.stat-card-l{font-family:var(--mono);font-size:8px;color:var(--t2);margin-top:4px;letter-spacing:.5px;text-transform:uppercase;}
+.stat-card-s{font-family:var(--mono);font-size:8px;color:var(--t3);margin-top:2px;}
+
+.habit-stat{background:var(--s1);border:1px solid var(--b1);border-radius:12px;padding:12px 14px;margin-bottom:6px;display:flex;align-items:center;gap:10px;}
+.hs-emoji{font-size:16px;flex-shrink:0;}
+.hs-name{flex:1;font-size:12px;font-weight:600;color:var(--t1);}
+.hs-bar-wrap{width:80px;height:3px;background:var(--s3);border-radius:2px;overflow:hidden;}
+.hs-bar-fill{height:100%;border-radius:2px;transition:width .5s ease;}
+.hs-pct{font-family:var(--mono);font-size:9px;color:var(--t2);min-width:30px;text-align:right;}
+.hs-streak{font-family:var(--serif);font-size:18px;color:var(--amber);min-width:28px;text-align:right;}
+
+/* ════════════════════════════════════
+   SETTINGS PAGE
+════════════════════════════════════ */
+#pg-settings{padding:0 16px;}
+.settings-hero{padding:32px 0 16px;}
+.settings-title{font-family:var(--serif);font-size:40px;font-style:italic;color:var(--t1);}
+.settings-section{background:var(--s1);border:1px solid var(--b1);border-radius:14px;padding:16px;margin-bottom:10px;}
+.settings-sec-title{font-family:var(--mono);font-size:9px;color:var(--t2);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;}
+.settings-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--b1);}
+.settings-row:last-child{border:none;}
+.settings-row label{flex:1;font-size:13px;font-weight:500;color:var(--t1);}
+.settings-row input[type=number]{background:var(--s2);border:1px solid var(--b1);border-radius:8px;color:var(--t1);font-family:var(--mono);font-size:12px;padding:5px 8px;width:70px;text-align:center;outline:none;}
+.settings-row input:focus{border-color:var(--am);}
+
+/* ════════════════════════════════════
+   OVERLAYS / MODALS
+════════════════════════════════════ */
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.88);display:flex;align-items:flex-end;justify-content:center;z-index:100;opacity:0;pointer-events:none;transition:opacity .2s;}
+.ov.on{opacity:1;pointer-events:all;}
+.modal{background:var(--s1);border:1px solid var(--b2);border-top:2px solid var(--b2);border-radius:20px 20px 0 0;padding:20px;width:100%;max-width:500px;max-height:88vh;overflow-y:auto;transform:translateY(40px);transition:transform .28s cubic-bezier(.34,1.1,.64,1);}
+.ov.on .modal{transform:translateY(0);}
+.modal-handle{width:36px;height:3px;background:var(--b2);border-radius:2px;margin:0 auto 16px;}
+.modal-title{font-family:var(--serif);font-size:24px;font-style:italic;color:var(--t1);margin-bottom:14px;}
+.modal-x{position:absolute;top:16px;right:16px;background:var(--s2);border:1px solid var(--b2);border-radius:50%;width:28px;height:28px;color:var(--t2);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+
+/* Day detail modal */
+.day-detail-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--b1);font-size:12px;}
+.day-detail-item:last-child{border:none;}
+.ddi-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+
+/* TOAST */
+.toast{position:fixed;top:14px;left:50%;transform:translateX(-50%) translateY(-60px);background:var(--s1);border:1px solid var(--am);border-radius:10px;padding:10px 18px;font-family:var(--mono);font-size:11px;color:var(--amber);z-index:999;transition:transform .3s cubic-bezier(.34,1.56,.64,1);white-space:nowrap;pointer-events:none;}
+.toast.on{transform:translateX(-50%) translateY(0);}
+
+/* Animations */
+@keyframes checkBounce{0%{transform:scale(1)}40%{transform:scale(1.08)}100%{transform:scale(1)}}
+.bounce{animation:checkBounce .2s ease;}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+
+<!-- ════════════ TODAY ════════════ -->
+<div class="page on" id="pg-today">
+  <div class="today-hero">
+    <div class="th-eyebrow">Health & Glow — Daily Log</div>
+    <div class="th-title"><span>Hari</span> ini</div>
+    <div class="th-eyebrow" id="th-date" style="font-size:10px;color:var(--t2);margin-bottom:16px;"></div>
+    <div class="progress-ring-wrap">
+      <svg class="ring-svg" width="72" height="72" viewBox="0 0 72 72">
+        <circle class="ring-bg" cx="36" cy="36" r="30"/>
+        <circle class="ring-fill" id="ring-fill" cx="36" cy="36" r="30" stroke-dasharray="188.5" stroke-dashoffset="188.5"/>
+        <text class="ring-pct" id="ring-pct" x="36" y="34">0%</text>
+        <text class="ring-label" x="36" y="46">DONE</text>
+      </svg>
+      <div class="streak-info">
+        <div class="streak-num" id="streak-num">0</div>
+        <div class="streak-sub">HARI STREAK</div>
+        <div class="streak-best" id="streak-best">best: 0 hari</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORY WIN INDICATORS -->
+  <div class="cat-wins">
+    <div class="cw" id="cw-gym"><span class="cw-icon">🏋️</span><div class="cw-name">Gym</div></div>
+    <div class="cw" id="cw-makan"><span class="cw-icon">🍱</span><div class="cw-name">Makan</div></div>
+    <div class="cw" id="cw-kulit"><span class="cw-icon">✨</span><div class="cw-name">Kulit</div></div>
+    <div class="cw" id="cw-rambut"><span class="cw-icon">💆</span><div class="cw-name">Rambut</div></div>
+  </div>
+
+  <!-- GYM SECTION -->
+  <div class="sec-block">
+    <div class="sec-head">
+      <div class="sec-title"><span class="sec-emoji">🏋️</span><div class="sec-name">Gym & Olahraga</div></div>
+      <div class="sec-pct" id="gym-pct"></div>
+    </div>
+    <div class="day-choice">
+      <div class="dc" id="btn-gym" onclick="setGym('gym')">
+        <div class="dc-icon">💪</div>
+        <div>
+          <div class="dc-label">Gym</div>
+          <div class="dc-sub">→ log split</div>
+        </div>
+      </div>
+      <div class="dc" id="btn-rest" onclick="setGym('rest')">
+        <div class="dc-icon">😴</div>
+        <div>
+          <div class="dc-label">Rest</div>
+          <div class="dc-sub">recovery = gains</div>
+        </div>
+      </div>
+    </div>
+    <div id="split-section" style="display:none;">
+      <div class="sec-lbl" style="margin-bottom:8px;">split hari ini</div>
+      <div class="split-chips" id="split-chips"></div>
+    </div>
+    <div id="split-logged" style="display:none;" class="split-logged"></div>
+  </div>
+
+  <div class="sec-divider"></div>
+
+  <!-- NUTRITION SECTION -->
+  <div class="sec-block">
+    <div class="sec-head">
+      <div class="sec-title"><span class="sec-emoji">🍱</span><div class="sec-name">Nutrisi & Bulking</div></div>
+      <div class="sec-pct" id="makan-pct"></div>
+    </div>
+
+    <!-- Meals 3x -->
+    <div class="sec-lbl" style="margin-bottom:8px;">makan harian</div>
+    <div class="meal-row">
+      <div class="meal-btn" id="meal-sahur" onclick="toggleMeal('sahur')">
+        <div class="meal-icon">🌅</div>
+        <div class="meal-name">Pagi</div>
+        <div class="meal-check">✓</div>
+      </div>
+      <div class="meal-btn" id="meal-siang" onclick="toggleMeal('siang')">
+        <div class="meal-icon">☀️</div>
+        <div class="meal-name">Siang</div>
+        <div class="meal-check">✓</div>
+      </div>
+      <div class="meal-btn" id="meal-malem" onclick="toggleMeal('malem')">
+        <div class="meal-icon">🌙</div>
+        <div class="meal-name">Malam</div>
+        <div class="meal-check">✓</div>
+      </div>
+    </div>
+
+    <!-- Protein Shake -->
+    <div class="shake-row" id="shake-row" onclick="toggleShake()">
+      <div class="shake-toggle"></div>
+      <div class="shake-info">
+        <div class="shake-name">🥤 Protein Shake</div>
+        <div class="shake-sub">homemade shake hari ini</div>
+      </div>
+      <div class="ci-streak"><span id="shake-streak">0</span>hari</div>
+    </div>
+
+    <!-- Hydration -->
+    <div style="margin-top:8px;" class="sec-lbl">hidrasi</div>
+    <div class="hydration-row">
+      <div class="hydration-glasses" id="glasses-wrap"></div>
+      <div class="hydration-label" id="hydration-label">0 / 8</div>
+    </div>
+    <div style="text-align:right;font-family:var(--mono);font-size:8px;color:var(--t3);margin-top:3px;padding:0 2px;">
+      ketuk gelas untuk tambah / kurangi
+    </div>
+
+    <!-- Sleep -->
+    <div style="margin-top:12px;" class="sec-lbl">tidur semalam</div>
+    <div class="sleep-row">
+      <div class="sleep-label">⏰ jam</div>
+      <div class="sleep-btns" id="sleep-btns"></div>
+    </div>
+  </div>
+
+  <div class="sec-divider"></div>
+
+  <!-- SKINCARE SECTION -->
+  <div class="sec-block">
+    <div class="sec-head">
+      <div class="sec-title"><span class="sec-emoji">✨</span><div class="sec-name">Perawatan Wajah</div></div>
+      <div class="sec-pct" id="kulit-pct"></div>
+    </div>
+    <div class="sec-lbl" style="margin-bottom:6px;">rutinitas malam</div>
+    <div class="sc-progress-bar"><div class="sc-progress-fill" id="sc-prog-fill" style="width:0%"></div></div>
+    <div class="skincare-steps" id="skincare-steps"></div>
+    <div class="sc-add-row" id="sc-add-row">
+      <input class="inp" id="sc-new-name" placeholder="tambah step... (mis: Retinol)" style="flex:1;">
+      <button class="btn btn-a" style="padding:9px 14px;" onclick="addSkinStep()">+</button>
+    </div>
+    <div style="font-family:var(--mono);font-size:8px;color:var(--t3);margin-top:6px;">
+      💡 step tersimpan otomatis — tap untuk centang hari ini
+    </div>
+  </div>
+
+  <div class="sec-divider"></div>
+
+  <!-- HAIR SECTION -->
+  <div class="sec-block">
+    <div class="sec-head">
+      <div class="sec-title"><span class="sec-emoji">💆</span><div class="sec-name">Perawatan Rambut</div></div>
+      <div class="sec-pct" id="rambut-pct"></div>
+    </div>
+    <div class="check-list" id="hair-list"></div>
+
+    <!-- Keramas target setting -->
+    <div style="margin-top:10px;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:9px;color:var(--t3);">
+      <span>Target keramas:</span>
+      <input class="inp" id="keramas-target" type="number" min="1" max="7" style="width:50px;padding:4px 8px;font-size:11px;" onchange="saveKeramasTarget()">
+      <span>x/minggu</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ CHAIN / CALENDAR ════════════ -->
+<div class="page" id="pg-chain">
+  <div class="chain-hero">
+    <div class="chain-title-big">Don't break<br>the <span>chain.</span></div>
+  </div>
+  <div class="chain-stats">
+    <div class="cstat"><div class="cstat-v" id="ch-cur" style="color:var(--amber)">0</div><div class="cstat-l">Streak</div></div>
+    <div class="cstat"><div class="cstat-v" id="ch-best2">0</div><div class="cstat-l">Best</div></div>
+    <div class="cstat"><div class="cstat-v" id="ch-month">0</div><div class="cstat-l">Bulan ini</div></div>
+  </div>
+
+  <div class="cat-tabs" id="cat-tabs">
+    <div class="cat-tab on" onclick="setCatFilter('all',this)">Semua</div>
+    <div class="cat-tab" onclick="setCatFilter('gym',this)">🏋️ Gym</div>
+    <div class="cat-tab" onclick="setCatFilter('makan',this)">🍱 Makan</div>
+    <div class="cat-tab" onclick="setCatFilter('kulit',this)">✨ Kulit</div>
+    <div class="cat-tab" onclick="setCatFilter('rambut',this)">💆 Rambut</div>
+  </div>
+
+  <div class="cal-nav">
+    <button class="cal-nbtn" onclick="changeMonth(-1)">‹</button>
+    <div class="cal-mnth" id="cal-mnth"></div>
+    <button class="cal-nbtn" onclick="changeMonth(1)">›</button>
+  </div>
+  <div class="dow-row">
+    <div class="dow-c">Min</div><div class="dow-c">Sen</div><div class="dow-c">Sel</div>
+    <div class="dow-c">Rab</div><div class="dow-c">Kam</div><div class="dow-c">Jum</div><div class="dow-c">Sab</div>
+  </div>
+  <div class="cal-grid" id="cal-grid"></div>
+  <div class="cal-legend">
+    <div class="leg"><div class="leg-dot" style="background:var(--amber);opacity:.6"></div> Semua selesai</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--s3);border:1px solid var(--b2)"></div> Parsial</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--s1);border:1px solid var(--b1)"></div> Kosong</div>
+  </div>
+</div>
+
+<!-- ════════════ STATS ════════════ -->
+<div class="page" id="pg-stats">
+  <div class="stats-hero">
+    <div class="stats-title">Progress <span>&</span><br>Statistik</div>
+  </div>
+  <div class="stat-grid" id="stat-grid"></div>
+  <div class="sec-lbl" style="margin-bottom:8px;">per kebiasaan</div>
+  <div id="habit-stat-list"></div>
+</div>
+
+<!-- ════════════ SETTINGS ════════════ -->
+<div class="page" id="pg-settings">
+  <div class="settings-hero">
+    <div class="settings-title">Pengaturan</div>
+  </div>
+
+  <div class="settings-section">
+    <div class="settings-sec-title">⚙️ Gym — Split Templates</div>
+    <div id="split-tpl-list"></div>
+    <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;">
+      <input class="inp" id="new-split-name" placeholder="nama split... (mis: Push)" style="flex:1;min-width:120px;">
+      <button class="btn btn-a" style="padding:9px 14px;" onclick="addSplitTpl()">+ Tambah</button>
+    </div>
+  </div>
+
+  <div class="settings-section">
+    <div class="settings-sec-title">🍱 Nutrisi</div>
+    <div class="settings-row">
+      <label>Target tidur (jam)</label>
+      <input type="number" id="sleep-target-inp" min="4" max="12" value="7" onchange="saveSleepTarget()">
+    </div>
+    <div class="settings-row">
+      <label>Target air (gelas/hari)</label>
+      <input type="number" id="water-target-inp" min="4" max="16" value="8" onchange="saveWaterTarget()">
+    </div>
+  </div>
+
+  <div class="settings-section">
+    <div class="settings-sec-title">💾 Data</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="btn btn-o" onclick="exportData()">Export JSON</button>
+      <button class="btn btn-o" onclick="document.getElementById('import-file').click()">Import JSON</button>
+      <input type="file" id="import-file" accept=".json" style="display:none" onchange="importData(event)">
+      <button class="btn btn-r" onclick="confirmReset()">Reset Data</button>
+    </div>
+    <div style="font-family:var(--mono);font-size:8px;color:var(--t3);margin-top:10px;line-height:1.6;">
+      semua data tersimpan di localStorage browser kamu. tidak ada yang dikirim ke server.
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ NAV ════════════ -->
+<nav>
+  <button class="nb on" onclick="nav('today',this)"><span class="ni">🌿</span>Hari ini</button>
+  <button class="nb" onclick="nav('chain',this)"><span class="ni">🔗</span>Chain</button>
+  <button class="nb" onclick="nav('stats',this)"><span class="ni">📈</span>Stats</button>
+  <button class="nb" onclick="nav('settings',this)"><span class="ni">⚙️</span>Settings</button>
+</nav>
+
+<!-- Day Detail Modal -->
+<div class="ov" id="ov-day">
+  <div class="modal" style="position:relative;">
+    <button class="modal-x" onclick="closeOv('ov-day')">✕</button>
+    <div class="modal-handle"></div>
+    <div class="modal-title" id="day-modal-title"></div>
+    <div id="day-modal-content"></div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════
+// STORAGE
+// ════════════════════════════════════════════
+const S={
+  get:k=>{try{const v=localStorage.getItem('hg_'+k);return v?JSON.parse(v):null;}catch{return null;}},
+  set:(k,v)=>{try{localStorage.setItem('hg_'+k,JSON.stringify(v));}catch{}}
+};
+const $=id=>document.getElementById(id);
+const DAYS=['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+const MONTHS=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+const CIRC=2*Math.PI*30; // ring circumference
+
+function todayStr(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+function getDayData(d){const all=S.get('days')||{};return all[d]||{};}
+function setDayData(d,patch){const all=S.get('days')||{};all[d]={...(all[d]||{}),...patch};S.set('days',all);}
+
+// ── SETTINGS state ──
+let sleepTarget=S.get('sleepTarget')||7;
+let waterTarget=S.get('waterTarget')||8;
+let keramasTarget=S.get('keramasTarget')||3;
+let calYear=new Date().getFullYear(), calMonth=new Date().getMonth();
+let calCatFilter='all';
+
+// ════════════════════════════════════════════
+// SPLIT TEMPLATES
+// ════════════════════════════════════════════
+const DEFAULT_SPLITS=[
+  {id:'push',name:'Push 💪'},
+  {id:'pull',name:'Pull 🦾'},
+  {id:'legs',name:'Legs 🦵'},
+  {id:'fullbody',name:'Full Body 🔥'},
+];
+function getSplits(){return S.get('splits')||DEFAULT_SPLITS;}
+function saveSplits(s){S.set('splits',s);}
+
+function addSplitTpl(){
+  const name=$('new-split-name').value.trim();
+  if(!name){toast('⚠ isi nama split dulu!');return;}
+  const splits=getSplits();
+  splits.push({id:'spl_'+Date.now(),name});
+  saveSplits(splits);
+  $('new-split-name').value='';
+  renderSplitTplList();
+  renderSplitChips();
+  toast('✓ Split "'+name+'" ditambah!');
+}
+function deleteSplitTpl(id){
+  saveSplits(getSplits().filter(s=>s.id!==id));
+  renderSplitTplList();renderSplitChips();
+  toast('Split dihapus');
+}
+function renderSplitTplList(){
+  const list=$('split-tpl-list');list.innerHTML='';
+  getSplits().forEach(s=>{
+    const row=document.createElement('div');
+    row.style.cssText='display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--b1);';
+    row.innerHTML=`<span style="flex:1;font-size:13px;font-weight:600;">${s.name}</span><button class="btn btn-r" style="padding:4px 8px;" onclick="deleteSplitTpl('${s.id}')">✕</button>`;
+    list.appendChild(row);
+  });
+}
+function renderSplitChips(){
+  const chips=$('split-chips');chips.innerHTML='';
+  const t=todayStr();const dd=getDayData(t);
+  getSplits().forEach(s=>{
+    const chip=document.createElement('div');
+    chip.className='sc'+(dd.gymSplit===s.id?' on':'');
+    chip.textContent=s.name;
+    chip.onclick=()=>setSplit(s.id,s.name);
+    chips.appendChild(chip);
+  });
+}
+
+// ════════════════════════════════════════════
+// SKINCARE STEPS
+// ════════════════════════════════════════════
+const SC_EMOJIS=['🧼','💧','🧴','💊','✨','🌙','💦','🌿','🍯','🪷'];
+const DEFAULT_STEPS=[
+  {id:'sc_cleanser',name:'Cleanser'},
+  {id:'sc_toner',name:'Toner'},
+  {id:'sc_obat',name:'Obat Jerawat'},
+  {id:'sc_moisturizer',name:'Moisturizer'},
+];
+function getSkinSteps(){return S.get('skinSteps')||DEFAULT_STEPS;}
+function saveSkinSteps(s){S.set('skinSteps',s);}
+
+function addSkinStep(){
+  const name=$('sc-new-name').value.trim();
+  if(!name){toast('⚠ isi nama step dulu!');return;}
+  const steps=getSkinSteps();
+  steps.push({id:'sc_'+Date.now(),name});
+  saveSkinSteps(steps);
+  $('sc-new-name').value='';
+  renderSkincareSteps();
+  toast('✓ Step "'+name+'" ditambah!');
+}
+function deleteSkinStep(id){
+  saveSkinSteps(getSkinSteps().filter(s=>s.id!==id));
+  const t=todayStr();const dd=getDayData(t);
+  if(dd.skincare){delete dd.skincare[id];setDayData(t,{skincare:dd.skincare});}
+  renderSkincareSteps();
+  updateAllProgress();
+}
+function toggleSkinStep(id){
+  const t=todayStr();const dd=getDayData(t);
+  const sc=dd.skincare||{};
+  sc[id]=!sc[id];
+  setDayData(t,{skincare:sc});
+  renderSkincareSteps();
+  updateAllProgress();
+}
+function renderSkincareSteps(){
+  const steps=getSkinSteps();
+  const t=todayStr();const dd=getDayData(t);
+  const sc=dd.skincare||{};
+  const cont=$('skincare-steps');cont.innerHTML='';
+  const done=steps.filter(s=>sc[s.id]).length;
+  $('sc-prog-fill').style.width=(steps.length?Math.round(done/steps.length*100):0)+'%';
+  steps.forEach((s,i)=>{
+    const isDone=!!sc[s.id];
+    const el=document.createElement('div');
+    el.className='sc-step'+(isDone?' done':'');
+    el.onclick=()=>toggleSkinStep(s.id);
+    el.innerHTML=`
+      <div class="sc-num">${isDone?'✓':i+1}</div>
+      <div class="sc-step-name">${s.name}</div>
+      <div class="sc-step-emoji">${SC_EMOJIS[i%SC_EMOJIS.length]}</div>
+      <button class="sc-step-del" onclick="event.stopPropagation();deleteSkinStep('${s.id}')">✕</button>
+    `;
+    cont.appendChild(el);
+  });
+  $('kulit-pct').textContent=steps.length?done+'/'+steps.length:'—';
+}
+
+// ════════════════════════════════════════════
+// HAIR
+// ════════════════════════════════════════════
+const HAIR_ITEMS=[
+  {id:'keramas',name:'Keramas',emoji:'🚿',sub:'cuci rambut',color:'sky'},
+  {id:'kondisioner',name:'Kondisioner',emoji:'💆',sub:'setelah keramas',color:'lavender'},
+];
+function renderHairList(){
+  const t=todayStr();const dd=getDayData(t);
+  const list=$('hair-list');list.innerHTML='';
+  HAIR_ITEMS.forEach(h=>{
+    const done=!!dd.hair&&!!dd.hair[h.id];
+    const streak=getHabitStreak(h.id,'hair');
+    const el=document.createElement('div');
+    el.className=`check-item${done?' done-'+h.color:''}`;
+    el.onclick=()=>{
+      const d2=getDayData(t);const hair=d2.hair||{};
+      hair[h.id]=!hair[h.id];
+      setDayData(t,{hair});
+      renderHairList();updateAllProgress();
+      if(hair[h.id])toast(h.emoji+' '+h.name+'!');
+    };
+    el.innerHTML=`
+      <div class="ci-check">${done?'✓':''}</div>
+      <div class="ci-info"><div class="ci-name">${h.emoji} ${h.name}</div><div class="ci-sub">${h.sub}</div></div>
+      <div class="ci-streak"><span>${streak}</span>hari</div>
+    `;
+    list.appendChild(el);
+  });
+  // Keramas frequency this week
+  const weekDone=getKeramasThisWeek();
+  const targetK=S.get('keramasTarget')||3;
+  const info=document.createElement('div');
+  info.style.cssText='font-family:var(--mono);font-size:8.5px;color:var(--t3);margin-top:8px;text-align:right;';
+  info.textContent=`keramas minggu ini: ${weekDone}/${targetK}x`;
+  list.appendChild(info);
+  $('rambut-pct').textContent=Object.values(dd.hair||{}).filter(Boolean).length+'/'+HAIR_ITEMS.length;
+}
+function getKeramasThisWeek(){
+  const now=new Date();
+  const day=now.getDay();
+  let count=0;
+  for(let i=0;i<=day;i++){
+    const d=new Date(now);d.setDate(now.getDate()-i);
+    const k=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    const dd=getDayData(k);
+    if(dd.hair&&dd.hair.keramas)count++;
+  }
+  return count;
+}
+function saveKeramasTarget(){
+  const v=parseInt($('keramas-target').value)||3;
+  S.set('keramasTarget',v);
+  keramasTarget=v;
+  renderHairList();
+  toast('✓ Target keramas '+v+'x/minggu disimpan');
+}
+
+// ════════════════════════════════════════════
+// GYM
+// ════════════════════════════════════════════
+function setGym(type){
+  const t=todayStr();const dd=getDayData(t);
+  if(dd.gymType===type){setDayData(t,{gymType:null,gymSplit:null});toast('Unchecked');}
+  else{
+    setDayData(t,{gymType:type});
+    toast(type==='gym'?'💪 Let\'s go! Pilih split-nya':'😴 Rest day. Growth happens here too.');
+  }
+  renderGymSection();updateAllProgress();
+}
+function setSplit(id,name){
+  const t=todayStr();const dd=getDayData(t);
+  if(dd.gymSplit===id){setDayData(t,{gymSplit:null});toast('Split unset');}
+  else{setDayData(t,{gymSplit:id,gymSplitName:name});toast('💪 '+name+' — let\'s goooo!');}
+  renderGymSection();updateAllProgress();
+}
+function renderGymSection(){
+  const t=todayStr();const dd=getDayData(t);
+  $('btn-gym').className='dc'+(dd.gymType==='gym'?' gym-sel':'');
+  $('btn-rest').className='dc'+(dd.gymType==='rest'?' rest-sel':'');
+  const showSplit=dd.gymType==='gym';
+  $('split-section').style.display=showSplit?'block':'none';
+  $('split-logged').style.display=(showSplit&&dd.gymSplit)?'block':'none';
+  if(showSplit&&dd.gymSplit)$('split-logged').textContent='✓ '+dd.gymSplitName+' logged!';
+  renderSplitChips();
+  const gymDone=dd.gymType==='gym'||dd.gymType==='rest';
+  $('gym-pct').textContent=gymDone?(dd.gymType==='gym'?(dd.gymSplit?'done 💪':'set split'):'rest ✓'):'—';
+}
+
+// ════════════════════════════════════════════
+// NUTRITION / MEALS
+// ════════════════════════════════════════════
+function toggleMeal(meal){
+  const t=todayStr();const dd=getDayData(t);
+  const meals=dd.meals||{};
+  meals[meal]=!meals[meal];
+  setDayData(t,{meals});
+  renderMeals();updateAllProgress();
+  if(meals[meal])toast({sahur:'🌅 Makan pagi ✓',siang:'☀️ Makan siang ✓',malem:'🌙 Makan malam ✓'}[meal]);
+}
+function renderMeals(){
+  const t=todayStr();const dd=getDayData(t);
+  const meals=dd.meals||{};
+  ['sahur','siang','malem'].forEach(m=>{
+    $('meal-'+m).className='meal-btn'+(meals[m]?' done':'');
+  });
+  const done=Object.values(meals).filter(Boolean).length;
+  $('makan-pct').textContent=done+'/3 makan'+(dd.shake?' + shake':'');
+}
+function toggleShake(){
+  const t=todayStr();const dd=getDayData(t);
+  const v=!dd.shake;
+  setDayData(t,{shake:v});
+  renderShake();renderMeals();updateAllProgress();
+  toast(v?'🥤 Shake done! Gains loading...':'Shake unchecked');
+}
+function renderShake(){
+  const t=todayStr();const dd=getDayData(t);
+  $('shake-row').className='shake-row'+(dd.shake?' done':'');
+  $('shake-streak').textContent=getHabitStreak('shake','shake');
+}
+
+// ════════════════════════════════════════════
+// HYDRATION
+// ════════════════════════════════════════════
+function renderGlasses(){
+  const t=todayStr();const dd=getDayData(t);
+  const filled=dd.water||0;
+  const target=S.get('waterTarget')||8;
+  const wrap=$('glasses-wrap');wrap.innerHTML='';
+  for(let i=0;i<target;i++){
+    const g=document.createElement('div');
+    g.className='glass'+(i<filled?' filled':'');
+    g.textContent='💧';
+    g.onclick=()=>{
+      const dd2=getDayData(todayStr());
+      const cur=dd2.water||0;
+      const newVal=i<cur?i:i+1;
+      setDayData(todayStr(),{water:newVal});
+      renderGlasses();updateAllProgress();
+    };
+    wrap.appendChild(g);
+  }
+  $('hydration-label').textContent=filled+' / '+target;
+}
+
+// ════════════════════════════════════════════
+// SLEEP
+// ════════════════════════════════════════════
+function renderSleepBtns(){
+  const t=todayStr();const dd=getDayData(t);
+  const cur=dd.sleep||null;
+  const cont=$('sleep-btns');cont.innerHTML='';
+  [5,6,7,8,9].forEach(h=>{
+    const b=document.createElement('button');
+    b.className='sleep-btn'+(cur===h?' on':'');
+    b.textContent=h+'j';
+    b.onclick=()=>{
+      const dd2=getDayData(todayStr());
+      const newVal=dd2.sleep===h?null:h;
+      setDayData(todayStr(),{sleep:newVal});
+      renderSleepBtns();updateAllProgress();
+      if(newVal){const msg=newVal>=(S.get('sleepTarget')||7)?'😴 Tidur cukup, mantap!':'😴 '+newVal+' jam dicatat';toast(msg);}
+    };
+    cont.appendChild(b);
+  });
+}
+
+// ════════════════════════════════════════════
+// STREAK HELPERS
+// ════════════════════════════════════════════
+function getHabitStreak(habitId,field){
+  let streak=0;
+  const today=new Date();
+  for(let i=0;i<365;i++){
+    const d=new Date(today);d.setDate(today.getDate()-i);
+    const k=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    const dd=getDayData(k);
+    let done=false;
+    if(field==='hair')done=!!(dd.hair&&dd.hair[habitId]);
+    else if(field==='shake')done=!!dd.shake;
+    if(done)streak++;
+    else if(i>0)break;
+  }
+  return streak;
+}
+
+function isDaySuccess(dateStr){
+  const dd=getDayData(dateStr);
+  const gymOk=(dd.gymType==='gym'||dd.gymType==='rest');
+  const meals=dd.meals||{};
+  const mealOk=meals.sahur&&meals.siang&&meals.malem;
+  const scSteps=getSkinSteps();
+  const sc=dd.skincare||{};
+  const skinOk=scSteps.length>0&&scSteps.every(s=>sc[s.id]);
+  return gymOk&&mealOk&&skinOk;
+}
+
+function getCatDayScore(dateStr,cat){
+  const dd=getDayData(dateStr);
+  if(cat==='gym')return dd.gymType==='gym'||dd.gymType==='rest';
+  if(cat==='makan'){const m=dd.meals||{};return m.sahur&&m.siang&&m.malem;}
+  if(cat==='kulit'){const sc=dd.skincare||{};const steps=getSkinSteps();return steps.length>0&&steps.every(s=>sc[s.id]);}
+  if(cat==='rambut'){const h=dd.hair||{};return HAIR_ITEMS.some(i=>h[i.id]);}
+  return isDaySuccess(dateStr);
+}
+
+function getOverallStreak(){
+  let streak=0;const today=new Date();
+  for(let i=1;i<365;i++){
+    const d=new Date(today);d.setDate(today.getDate()-i);
+    const k=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    if(isDaySuccess(k))streak++;else break;
+  }
+  return streak;
+}
+function getBestStreak(){
+  const all=S.get('days')||{};
+  const keys=Object.keys(all).sort();
+  let best=0,cur=0;
+  keys.forEach(k=>{if(isDaySuccess(k)){cur++;best=Math.max(best,cur);}else cur=0;});
+  return best;
+}
+
+// ════════════════════════════════════════════
+// OVERALL PROGRESS RING
+// ════════════════════════════════════════════
+function getDayProgress(dateStr){
+  const dd=getDayData(dateStr);
+  let done=0,total=0;
+  // gym
+  total++;if(dd.gymType==='gym'||dd.gymType==='rest')done++;
+  // meals 3x
+  const meals=dd.meals||{};
+  total+=3;
+  if(meals.sahur)done++;if(meals.siang)done++;if(meals.malem)done++;
+  // shake
+  total++;if(dd.shake)done++;
+  // water
+  const wt=S.get('waterTarget')||8;
+  total++;if((dd.water||0)>=wt)done++;
+  // sleep
+  total++;if((dd.sleep||0)>=(S.get('sleepTarget')||7))done++;
+  // skincare
+  const steps=getSkinSteps();
+  const sc=dd.skincare||{};
+  steps.forEach(s=>{total++;if(sc[s.id])done++;});
+  // hair
+  HAIR_ITEMS.forEach(h=>{total++;if(dd.hair&&dd.hair[h.id])done++;});
+  return total>0?Math.round(done/total*100):0;
+}
+
+function updateAllProgress(){
+  const t=todayStr();
+  const pct=getDayProgress(t);
+  const offset=CIRC-(CIRC*pct/100);
+  $('ring-fill').style.strokeDashoffset=offset;
+  $('ring-pct').textContent=pct+'%';
+  $('ring-fill').style.stroke=pct>=80?'#3ecfb8':pct>=50?'#f5a623':'#f2789f';
+
+  // streak
+  const streak=getOverallStreak();
+  $('streak-num').textContent=streak;
+  $('streak-best').textContent='best: '+getBestStreak()+' hari';
+
+  // category wins
+  const dd=getDayData(t);
+  $('cw-gym').className='cw'+(getCatDayScore(t,'gym')?' done':'');
+  $('cw-makan').className='cw'+(getCatDayScore(t,'makan')?' done':'');
+  $('cw-kulit').className='cw'+(getCatDayScore(t,'kulit')?' done':'');
+  $('cw-rambut').className='cw'+(getCatDayScore(t,'rambut')?' done':'');
+
+  renderCalendar();
+}
+
+// ════════════════════════════════════════════
+// CALENDAR
+// ════════════════════════════════════════════
+function changeMonth(dir){
+  calMonth+=dir;
+  if(calMonth>11){calMonth=0;calYear++;}
+  if(calMonth<0){calMonth=11;calYear--;}
+  renderCalendar();
+}
+function setCatFilter(f,el){
+  calCatFilter=f;
+  document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+  renderCalendar();
+}
+function renderCalendar(){
+  $('cal-mnth').textContent=MONTHS[calMonth]+' '+calYear;
+  const grid=$('cal-grid');grid.innerHTML='';
+  const first=new Date(calYear,calMonth,1).getDay();
+  const days=new Date(calYear,calMonth+1,0).getDate();
+  const today=new Date();
+  const todayKey=todayStr();
+
+  for(let i=0;i<first;i++){const e=document.createElement('div');e.className='cc empty';grid.appendChild(e);}
+  for(let d=1;d<=days;d++){
+    const k=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const cellDate=new Date(calYear,calMonth,d);
+    const isFuture=cellDate>today&&k!==todayKey;
+    const isToday=k===todayKey;
+    const dd=getDayData(k);
+    const hasData=dd&&Object.keys(dd).length>0;
+
+    let cls='cc';
+    if(isFuture)cls+=' future';
+    else if(isToday)cls+=' today';
+
+    if(!isFuture&&hasData){
+      const score=getCatDayScore(k,calCatFilter);
+      const fullScore=calCatFilter==='all'?isDaySuccess(k):score;
+      if(fullScore)cls+=' full';
+      else if(score||Object.keys(dd).length>1)cls+=' partial';
+    }
+
+    const cell=document.createElement('div');
+    cell.className=cls;
+    cell.innerHTML=`<span class="cc-num">${d}</span>`;
+
+    // dots for partial
+    if(!isFuture&&hasData&&!cls.includes('full')){
+      const dotWrap=document.createElement('div');
+      dotWrap.className='cc-dots';
+      const cats=['gym','makan','kulit','rambut'];
+      const colors=['var(--amber)','var(--teal)','var(--rose)','var(--sky)'];
+      cats.forEach((c,i)=>{
+        if(getCatDayScore(k,c)){
+          const dot=document.createElement('div');
+          dot.className='cc-dot';
+          dot.style.background=colors[i];
+          dotWrap.appendChild(dot);
+        }
+      });
+      if(dotWrap.children.length)cell.appendChild(dotWrap);
+    }
+
+    if(!isFuture&&hasData){
+      cell.onclick=()=>openDayDetail(calYear,calMonth,d,k);
+    }
+    grid.appendChild(cell);
+  }
+
+  // Chain stats
+  const streak=getOverallStreak();
+  const best=getBestStreak();
+  $('ch-cur').textContent=streak;
+  $('ch-best2').textContent=best;
+  // month count
+  const all=S.get('days')||{};
+  let monthCount=0;
+  for(let d=1;d<=days;d++){
+    const k=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    if(isDaySuccess(k))monthCount++;
+  }
+  $('ch-month').textContent=monthCount;
+}
+
+// ════════════════════════════════════════════
+// DAY DETAIL MODAL
+// ════════════════════════════════════════════
+function openDayDetail(y,m,d,k){
+  const label=DAYS[new Date(y,m,d).getDay()]+', '+d+' '+MONTHS[m]+' '+y;
+  $('day-modal-title').textContent=label;
+  const dd=getDayData(k);
+  const cont=$('day-modal-content');cont.innerHTML='';
+  const items=[
+    {label:'Gym: '+(dd.gymType||'—')+(dd.gymSplitName?' ('+dd.gymSplitName+')':''),color:'var(--amber)',done:dd.gymType},
+    {label:'Makan pagi',color:'var(--teal)',done:dd.meals&&dd.meals.sahur},
+    {label:'Makan siang',color:'var(--teal)',done:dd.meals&&dd.meals.siang},
+    {label:'Makan malam',color:'var(--teal)',done:dd.meals&&dd.meals.malem},
+    {label:'Protein shake',color:'var(--teal)',done:dd.shake},
+    {label:`Air: ${dd.water||0}/${S.get('waterTarget')||8} gelas`,color:'var(--sky)',done:(dd.water||0)>=(S.get('waterTarget')||8)},
+    {label:`Tidur: ${dd.sleep||'—'} jam`,color:'var(--lavender)',done:(dd.sleep||0)>=(S.get('sleepTarget')||7)},
+    ...getSkinSteps().map(s=>({label:s.name,color:'var(--rose)',done:dd.skincare&&dd.skincare[s.id]})),
+    ...HAIR_ITEMS.map(h=>({label:h.emoji+' '+h.name,color:'var(--sky)',done:dd.hair&&dd.hair[h.id]})),
+  ];
+  items.forEach(item=>{
+    const row=document.createElement('div');
+    row.className='day-detail-item';
+    row.innerHTML=`<div class="ddi-dot" style="background:${item.done?item.color:'var(--b2)'}"></div><span style="flex:1;color:${item.done?'var(--t1)':'var(--t2)'};font-size:12px;">${item.label}</span><span style="font-family:var(--mono);font-size:10px;color:${item.done?item.color:'var(--t3)'};">${item.done?'✓':'—'}</span>`;
+    cont.appendChild(row);
+  });
+  openOv('ov-day');
+}
+
+// ════════════════════════════════════════════
+// STATS
+// ════════════════════════════════════════════
+function renderStats(){
+  const all=S.get('days')||{};
+  const keys=Object.keys(all).sort();
+  const activeDays=keys.filter(k=>Object.keys(all[k]).length>1).length;
+  const fullDays=keys.filter(k=>isDaySuccess(k)).length;
+  const totalGym=keys.filter(k=>all[k].gymType==='gym').length;
+  const totalShake=keys.filter(k=>all[k].shake).length;
+  const streak=getOverallStreak();
+  const best=getBestStreak();
+
+  const grid=$('stat-grid');grid.innerHTML='';
+  [
+    {n:streak,l:'Streak Sekarang',s:'hari berturut-turut',c:'var(--amber)'},
+    {n:best,l:'Best Streak',s:'hari terbaik',c:'var(--teal)'},
+    {n:fullDays,l:'Hari Sempurna',s:'semua kategori done',c:'var(--rose)'},
+    {n:activeDays,l:'Hari Aktif',s:'total ada data',c:'var(--sky)'},
+  ].forEach(s=>{
+    const card=document.createElement('div');
+    card.className='stat-card';
+    card.innerHTML=`<div class="stat-card-n" style="color:${s.c}">${s.n}</div><div class="stat-card-l">${s.l}</div><div class="stat-card-s">${s.s}</div>`;
+    grid.appendChild(card);
+  });
+
+  // per habit
+  const list=$('habit-stat-list');list.innerHTML='';
+  const habits=[
+    {id:'gym',emoji:'🏋️',name:'Gym / Rest',getScore:k=>getCatDayScore(k,'gym')},
+    {id:'makan',emoji:'🍱',name:'Makan 3x',getScore:k=>{const m=all[k]&&all[k].meals||{};return m.sahur&&m.siang&&m.malem;}},
+    {id:'shake',emoji:'🥤',name:'Protein Shake',getScore:k=>!!(all[k]&&all[k].shake)},
+    {id:'water',emoji:'💧',name:'Hidrasi Cukup',getScore:k=>(all[k]&&all[k].water||0)>=(S.get('waterTarget')||8)},
+    {id:'sleep',emoji:'😴',name:'Tidur Cukup',getScore:k=>(all[k]&&all[k].sleep||0)>=(S.get('sleepTarget')||7)},
+    {id:'skin',emoji:'✨',name:'Skincare Malam',getScore:k=>{const sc=all[k]&&all[k].skincare||{};return getSkinSteps().length>0&&getSkinSteps().every(s=>sc[s.id]);}},
+    {id:'keramas',emoji:'🚿',name:'Keramas',getScore:k=>!!(all[k]&&all[k].hair&&all[k].hair.keramas)},
+  ];
+  const colors=['var(--amber)','var(--teal)','var(--teal)','var(--sky)','var(--lavender)','var(--rose)','var(--sky)'];
+  habits.forEach((h,idx)=>{
+    const done=activeDays>0?keys.filter(k=>h.getScore(k)).length:0;
+    const pct=activeDays>0?Math.round(done/Math.max(activeDays,1)*100):0;
+    // streak
+    let streak2=0,today2=new Date();
+    for(let i=0;i<365;i++){
+      const d=new Date(today2);d.setDate(today2.getDate()-i);
+      const k=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+      if(h.getScore(k))streak2++;else if(i>0)break;
+    }
+    const row=document.createElement('div');row.className='habit-stat';
+    row.innerHTML=`<div class="hs-emoji">${h.emoji}</div><div class="hs-name">${h.name}</div><div class="hs-bar-wrap"><div class="hs-bar-fill" style="width:${pct}%;background:${colors[idx]}"></div></div><div class="hs-pct">${pct}%</div><div class="hs-streak">${streak2}🔥</div>`;
+    list.appendChild(row);
+  });
+}
+
+// ════════════════════════════════════════════
+// OVERLAYS
+// ════════════════════════════════════════════
+function openOv(id){$(id).classList.add('on');}
+function closeOv(id){$(id).classList.remove('on');}
+document.querySelectorAll('.ov').forEach(ov=>{ov.addEventListener('click',e=>{if(e.target===ov)ov.classList.remove('on');});});
+
+// ════════════════════════════════════════════
+// SETTINGS SAVES
+// ════════════════════════════════════════════
+function saveSleepTarget(){const v=parseInt($('sleep-target-inp').value)||7;S.set('sleepTarget',v);sleepTarget=v;renderSleepBtns();toast('✓ Target tidur: '+v+' jam');}
+function saveWaterTarget(){const v=parseInt($('water-target-inp').value)||8;S.set('waterTarget',v);waterTarget=v;renderGlasses();toast('✓ Target air: '+v+' gelas');}
+
+function exportData(){
+  const blob=new Blob([JSON.stringify({days:S.get('days'),skinSteps:S.get('skinSteps'),splits:S.get('splits'),settings:{sleepTarget:S.get('sleepTarget'),waterTarget:S.get('waterTarget'),keramasTarget:S.get('keramasTarget')}},null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`health-glow-backup-${todayStr()}.json`;a.click();toast('📦 Data diekspor!');
+}
+function importData(e){
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    try{
+      const p=JSON.parse(ev.target.result);
+      if(p.days)S.set('days',p.days);
+      if(p.skinSteps)S.set('skinSteps',p.skinSteps);
+      if(p.splits)S.set('splits',p.splits);
+      if(p.settings){if(p.settings.sleepTarget)S.set('sleepTarget',p.settings.sleepTarget);if(p.settings.waterTarget)S.set('waterTarget',p.settings.waterTarget);if(p.settings.keramasTarget)S.set('keramasTarget',p.settings.keramasTarget);}
+      init();toast('✓ Data berhasil diimpor!');
+    }catch{toast('⚠ File tidak valid');}
+  };
+  r.readAsText(f);e.target.value='';
+}
+function confirmReset(){
+  if(confirm('Reset semua data? Tidak bisa dibatalkan!')){
+    ['days','skinSteps','splits','sleepTarget','waterTarget','keramasTarget'].forEach(k=>localStorage.removeItem('hg_'+k));
+    init();toast('Data direset');
+  }
+}
+
+// ════════════════════════════════════════════
+// TOAST
+// ════════════════════════════════════════════
+let toastT;
+function toast(msg){const el=$('toast');el.textContent=msg;el.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove('on'),2400);}
+
+// ════════════════════════════════════════════
+// NAV
+// ════════════════════════════════════════════
+function nav(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
+  $('pg-'+id).classList.add('on');btn.classList.add('on');
+  if(id==='chain'){renderCalendar();}
+  if(id==='stats'){renderStats();}
+  if(id==='settings'){renderSplitTplList();$('sleep-target-inp').value=S.get('sleepTarget')||7;$('water-target-inp').value=S.get('waterTarget')||8;}
+}
+
+// ════════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════════
+function init(){
+  const now=new Date();
+  calYear=now.getFullYear();calMonth=now.getMonth();
+  $('th-date').textContent=DAYS[now.getDay()]+', '+now.getDate()+' '+MONTHS[now.getMonth()]+' '+now.getFullYear();
+  $('keramas-target').value=S.get('keramasTarget')||3;
+
+  renderGymSection();
+  renderMeals();
+  renderShake();
+  renderGlasses();
+  renderSleepBtns();
+  renderSkincareSteps();
+  renderHairList();
+  updateAllProgress();
+  renderCalendar();
+}
+
+init();
+window.addEventListener('resize',()=>{});
+</script>
+</body>
+</html>
