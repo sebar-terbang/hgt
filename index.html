@@ -51,6 +51,84 @@ nav{position:fixed;bottom:0;left:0;right:0;background:rgba(15,13,11,.97);backdro
 .page{display:none;max-width:500px;margin:0 auto;padding-bottom:20px;}
 .page.on{display:block;}
 
+/* ── TODAY SWIPE TABS ── */
+.today-tab-bar{
+  display:flex;align-items:center;
+  border-bottom:1px solid var(--b1);
+  background:var(--bg);
+  position:sticky;top:0;z-index:10;
+  overflow-x:auto;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+}
+.today-tab-bar::-webkit-scrollbar{display:none;}
+.t-tab{
+  flex-shrink:0;
+  padding:10px 14px 9px;
+  font-family:var(--mono);font-size:9px;letter-spacing:.5px;
+  color:var(--t3);cursor:pointer;
+  border-bottom:2px solid transparent;
+  transition:all .15s;white-space:nowrap;
+  display:flex;align-items:center;gap:5px;
+}
+.t-tab.on{color:var(--amber);border-bottom-color:var(--amber);}
+.t-tab .t-tab-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--b2);transition:background .2s;flex-shrink:0;
+}
+.t-tab.done-tab .t-tab-dot{background:var(--teal);}
+.t-tab.on.done-tab{color:var(--teal);border-bottom-color:var(--teal);}
+
+/* focus mode toggle */
+.focus-toggle{
+  margin-left:auto;flex-shrink:0;
+  padding:6px 12px;
+  font-family:var(--mono);font-size:8px;color:var(--t3);
+  cursor:pointer;border-left:1px solid var(--b1);
+  display:flex;align-items:center;gap:5px;
+  transition:color .15s;letter-spacing:.5px;
+  white-space:nowrap;
+}
+.focus-toggle.on{color:var(--amber);}
+.focus-toggle-pip{
+  width:8px;height:8px;border-radius:50%;
+  border:1.5px solid var(--t3);
+  transition:all .2s;
+}
+.focus-toggle.on .focus-toggle-pip{background:var(--amber);border-color:var(--amber);}
+
+/* Tab panels */
+.today-panels{
+  position:relative;
+  overflow:hidden;
+}
+.today-panel{display:none;padding:14px 16px 16px;}
+.today-panel.on{display:block;}
+
+/* focus mode — hide done items */
+.today-panels.focus-mode .box-habit.done,
+.today-panels.focus-mode .check-item.done,
+.today-panels.focus-mode .check-item.done-teal,
+.today-panels.focus-mode .check-item.done-coral,
+.today-panels.focus-mode .check-item.done-rose,
+.today-panels.focus-mode .check-item.done-sky,
+.today-panels.focus-mode .check-item.done-lavender,
+.today-panels.focus-mode .sc-step.done,
+.today-panels.focus-mode .meal-btn.done,
+.today-panels.focus-mode .shake-row.done{
+  display:none;
+}
+/* focus mode — hide gym done state but keep visible so user can log */
+.today-panels.focus-mode .split-logged{display:none!important;}
+
+.focus-empty{
+  text-align:center;padding:32px 16px;
+  font-family:var(--mono);font-size:11px;color:var(--t2);
+  display:none;
+}
+.focus-empty-icon{font-size:32px;margin-bottom:8px;}
+.focus-empty.show{display:block;}
+
 /* ── COMMON ── */
 .inp{background:var(--s2);border:1px solid var(--b1);border-radius:10px;padding:9px 12px;color:var(--t1);font-family:var(--mono);font-size:12px;outline:none;transition:border-color .15s;width:100%;}
 .inp:focus{border-color:var(--am);}
@@ -385,6 +463,144 @@ nav{position:fixed;bottom:0;left:0;right:0;background:rgba(15,13,11,.97);backdro
 /* Animations */
 @keyframes checkBounce{0%{transform:scale(1)}40%{transform:scale(1.08)}100%{transform:scale(1)}}
 .bounce{animation:checkBounce .2s ease;}
+
+/* ════════════════════════════════════
+   BOXING SECTION
+════════════════════════════════════ */
+--coral2:#ff7058;
+.boxing-hero-label{font-family:var(--mono);font-size:8px;color:var(--t3);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;}
+
+/* Phase badge */
+.boxing-phase-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,112,88,.12);border:1px solid rgba(255,112,88,.3);
+  border-radius:20px;padding:4px 12px;
+  font-family:var(--mono);font-size:9px;color:var(--coral);
+  letter-spacing:.5px;margin-bottom:14px;
+}
+
+/* Boxing habit items */
+.box-habit{
+  display:flex;align-items:center;gap:12px;
+  background:var(--s1);border:1px solid var(--b1);
+  border-radius:12px;padding:12px 14px;
+  cursor:pointer;transition:all .18s;
+  position:relative;overflow:hidden;
+  margin-bottom:6px;
+}
+.box-habit::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--b1);transition:background .2s;}
+.box-habit:active{transform:scale(.98);}
+.box-habit.done{background:rgba(255,112,88,.06);border-color:rgba(255,112,88,.25);}
+.box-habit.done::before{background:var(--coral);}
+.bh-check{
+  width:22px;height:22px;border-radius:50%;
+  border:2px solid var(--b2);background:var(--s2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:transparent;flex-shrink:0;
+  transition:all .2s;
+}
+.box-habit.done .bh-check{background:var(--coral);border-color:var(--coral);color:#0f0d0b;font-weight:700;}
+.bh-info{flex:1;}
+.bh-name{font-size:13px;font-weight:600;color:var(--t1);line-height:1.2;}
+.bh-sub{font-family:var(--mono);font-size:9px;color:var(--t2);margin-top:2px;}
+.bh-streak{font-family:var(--mono);font-size:9px;color:var(--t3);text-align:right;flex-shrink:0;}
+.bh-streak span{display:block;font-size:18px;font-weight:500;color:var(--coral);line-height:1;}
+
+/* Boxing progress bar */
+.box-prog-bar{height:3px;background:var(--s3);border-radius:2px;overflow:hidden;margin-bottom:12px;}
+.box-prog-fill{height:100%;background:var(--coral);border-radius:2px;transition:width .4s cubic-bezier(.34,1.1,.64,1);}
+
+/* ── CURRICULUM / SKILL PAGE ── */
+#pg-boxing{padding:0 16px;}
+.boxing-page-hero{padding:32px 0 16px;}
+.boxing-page-title{font-family:var(--serif);font-size:40px;font-style:italic;line-height:1;color:var(--t1);}
+.boxing-page-title span{color:var(--coral);}
+
+/* Phase tabs */
+.phase-tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:16px;}
+.phase-tab{
+  font-family:var(--mono);font-size:9px;padding:6px 12px;
+  border-radius:20px;border:1px solid var(--b2);
+  background:var(--s2);color:var(--t2);cursor:pointer;transition:all .15s;
+}
+.phase-tab.on{border-color:rgba(255,112,88,.5);color:var(--coral);background:rgba(255,112,88,.1);}
+
+/* Skill card */
+.skill-card{
+  background:var(--s1);border:1px solid var(--b1);
+  border-radius:14px;padding:0;
+  margin-bottom:8px;overflow:hidden;
+  transition:border-color .2s;
+}
+.skill-card.lvl-1{border-left:3px solid var(--b2);}
+.skill-card.lvl-2{border-left:3px solid var(--sky);}
+.skill-card.lvl-3{border-left:3px solid var(--amber);}
+.skill-card.lvl-4{border-left:3px solid var(--coral);}
+
+.skill-header{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 14px;cursor:pointer;
+}
+.skill-icon{font-size:20px;flex-shrink:0;}
+.skill-meta{flex:1;}
+.skill-name{font-size:13px;font-weight:700;color:var(--t1);}
+.skill-phase-tag{font-family:var(--mono);font-size:8px;color:var(--t3);margin-top:1px;}
+.skill-lvl-wrap{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+
+/* Level selector — tap through 4 levels */
+.lvl-pip-row{display:flex;gap:4px;}
+.lvl-pip{
+  width:10px;height:10px;border-radius:50%;
+  border:1.5px solid var(--b2);background:transparent;
+  transition:all .2s;cursor:pointer;
+}
+.lvl-pip.l1{border-color:var(--sky);}
+.lvl-pip.l1.filled{background:var(--sky);}
+.lvl-pip.l2{border-color:var(--amber);}
+.lvl-pip.l2.filled{background:var(--amber);}
+.lvl-pip.l3{border-color:var(--coral);}
+.lvl-pip.l3.filled{background:var(--coral);}
+.lvl-pip.l4{border-color:var(--rose);}
+.lvl-pip.l4.filled{background:var(--rose);}
+
+.lvl-label{font-family:var(--mono);font-size:8px;color:var(--t3);}
+.lvl-label.lbl-0{color:var(--t3);}
+.lvl-label.lbl-1{color:var(--sky);}
+.lvl-label.lbl-2{color:var(--amber);}
+.lvl-label.lbl-3{color:var(--coral);}
+.lvl-label.lbl-4{color:var(--rose);}
+
+/* skill note */
+.skill-note-wrap{padding:0 14px 12px;display:none;}
+.skill-note-wrap.open{display:block;}
+.skill-note{
+  width:100%;background:var(--s2);border:1px solid var(--b1);
+  border-radius:8px;padding:8px 10px;color:var(--t1);
+  font-family:var(--mono);font-size:11px;outline:none;
+  resize:none;min-height:48px;line-height:1.5;
+  transition:border-color .15s;
+}
+.skill-note:focus{border-color:rgba(255,112,88,.4);}
+.skill-note::placeholder{color:var(--t3);}
+.skill-note-hint{font-family:var(--mono);font-size:8px;color:var(--t3);margin-top:4px;}
+
+/* Overall skill progress bar */
+.skill-overall{
+  background:var(--s1);border:1px solid var(--b1);border-radius:14px;
+  padding:14px;margin-bottom:12px;
+}
+.skill-ov-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.skill-ov-title{font-family:var(--mono);font-size:9px;color:var(--t2);letter-spacing:1.5px;text-transform:uppercase;}
+.skill-ov-pct{font-family:var(--serif);font-size:28px;color:var(--coral);}
+.skill-ov-bar{height:4px;background:var(--s3);border-radius:2px;overflow:hidden;}
+.skill-ov-fill{height:100%;background:linear-gradient(90deg,var(--sky),var(--amber),var(--coral));border-radius:2px;transition:width .5s cubic-bezier(.34,1.1,.64,1);}
+.skill-ov-sub{font-family:var(--mono);font-size:8px;color:var(--t3);margin-top:6px;}
+
+/* Phase summary mini cards */
+.phase-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:14px;}
+.ps-card{background:var(--s1);border:1px solid var(--b1);border-radius:10px;padding:10px 8px;text-align:center;}
+.ps-num{font-family:var(--serif);font-size:26px;line-height:1;}
+.ps-lbl{font-family:var(--mono);font-size:7px;color:var(--t2);margin-top:2px;letter-spacing:.5px;text-transform:uppercase;}
 </style>
 </head>
 <body>
@@ -392,6 +608,7 @@ nav{position:fixed;bottom:0;left:0;right:0;background:rgba(15,13,11,.97);backdro
 
 <!-- ════════════ TODAY ════════════ -->
 <div class="page on" id="pg-today">
+  <!-- HERO -->
   <div class="today-hero">
     <div class="th-eyebrow">Health & Glow — Daily Log</div>
     <div class="th-title"><span>Hari</span> ini</div>
@@ -411,137 +628,148 @@ nav{position:fixed;bottom:0;left:0;right:0;background:rgba(15,13,11,.97);backdro
     </div>
   </div>
 
-  <!-- CATEGORY WIN INDICATORS -->
-  <div class="cat-wins">
-    <div class="cw" id="cw-gym"><span class="cw-icon">🏋️</span><div class="cw-name">Gym</div></div>
-    <div class="cw" id="cw-makan"><span class="cw-icon">🍱</span><div class="cw-name">Makan</div></div>
-    <div class="cw" id="cw-kulit"><span class="cw-icon">✨</span><div class="cw-name">Kulit</div></div>
-    <div class="cw" id="cw-rambut"><span class="cw-icon">💆</span><div class="cw-name">Rambut</div></div>
+  <!-- SWIPE TAB BAR -->
+  <div class="today-tab-bar" id="today-tab-bar">
+    <div class="t-tab on" id="ttab-gym"     onclick="switchTodayTab('gym',this)">    <span class="t-tab-dot"></span>🏋️ Gym</div>
+    <div class="t-tab"    id="ttab-boxing"  onclick="switchTodayTab('boxing',this)"> <span class="t-tab-dot"></span>🥊 Boxing</div>
+    <div class="t-tab"    id="ttab-nutrisi" onclick="switchTodayTab('nutrisi',this)"><span class="t-tab-dot"></span>🍱 Nutrisi</div>
+    <div class="t-tab"    id="ttab-kulit"   onclick="switchTodayTab('kulit',this)">  <span class="t-tab-dot"></span>✨ Kulit</div>
+    <div class="t-tab"    id="ttab-rambut"  onclick="switchTodayTab('rambut',this)"> <span class="t-tab-dot"></span>💆 Rambut</div>
+    <div class="focus-toggle" id="focus-toggle" onclick="toggleFocusMode()">
+      <div class="focus-toggle-pip"></div>FOCUS
+    </div>
   </div>
 
-  <!-- GYM SECTION -->
-  <div class="sec-block">
-    <div class="sec-head">
-      <div class="sec-title"><span class="sec-emoji">🏋️</span><div class="sec-name">Gym & Olahraga</div></div>
-      <div class="sec-pct" id="gym-pct"></div>
-    </div>
-    <div class="day-choice">
-      <div class="dc" id="btn-gym" onclick="setGym('gym')">
-        <div class="dc-icon">💪</div>
-        <div>
-          <div class="dc-label">Gym</div>
-          <div class="dc-sub">→ log split</div>
+  <!-- PANELS -->
+  <div class="today-panels" id="today-panels">
+
+    <!-- GYM PANEL -->
+    <div class="today-panel on" id="panel-gym">
+      <div class="sec-head" style="margin-bottom:12px;">
+        <div class="sec-title"><span class="sec-emoji">🏋️</span><div class="sec-name">Gym & Olahraga</div></div>
+        <div class="sec-pct" id="gym-pct"></div>
+      </div>
+      <div class="day-choice">
+        <div class="dc" id="btn-gym" onclick="setGym('gym')">
+          <div class="dc-icon">💪</div>
+          <div><div class="dc-label">Gym</div><div class="dc-sub">→ log split</div></div>
+        </div>
+        <div class="dc" id="btn-rest" onclick="setGym('rest')">
+          <div class="dc-icon">😴</div>
+          <div><div class="dc-label">Rest</div><div class="dc-sub">recovery = gains</div></div>
         </div>
       </div>
-      <div class="dc" id="btn-rest" onclick="setGym('rest')">
-        <div class="dc-icon">😴</div>
-        <div>
-          <div class="dc-label">Rest</div>
-          <div class="dc-sub">recovery = gains</div>
+      <div id="split-section" style="display:none;">
+        <div class="sec-lbl" style="margin-bottom:8px;">split hari ini</div>
+        <div class="split-chips" id="split-chips"></div>
+      </div>
+      <div id="split-logged" style="display:none;" class="split-logged"></div>
+      <div class="focus-empty" id="focus-empty-gym">
+        <div class="focus-empty-icon">🏋️</div>
+        Gym udah dicatat hari ini!
+      </div>
+    </div>
+
+    <!-- BOXING PANEL -->
+    <div class="today-panel" id="panel-boxing">
+      <div class="sec-head" style="margin-bottom:8px;">
+        <div class="sec-title"><span class="sec-emoji">🥊</span><div class="sec-name">Boxing</div></div>
+        <div class="sec-pct" id="boxing-pct"></div>
+      </div>
+      <div class="boxing-phase-badge" id="boxing-phase-badge">📅 Phase 1 — Foundation</div>
+      <div class="box-prog-bar"><div class="box-prog-fill" id="box-prog-fill" style="width:0%"></div></div>
+      <div id="boxing-habit-list"></div>
+      <div class="focus-empty" id="focus-empty-boxing">
+        <div class="focus-empty-icon">🥊</div>
+        Boxing habits semua done!<br>Beast mode activated.
+      </div>
+      <div style="font-family:var(--mono);font-size:8px;color:var(--t3);margin-top:6px;text-align:right;">
+        chain ga boleh putus 🔗
+      </div>
+    </div>
+
+    <!-- NUTRISI PANEL -->
+    <div class="today-panel" id="panel-nutrisi">
+      <div class="sec-head" style="margin-bottom:12px;">
+        <div class="sec-title"><span class="sec-emoji">🍱</span><div class="sec-name">Nutrisi & Bulking</div></div>
+        <div class="sec-pct" id="makan-pct"></div>
+      </div>
+      <div class="sec-lbl" style="margin-bottom:8px;">makan harian</div>
+      <div class="meal-row">
+        <div class="meal-btn" id="meal-sahur" onclick="toggleMeal('sahur')">
+          <div class="meal-icon">🌅</div><div class="meal-name">Pagi</div><div class="meal-check">✓</div>
+        </div>
+        <div class="meal-btn" id="meal-siang" onclick="toggleMeal('siang')">
+          <div class="meal-icon">☀️</div><div class="meal-name">Siang</div><div class="meal-check">✓</div>
+        </div>
+        <div class="meal-btn" id="meal-malem" onclick="toggleMeal('malem')">
+          <div class="meal-icon">🌙</div><div class="meal-name">Malam</div><div class="meal-check">✓</div>
         </div>
       </div>
-    </div>
-    <div id="split-section" style="display:none;">
-      <div class="sec-lbl" style="margin-bottom:8px;">split hari ini</div>
-      <div class="split-chips" id="split-chips"></div>
-    </div>
-    <div id="split-logged" style="display:none;" class="split-logged"></div>
-  </div>
-
-  <div class="sec-divider"></div>
-
-  <!-- NUTRITION SECTION -->
-  <div class="sec-block">
-    <div class="sec-head">
-      <div class="sec-title"><span class="sec-emoji">🍱</span><div class="sec-name">Nutrisi & Bulking</div></div>
-      <div class="sec-pct" id="makan-pct"></div>
-    </div>
-
-    <!-- Meals 3x -->
-    <div class="sec-lbl" style="margin-bottom:8px;">makan harian</div>
-    <div class="meal-row">
-      <div class="meal-btn" id="meal-sahur" onclick="toggleMeal('sahur')">
-        <div class="meal-icon">🌅</div>
-        <div class="meal-name">Pagi</div>
-        <div class="meal-check">✓</div>
+      <div class="shake-row" id="shake-row" onclick="toggleShake()">
+        <div class="shake-toggle"></div>
+        <div class="shake-info">
+          <div class="shake-name">🥤 Protein Shake</div>
+          <div class="shake-sub">homemade shake hari ini</div>
+        </div>
+        <div class="ci-streak"><span id="shake-streak">0</span>hari</div>
       </div>
-      <div class="meal-btn" id="meal-siang" onclick="toggleMeal('siang')">
-        <div class="meal-icon">☀️</div>
-        <div class="meal-name">Siang</div>
-        <div class="meal-check">✓</div>
+      <div style="margin-top:8px;" class="sec-lbl">hidrasi</div>
+      <div class="hydration-row">
+        <div class="hydration-glasses" id="glasses-wrap"></div>
+        <div class="hydration-label" id="hydration-label">0 / 8</div>
       </div>
-      <div class="meal-btn" id="meal-malem" onclick="toggleMeal('malem')">
-        <div class="meal-icon">🌙</div>
-        <div class="meal-name">Malam</div>
-        <div class="meal-check">✓</div>
+      <div style="text-align:right;font-family:var(--mono);font-size:8px;color:var(--t3);margin-top:3px;">ketuk gelas untuk tambah / kurangi</div>
+      <div style="margin-top:12px;" class="sec-lbl">tidur semalam</div>
+      <div class="sleep-row">
+        <div class="sleep-label">⏰ jam</div>
+        <div class="sleep-btns" id="sleep-btns"></div>
+      </div>
+      <div class="focus-empty" id="focus-empty-nutrisi">
+        <div class="focus-empty-icon">🍱</div>
+        Semua nutrisi hari ini done!
       </div>
     </div>
 
-    <!-- Protein Shake -->
-    <div class="shake-row" id="shake-row" onclick="toggleShake()">
-      <div class="shake-toggle"></div>
-      <div class="shake-info">
-        <div class="shake-name">🥤 Protein Shake</div>
-        <div class="shake-sub">homemade shake hari ini</div>
+    <!-- KULIT PANEL -->
+    <div class="today-panel" id="panel-kulit">
+      <div class="sec-head" style="margin-bottom:12px;">
+        <div class="sec-title"><span class="sec-emoji">✨</span><div class="sec-name">Perawatan Wajah</div></div>
+        <div class="sec-pct" id="kulit-pct"></div>
       </div>
-      <div class="ci-streak"><span id="shake-streak">0</span>hari</div>
+      <div class="sec-lbl" style="margin-bottom:6px;">rutinitas malam</div>
+      <div class="sc-progress-bar"><div class="sc-progress-fill" id="sc-prog-fill" style="width:0%"></div></div>
+      <div class="skincare-steps" id="skincare-steps"></div>
+      <div class="sc-add-row" id="sc-add-row">
+        <input class="inp" id="sc-new-name" placeholder="tambah step... (mis: Retinol)" style="flex:1;">
+        <button class="btn btn-a" style="padding:9px 14px;" onclick="addSkinStep()">+</button>
+      </div>
+      <div style="font-family:var(--mono);font-size:8px;color:var(--t3);margin-top:6px;">💡 step tersimpan otomatis — tap untuk centang hari ini</div>
+      <div class="focus-empty" id="focus-empty-kulit">
+        <div class="focus-empty-icon">✨</div>
+        Skincare malam done!<br>Glowing tomorrow.
+      </div>
     </div>
 
-    <!-- Hydration -->
-    <div style="margin-top:8px;" class="sec-lbl">hidrasi</div>
-    <div class="hydration-row">
-      <div class="hydration-glasses" id="glasses-wrap"></div>
-      <div class="hydration-label" id="hydration-label">0 / 8</div>
-    </div>
-    <div style="text-align:right;font-family:var(--mono);font-size:8px;color:var(--t3);margin-top:3px;padding:0 2px;">
-      ketuk gelas untuk tambah / kurangi
+    <!-- RAMBUT PANEL -->
+    <div class="today-panel" id="panel-rambut">
+      <div class="sec-head" style="margin-bottom:12px;">
+        <div class="sec-title"><span class="sec-emoji">💆</span><div class="sec-name">Perawatan Rambut</div></div>
+        <div class="sec-pct" id="rambut-pct"></div>
+      </div>
+      <div class="check-list" id="hair-list"></div>
+      <div style="margin-top:10px;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:9px;color:var(--t3);">
+        <span>Target keramas:</span>
+        <input class="inp" id="keramas-target" type="number" min="1" max="7" style="width:50px;padding:4px 8px;font-size:11px;" onchange="saveKeramasTarget()">
+        <span>x/minggu</span>
+      </div>
+      <div class="focus-empty" id="focus-empty-rambut">
+        <div class="focus-empty-icon">💆</div>
+        Rambut udah dirawat hari ini!
+      </div>
     </div>
 
-    <!-- Sleep -->
-    <div style="margin-top:12px;" class="sec-lbl">tidur semalam</div>
-    <div class="sleep-row">
-      <div class="sleep-label">⏰ jam</div>
-      <div class="sleep-btns" id="sleep-btns"></div>
-    </div>
-  </div>
-
-  <div class="sec-divider"></div>
-
-  <!-- SKINCARE SECTION -->
-  <div class="sec-block">
-    <div class="sec-head">
-      <div class="sec-title"><span class="sec-emoji">✨</span><div class="sec-name">Perawatan Wajah</div></div>
-      <div class="sec-pct" id="kulit-pct"></div>
-    </div>
-    <div class="sec-lbl" style="margin-bottom:6px;">rutinitas malam</div>
-    <div class="sc-progress-bar"><div class="sc-progress-fill" id="sc-prog-fill" style="width:0%"></div></div>
-    <div class="skincare-steps" id="skincare-steps"></div>
-    <div class="sc-add-row" id="sc-add-row">
-      <input class="inp" id="sc-new-name" placeholder="tambah step... (mis: Retinol)" style="flex:1;">
-      <button class="btn btn-a" style="padding:9px 14px;" onclick="addSkinStep()">+</button>
-    </div>
-    <div style="font-family:var(--mono);font-size:8px;color:var(--t3);margin-top:6px;">
-      💡 step tersimpan otomatis — tap untuk centang hari ini
-    </div>
-  </div>
-
-  <div class="sec-divider"></div>
-
-  <!-- HAIR SECTION -->
-  <div class="sec-block">
-    <div class="sec-head">
-      <div class="sec-title"><span class="sec-emoji">💆</span><div class="sec-name">Perawatan Rambut</div></div>
-      <div class="sec-pct" id="rambut-pct"></div>
-    </div>
-    <div class="check-list" id="hair-list"></div>
-
-    <!-- Keramas target setting -->
-    <div style="margin-top:10px;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:9px;color:var(--t3);">
-      <span>Target keramas:</span>
-      <input class="inp" id="keramas-target" type="number" min="1" max="7" style="width:50px;padding:4px 8px;font-size:11px;" onchange="saveKeramasTarget()">
-      <span>x/minggu</span>
-    </div>
-  </div>
+  </div><!-- /today-panels -->
 </div>
 
 <!-- ════════════ CHAIN / CALENDAR ════════════ -->
@@ -558,6 +786,7 @@ nav{position:fixed;bottom:0;left:0;right:0;background:rgba(15,13,11,.97);backdro
   <div class="cat-tabs" id="cat-tabs">
     <div class="cat-tab on" onclick="setCatFilter('all',this)">Semua</div>
     <div class="cat-tab" onclick="setCatFilter('gym',this)">🏋️ Gym</div>
+    <div class="cat-tab" onclick="setCatFilter('boxing',this)">🥊 Boxing</div>
     <div class="cat-tab" onclick="setCatFilter('makan',this)">🍱 Makan</div>
     <div class="cat-tab" onclick="setCatFilter('kulit',this)">✨ Kulit</div>
     <div class="cat-tab" onclick="setCatFilter('rambut',this)">💆 Rambut</div>
@@ -618,6 +847,18 @@ nav{position:fixed;bottom:0;left:0;right:0;background:rgba(15,13,11,.97);backdro
   </div>
 
   <div class="settings-section">
+    <div class="settings-sec-title">🥊 Boxing</div>
+    <div class="settings-row">
+      <label>Phase saat ini</label>
+      <select id="boxing-phase-inp" onchange="saveBoxingPhase()" style="background:var(--s2);border:1px solid var(--b1);border-radius:8px;color:var(--t1);font-family:var(--mono);font-size:11px;padding:5px 8px;outline:none;">
+        <option value="1">Phase 1 — Foundation</option>
+        <option value="2">Phase 2 — Development</option>
+        <option value="3">Phase 3 — Sharpening</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="settings-section">
     <div class="settings-sec-title">💾 Data</div>
     <div style="display:flex;gap:8px;flex-wrap:wrap;">
       <button class="btn btn-o" onclick="exportData()">Export JSON</button>
@@ -631,10 +872,45 @@ nav{position:fixed;bottom:0;left:0;right:0;background:rgba(15,13,11,.97);backdro
   </div>
 </div>
 
+<!-- ════════════ BOXING CURRICULUM ════════════ -->
+<div class="page" id="pg-boxing">
+  <div class="boxing-page-hero">
+    <div class="boxing-page-title">Kurikulum<br><span>Boxing</span></div>
+  </div>
+
+  <!-- Overall progress -->
+  <div class="skill-overall">
+    <div class="skill-ov-row">
+      <div class="skill-ov-title">Penguasaan keseluruhan</div>
+      <div class="skill-ov-pct" id="skill-ov-pct">0%</div>
+    </div>
+    <div class="skill-ov-bar"><div class="skill-ov-fill" id="skill-ov-fill" style="width:0%"></div></div>
+    <div class="skill-ov-sub" id="skill-ov-sub">0 dari 0 skill dikuasai</div>
+  </div>
+
+  <!-- Phase summary -->
+  <div class="phase-summary">
+    <div class="ps-card"><div class="ps-num" id="ps-1" style="color:var(--sky)">0</div><div class="ps-lbl">Phase 1<br>Foundation</div></div>
+    <div class="ps-card"><div class="ps-num" id="ps-2" style="color:var(--amber)">0</div><div class="ps-lbl">Phase 2<br>Develop</div></div>
+    <div class="ps-card"><div class="ps-num" id="ps-3" style="color:var(--coral)">0</div><div class="ps-lbl">Phase 3<br>Sharp</div></div>
+  </div>
+
+  <!-- Phase tabs -->
+  <div class="phase-tabs">
+    <div class="phase-tab on" onclick="setPhaseFilter('all',this)">Semua</div>
+    <div class="phase-tab" onclick="setPhaseFilter('1',this)">⚡ Phase 1</div>
+    <div class="phase-tab" onclick="setPhaseFilter('2',this)">🔥 Phase 2</div>
+    <div class="phase-tab" onclick="setPhaseFilter('3',this)">💀 Phase 3</div>
+  </div>
+
+  <div id="skill-list"></div>
+</div>
+
 <!-- ════════════ NAV ════════════ -->
 <nav>
   <button class="nb on" onclick="nav('today',this)"><span class="ni">🌿</span>Hari ini</button>
   <button class="nb" onclick="nav('chain',this)"><span class="ni">🔗</span>Chain</button>
+  <button class="nb" onclick="nav('boxing',this)"><span class="ni">🥊</span>Boxing</button>
   <button class="nb" onclick="nav('stats',this)"><span class="ni">📈</span>Stats</button>
   <button class="nb" onclick="nav('settings',this)"><span class="ni">⚙️</span>Settings</button>
 </nav>
@@ -650,6 +926,77 @@ nav{position:fixed;bottom:0;left:0;right:0;background:rgba(15,13,11,.97);backdro
 </div>
 
 <script>
+// ════════════════════════════════════════════
+// TODAY SWIPE TABS + FOCUS MODE
+// ════════════════════════════════════════════
+let activeTodayTab='gym';
+let focusMode=false;
+
+function switchTodayTab(id,el){
+  activeTodayTab=id;
+  document.querySelectorAll('.t-tab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.today-panel').forEach(p=>p.classList.remove('on'));
+  el.classList.add('on');
+  $('panel-'+id).classList.add('on');
+  updateFocusEmptyStates();
+}
+
+function toggleFocusMode(){
+  focusMode=!focusMode;
+  const toggle=$('focus-toggle');
+  const panels=$('today-panels');
+  toggle.classList.toggle('on',focusMode);
+  panels.classList.toggle('focus-mode',focusMode);
+  updateFocusEmptyStates();
+  toast(focusMode?'🎯 Focus mode — cuma yang belum done':'👁 Semua keliatan');
+}
+
+function updateFocusEmptyStates(){
+  if(!focusMode){
+    document.querySelectorAll('.focus-empty').forEach(el=>el.classList.remove('show'));
+    return;
+  }
+  // Gym: done if gymType set
+  const t=todayStr();const dd=getDayData(t);
+  const gymDone=!!(dd.gymType);
+  $('focus-empty-gym').classList.toggle('show',gymDone);
+
+  // Boxing: all habits done
+  const bx=dd.boxing||{};
+  const bxAllDone=BOXING_HABITS.every(h=>bx[h.id]);
+  $('focus-empty-boxing').classList.toggle('show',bxAllDone);
+
+  // Nutrisi: meals + shake all done (water/sleep not hidden in focus)
+  const meals=dd.meals||{};
+  const nutrisiAllDone=meals.sahur&&meals.siang&&meals.malem&&dd.shake;
+  $('focus-empty-nutrisi').classList.toggle('show',!!nutrisiAllDone);
+
+  // Kulit: all steps done
+  const sc=dd.skincare||{};
+  const steps=getSkinSteps();
+  const kulitAllDone=steps.length>0&&steps.every(s=>sc[s.id]);
+  $('focus-empty-kulit').classList.toggle('show',kulitAllDone);
+
+  // Rambut: any hair done
+  const hair=dd.hair||{};
+  const rambutAllDone=HAIR_ITEMS.every(h=>hair[h.id]);
+  $('focus-empty-rambut').classList.toggle('show',rambutAllDone);
+}
+
+function updateTabDots(){
+  const t=todayStr();
+  const gymDone=getCatDayScore(t,'gym');
+  const boxDone=getCatDayScore(t,'boxing');
+  const makDone=getCatDayScore(t,'makan');
+  const kulDone=getCatDayScore(t,'kulit');
+  const ramDone=getCatDayScore(t,'rambut');
+  ['gym','boxing','nutrisi','kulit','rambut'].forEach(id=>{
+    const tab=$('ttab-'+id);if(!tab)return;
+    const done={gym:gymDone,boxing:boxDone,nutrisi:makDone,kulit:kulDone,rambut:ramDone}[id];
+    tab.classList.toggle('done-tab',!!done);
+  });
+}
+
 // ════════════════════════════════════════════
 // STORAGE
 // ════════════════════════════════════════════
@@ -987,6 +1334,7 @@ function getCatDayScore(dateStr,cat){
   if(cat==='makan'){const m=dd.meals||{};return m.sahur&&m.siang&&m.malem;}
   if(cat==='kulit'){const sc=dd.skincare||{};const steps=getSkinSteps();return steps.length>0&&steps.every(s=>sc[s.id]);}
   if(cat==='rambut'){const h=dd.hair||{};return HAIR_ITEMS.some(i=>h[i.id]);}
+  if(cat==='boxing'){const bx=dd.boxing||{};const done=BOXING_HABITS.filter(h=>bx[h.id]).length;return done>=Math.ceil(BOXING_HABITS.length*0.6);}
   return isDaySuccess(dateStr);
 }
 
@@ -1032,6 +1380,9 @@ function getDayProgress(dateStr){
   steps.forEach(s=>{total++;if(sc[s.id])done++;});
   // hair
   HAIR_ITEMS.forEach(h=>{total++;if(dd.hair&&dd.hair[h.id])done++;});
+  // boxing
+  const bxData=dd.boxing||{};
+  BOXING_HABITS.forEach(h=>{total++;if(bxData[h.id])done++;});
   return total>0?Math.round(done/total*100):0;
 }
 
@@ -1048,13 +1399,14 @@ function updateAllProgress(){
   $('streak-num').textContent=streak;
   $('streak-best').textContent='best: '+getBestStreak()+' hari';
 
-  // category wins
-  const dd=getDayData(t);
-  $('cw-gym').className='cw'+(getCatDayScore(t,'gym')?' done':'');
-  $('cw-makan').className='cw'+(getCatDayScore(t,'makan')?' done':'');
-  $('cw-kulit').className='cw'+(getCatDayScore(t,'kulit')?' done':'');
-  $('cw-rambut').className='cw'+(getCatDayScore(t,'rambut')?' done':'');
+  // category wins — now reflected in tab dots instead of cat-wins row
+  $('cw-gym') && ($('cw-gym').className='cw'+(getCatDayScore(t,'gym')?' done':''));
+  $('cw-boxing') && ($('cw-boxing').className='cw'+(getCatDayScore(t,'boxing')?' done':''));
+  $('cw-makan') && ($('cw-makan').className='cw'+(getCatDayScore(t,'makan')?' done':''));
+  $('cw-kulit') && ($('cw-kulit').className='cw'+(getCatDayScore(t,'kulit')?' done':''));
 
+  updateTabDots();
+  updateFocusEmptyStates();
   renderCalendar();
 }
 
@@ -1109,8 +1461,8 @@ function renderCalendar(){
     if(!isFuture&&hasData&&!cls.includes('full')){
       const dotWrap=document.createElement('div');
       dotWrap.className='cc-dots';
-      const cats=['gym','makan','kulit','rambut'];
-      const colors=['var(--amber)','var(--teal)','var(--rose)','var(--sky)'];
+      const cats=['gym','boxing','makan','kulit'];
+      const colors=['var(--amber)','var(--coral)','var(--teal)','var(--rose)'];
       cats.forEach((c,i)=>{
         if(getCatDayScore(k,c)){
           const dot=document.createElement('div');
@@ -1161,6 +1513,7 @@ function openDayDetail(y,m,d,k){
     {label:`Tidur: ${dd.sleep||'—'} jam`,color:'var(--lavender)',done:(dd.sleep||0)>=(S.get('sleepTarget')||7)},
     ...getSkinSteps().map(s=>({label:s.name,color:'var(--rose)',done:dd.skincare&&dd.skincare[s.id]})),
     ...HAIR_ITEMS.map(h=>({label:h.emoji+' '+h.name,color:'var(--sky)',done:dd.hair&&dd.hair[h.id]})),
+    ...BOXING_HABITS.map(h=>({label:h.emoji+' '+h.name,color:'var(--coral)',done:dd.boxing&&dd.boxing[h.id]})),
   ];
   items.forEach(item=>{
     const row=document.createElement('div');
@@ -1200,19 +1553,18 @@ function renderStats(){
   // per habit
   const list=$('habit-stat-list');list.innerHTML='';
   const habits=[
-    {id:'gym',emoji:'🏋️',name:'Gym / Rest',getScore:k=>getCatDayScore(k,'gym')},
-    {id:'makan',emoji:'🍱',name:'Makan 3x',getScore:k=>{const m=all[k]&&all[k].meals||{};return m.sahur&&m.siang&&m.malem;}},
-    {id:'shake',emoji:'🥤',name:'Protein Shake',getScore:k=>!!(all[k]&&all[k].shake)},
-    {id:'water',emoji:'💧',name:'Hidrasi Cukup',getScore:k=>(all[k]&&all[k].water||0)>=(S.get('waterTarget')||8)},
-    {id:'sleep',emoji:'😴',name:'Tidur Cukup',getScore:k=>(all[k]&&all[k].sleep||0)>=(S.get('sleepTarget')||7)},
-    {id:'skin',emoji:'✨',name:'Skincare Malam',getScore:k=>{const sc=all[k]&&all[k].skincare||{};return getSkinSteps().length>0&&getSkinSteps().every(s=>sc[s.id]);}},
-    {id:'keramas',emoji:'🚿',name:'Keramas',getScore:k=>!!(all[k]&&all[k].hair&&all[k].hair.keramas)},
+    {id:'gym',emoji:'🏋️',name:'Gym / Rest',getScore:k=>getCatDayScore(k,'gym'),color:'var(--amber)'},
+    {id:'makan',emoji:'🍱',name:'Makan 3x',getScore:k=>{const m=all[k]&&all[k].meals||{};return m.sahur&&m.siang&&m.malem;},color:'var(--teal)'},
+    {id:'shake',emoji:'🥤',name:'Protein Shake',getScore:k=>!!(all[k]&&all[k].shake),color:'var(--teal)'},
+    {id:'water',emoji:'💧',name:'Hidrasi Cukup',getScore:k=>(all[k]&&all[k].water||0)>=(S.get('waterTarget')||8),color:'var(--sky)'},
+    {id:'sleep',emoji:'😴',name:'Tidur Cukup',getScore:k=>(all[k]&&all[k].sleep||0)>=(S.get('sleepTarget')||7),color:'var(--lavender)'},
+    {id:'skin',emoji:'✨',name:'Skincare Malam',getScore:k=>{const sc=all[k]&&all[k].skincare||{};return getSkinSteps().length>0&&getSkinSteps().every(s=>sc[s.id]);},color:'var(--rose)'},
+    {id:'keramas',emoji:'🚿',name:'Keramas',getScore:k=>!!(all[k]&&all[k].hair&&all[k].hair.keramas),color:'var(--sky)'},
+    ...BOXING_HABITS.map(h=>({id:'bx_'+h.id,emoji:h.emoji,name:h.name,getScore:k=>!!(all[k]&&all[k].boxing&&all[k].boxing[h.id]),color:'var(--coral)'})),
   ];
-  const colors=['var(--amber)','var(--teal)','var(--teal)','var(--sky)','var(--lavender)','var(--rose)','var(--sky)'];
   habits.forEach((h,idx)=>{
     const done=activeDays>0?keys.filter(k=>h.getScore(k)).length:0;
     const pct=activeDays>0?Math.round(done/Math.max(activeDays,1)*100):0;
-    // streak
     let streak2=0,today2=new Date();
     for(let i=0;i<365;i++){
       const d=new Date(today2);d.setDate(today2.getDate()-i);
@@ -1220,7 +1572,7 @@ function renderStats(){
       if(h.getScore(k))streak2++;else if(i>0)break;
     }
     const row=document.createElement('div');row.className='habit-stat';
-    row.innerHTML=`<div class="hs-emoji">${h.emoji}</div><div class="hs-name">${h.name}</div><div class="hs-bar-wrap"><div class="hs-bar-fill" style="width:${pct}%;background:${colors[idx]}"></div></div><div class="hs-pct">${pct}%</div><div class="hs-streak">${streak2}🔥</div>`;
+    row.innerHTML=`<div class="hs-emoji">${h.emoji}</div><div class="hs-name">${h.name}</div><div class="hs-bar-wrap"><div class="hs-bar-fill" style="width:${pct}%;background:${h.color}"></div></div><div class="hs-pct">${pct}%</div><div class="hs-streak">${streak2}🔥</div>`;
     list.appendChild(row);
   });
 }
@@ -1237,9 +1589,10 @@ document.querySelectorAll('.ov').forEach(ov=>{ov.addEventListener('click',e=>{if
 // ════════════════════════════════════════════
 function saveSleepTarget(){const v=parseInt($('sleep-target-inp').value)||7;S.set('sleepTarget',v);sleepTarget=v;renderSleepBtns();toast('✓ Target tidur: '+v+' jam');}
 function saveWaterTarget(){const v=parseInt($('water-target-inp').value)||8;S.set('waterTarget',v);waterTarget=v;renderGlasses();toast('✓ Target air: '+v+' gelas');}
+function saveBoxingPhase(){const v=parseInt($('boxing-phase-inp').value)||1;S.set('boxingPhase',v);renderBoxingHabits();toast('🥊 Boxing phase '+v+' aktif!');}
 
 function exportData(){
-  const blob=new Blob([JSON.stringify({days:S.get('days'),skinSteps:S.get('skinSteps'),splits:S.get('splits'),settings:{sleepTarget:S.get('sleepTarget'),waterTarget:S.get('waterTarget'),keramasTarget:S.get('keramasTarget')}},null,2)],{type:'application/json'});
+  const blob=new Blob([JSON.stringify({days:S.get('days'),skinSteps:S.get('skinSteps'),splits:S.get('splits'),boxingSkills:S.get('boxingSkills'),settings:{sleepTarget:S.get('sleepTarget'),waterTarget:S.get('waterTarget'),keramasTarget:S.get('keramasTarget'),boxingPhase:S.get('boxingPhase')}},null,2)],{type:'application/json'});
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`health-glow-backup-${todayStr()}.json`;a.click();toast('📦 Data diekspor!');
 }
 function importData(e){
@@ -1251,7 +1604,8 @@ function importData(e){
       if(p.days)S.set('days',p.days);
       if(p.skinSteps)S.set('skinSteps',p.skinSteps);
       if(p.splits)S.set('splits',p.splits);
-      if(p.settings){if(p.settings.sleepTarget)S.set('sleepTarget',p.settings.sleepTarget);if(p.settings.waterTarget)S.set('waterTarget',p.settings.waterTarget);if(p.settings.keramasTarget)S.set('keramasTarget',p.settings.keramasTarget);}
+      if(p.boxingSkills)S.set('boxingSkills',p.boxingSkills);
+      if(p.settings){if(p.settings.sleepTarget)S.set('sleepTarget',p.settings.sleepTarget);if(p.settings.waterTarget)S.set('waterTarget',p.settings.waterTarget);if(p.settings.keramasTarget)S.set('keramasTarget',p.settings.keramasTarget);if(p.settings.boxingPhase)S.set('boxingPhase',p.settings.boxingPhase);}
       init();toast('✓ Data berhasil diimpor!');
     }catch{toast('⚠ File tidak valid');}
   };
@@ -1259,9 +1613,198 @@ function importData(e){
 }
 function confirmReset(){
   if(confirm('Reset semua data? Tidak bisa dibatalkan!')){
-    ['days','skinSteps','splits','sleepTarget','waterTarget','keramasTarget'].forEach(k=>localStorage.removeItem('hg_'+k));
+    ['days','skinSteps','splits','sleepTarget','waterTarget','keramasTarget','boxingSkills','boxingPhase'].forEach(k=>localStorage.removeItem('hg_'+k));
     init();toast('Data direset');
   }
+}
+
+// ════════════════════════════════════════════
+// BOXING — DAILY HABITS
+// ════════════════════════════════════════════
+const BOXING_HABITS=[
+  {id:'shadow',emoji:'🌅',name:'Shadow Boxing Pagi',sub:'10 menit — sebelum ngapa-ngapain',phase:1},
+  {id:'pushup',emoji:'💪',name:'100 Push-up',sub:'bisa dipecah 4x25 — no skip',phase:1},
+  {id:'roadwork',emoji:'🏃',name:'Roadwork / Lari',sub:'3-5km — bangun cardio base',phase:1},
+  {id:'gymboxing',emoji:'🥊',name:'Gym Boxing Session',sub:'teknik, drilling, pad work — no sparring ok',phase:1},
+  {id:'visualize',emoji:'🧠',name:'Visualisasi Mental',sub:'5 menit sebelum tidur — otak dilatih',phase:1},
+];
+
+function getBoxingHabitStreak(id){
+  let streak=0;const today=new Date();
+  for(let i=0;i<365;i++){
+    const d=new Date(today);d.setDate(today.getDate()-i);
+    const k=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    const dd=getDayData(k);
+    if(dd.boxing&&dd.boxing[id])streak++;
+    else if(i>0)break;
+  }
+  return streak;
+}
+
+function toggleBoxingHabit(id){
+  const t=todayStr();const dd=getDayData(t);
+  const bx=dd.boxing||{};
+  bx[id]=!bx[id];
+  setDayData(t,{boxing:bx});
+  renderBoxingHabits();updateAllProgress();
+  const h=BOXING_HABITS.find(x=>x.id===id);
+  if(bx[id])toast(h.emoji+' '+h.name+' ✓');
+}
+
+function getBoxingPhase(){
+  // determine phase based on start date or manual — stored as setting
+  const phase=S.get('boxingPhase')||1;
+  return phase;
+}
+
+function renderBoxingHabits(){
+  const t=todayStr();const dd=getDayData(t);
+  const bx=dd.boxing||{};
+  const list=$('boxing-habit-list');list.innerHTML='';
+  const phase=getBoxingPhase();
+
+  const phaseName=['','Phase 1 — Foundation','Phase 2 — Development','Phase 3 — Sharpening'];
+  $('boxing-phase-badge').textContent='📅 '+phaseName[phase];
+
+  let done=0,total=BOXING_HABITS.length;
+  BOXING_HABITS.forEach(h=>{
+    const isDone=!!bx[h.id];
+    if(isDone)done++;
+    const streak=getBoxingHabitStreak(h.id);
+    const el=document.createElement('div');
+    el.className='box-habit'+(isDone?' done':'');
+    el.onclick=()=>toggleBoxingHabit(h.id);
+    el.innerHTML=`
+      <div class="bh-check">${isDone?'✓':''}</div>
+      <div class="bh-info">
+        <div class="bh-name">${h.emoji} ${h.name}</div>
+        <div class="bh-sub">${h.sub}</div>
+      </div>
+      <div class="bh-streak"><span>${streak}</span>hari</div>
+    `;
+    list.appendChild(el);
+  });
+
+  const pct=total>0?Math.round(done/total*100):0;
+  $('box-prog-fill').style.width=pct+'%';
+  $('boxing-pct').textContent=done+'/'+total;
+}
+
+// ════════════════════════════════════════════
+// BOXING — SKILL CURRICULUM
+// ════════════════════════════════════════════
+const BOXING_SKILLS=[
+  // Phase 1 — Foundation
+  {id:'sk_stance',phase:'1',icon:'🦶',name:'Stance & Guard',desc:'Orthodox/southpaw — tangan up, chin down'},
+  {id:'sk_jab',phase:'1',icon:'👊',name:'Jab',desc:'Senjata utama — setup semua combo'},
+  {id:'sk_cross',phase:'1',icon:'💥',name:'Cross (Straight Right)',desc:'Power punch — pindah berat badan'},
+  {id:'sk_hook',phase:'1',icon:'🌀',name:'Hook',desc:'Kiri & kanan — dari pinggang, bukan lengan'},
+  {id:'sk_uppercut',phase:'1',icon:'⬆️',name:'Uppercut',desc:'Close range — dari bawah ke atas'},
+  {id:'sk_footwork',phase:'1',icon:'👟',name:'Footwork Dasar',desc:'Advance, retreat, pivot — jangan crossed feet'},
+  {id:'sk_combo12',phase:'1',icon:'🔢',name:'Combo 1-2',desc:'Jab-Cross — drill sampai automatic'},
+  {id:'sk_combo123',phase:'1',icon:'🔢',name:'Combo 1-2-3',desc:'Jab-Cross-Hook kiri'},
+  // Phase 2 — Development
+  {id:'sk_slip',phase:'2',icon:'👀',name:'Slip Kiri & Kanan',desc:'Defense utama — bergerak dari pinggang'},
+  {id:'sk_block',phase:'2',icon:'🛡️',name:'Block & Parry',desc:'High guard block, deflect jab'},
+  {id:'sk_roll',phase:'2',icon:'🌊',name:'Roll / Duck',desc:'Under hooks — bukan tutup mata'},
+  {id:'sk_counter',phase:'2',icon:'⚡',name:'Counter Punching',desc:'Balas setelah defend — reflex, bukan pikir'},
+  {id:'sk_clinch',phase:'2',icon:'🤼',name:'Clinch & Break',desc:'Masuk clinch, survive, keluar clean'},
+  {id:'sk_sparring',phase:'2',icon:'🥊',name:'Sparring Survival',desc:'3 rounds tanpa panik — tenang di api'},
+  // Phase 3 — Sharpening
+  {id:'sk_pressure',phase:'3',icon:'😤',name:'Pressure Fighting',desc:'Walk orang down — control jarak & tempo'},
+  {id:'sk_combo_adv',phase:'3',icon:'🎯',name:'Advanced Combos 6+',desc:'Setup trap, feint, dan finish'},
+  {id:'sk_ring_iq',phase:'3',icon:'🧩',name:'Ring IQ',desc:'Baca lawan, adjust, hunting weakness'},
+  {id:'sk_mindset',phase:'3',icon:'💀',name:'Zero Fear / Zero Doubt',desc:'Kena pukul = data. Berdiri. Lanjut.'},
+];
+
+const LEVEL_LABELS=['Belum','Latihan','Solid','Master'];
+const LEVEL_COLORS=['var(--t3)','var(--sky)','var(--amber)','var(--coral)'];
+let activePhaseFilter='all';
+
+function getSkillData(){return S.get('boxingSkills')||{};}
+function setSkillLevel(id,lvl){
+  const sk=getSkillData();
+  const cur=sk[id]||{lvl:0,note:''};
+  const newLvl=cur.lvl===lvl?0:lvl; // tap same = unset
+  sk[id]={...cur,lvl:newLvl};
+  S.set('boxingSkills',sk);
+  renderSkills();
+}
+function saveSkillNote(id,val){
+  const sk=getSkillData();
+  const cur=sk[id]||{lvl:0};
+  sk[id]={...cur,note:val};
+  S.set('boxingSkills',sk);
+}
+
+function setPhaseFilter(f,el){
+  activePhaseFilter=f;
+  document.querySelectorAll('.phase-tab').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+  renderSkills();
+}
+
+function renderSkills(){
+  const sk=getSkillData();
+  const list=$('skill-list');list.innerHTML='';
+
+  const filtered=activePhaseFilter==='all'?BOXING_SKILLS:BOXING_SKILLS.filter(s=>s.phase===activePhaseFilter);
+
+  // per-phase mastered count
+  ['1','2','3'].forEach(p=>{
+    const total=BOXING_SKILLS.filter(s=>s.phase===p).length;
+    const mastered=BOXING_SKILLS.filter(s=>s.phase===p&&(sk[s.id]?.lvl||0)>=3).length;
+    $('ps-'+p).textContent=mastered+'/'+total;
+  });
+
+  // overall progress
+  const allTotal=BOXING_SKILLS.length;
+  const allPoints=BOXING_SKILLS.reduce((sum,s)=>sum+(sk[s.id]?.lvl||0),0);
+  const maxPoints=allTotal*3;
+  const pct=maxPoints>0?Math.round(allPoints/maxPoints*100):0;
+  $('skill-ov-pct').textContent=pct+'%';
+  $('skill-ov-fill').style.width=pct+'%';
+  const mastered=BOXING_SKILLS.filter(s=>(sk[s.id]?.lvl||0)>=3).length;
+  $('skill-ov-sub').textContent=mastered+' dari '+allTotal+' skill dikuasai (Solid+)';
+
+  filtered.forEach(skill=>{
+    const data=sk[skill.id]||{lvl:0,note:''};
+    const lvl=data.lvl||0;
+    const noteId='note_'+skill.id;
+
+    const card=document.createElement('div');
+    card.className='skill-card lvl-'+lvl;
+
+    const phaseBadge={1:'⚡ Phase 1',2:'🔥 Phase 2',3:'💀 Phase 3'}[skill.phase];
+    const pips=[1,2,3].map(i=>`<div class="lvl-pip l${i}${lvl>=i?' filled':''}" onclick="event.stopPropagation();setSkillLevel('${skill.id}',${i})"></div>`).join('');
+
+    card.innerHTML=`
+      <div class="skill-header" onclick="toggleSkillNote('${noteId}')">
+        <div class="skill-icon">${skill.icon}</div>
+        <div class="skill-meta">
+          <div class="skill-name">${skill.name}</div>
+          <div class="skill-phase-tag">${phaseBadge} · ${skill.desc}</div>
+        </div>
+        <div class="skill-lvl-wrap">
+          <div>
+            <div class="lvl-pip-row">${pips}</div>
+            <div class="lvl-label lbl-${lvl}" style="text-align:right;margin-top:3px;">${LEVEL_LABELS[lvl]}</div>
+          </div>
+        </div>
+      </div>
+      <div class="skill-note-wrap" id="${noteId}">
+        <textarea class="skill-note" placeholder="kapan lo ngerasa skill ini 'klik'? tulis di sini..." rows="2"
+          onchange="saveSkillNote('${skill.id}',this.value)">${data.note||''}</textarea>
+        <div class="skill-note-hint">💡 catatan tersimpan otomatis</div>
+      </div>
+    `;
+    list.appendChild(card);
+  });
+}
+
+function toggleSkillNote(id){
+  const wrap=$(id);
+  if(wrap)wrap.classList.toggle('open');
 }
 
 // ════════════════════════════════════════════
@@ -1279,7 +1822,8 @@ function nav(id,btn){
   $('pg-'+id).classList.add('on');btn.classList.add('on');
   if(id==='chain'){renderCalendar();}
   if(id==='stats'){renderStats();}
-  if(id==='settings'){renderSplitTplList();$('sleep-target-inp').value=S.get('sleepTarget')||7;$('water-target-inp').value=S.get('waterTarget')||8;}
+  if(id==='boxing'){renderSkills();}
+  if(id==='settings'){renderSplitTplList();$('sleep-target-inp').value=S.get('sleepTarget')||7;$('water-target-inp').value=S.get('waterTarget')||8;$('boxing-phase-inp').value=S.get('boxingPhase')||1;}
 }
 
 // ════════════════════════════════════════════
@@ -1298,6 +1842,7 @@ function init(){
   renderSleepBtns();
   renderSkincareSteps();
   renderHairList();
+  renderBoxingHabits();
   updateAllProgress();
   renderCalendar();
 }
