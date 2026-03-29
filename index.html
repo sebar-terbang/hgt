@@ -51,83 +51,159 @@ nav{position:fixed;bottom:0;left:0;right:0;background:rgba(15,13,11,.97);backdro
 .page{display:none;max-width:500px;margin:0 auto;padding-bottom:20px;}
 .page.on{display:block;}
 
-/* ── TODAY SWIPE TABS ── */
-.today-tab-bar{
-  display:flex;align-items:center;
+/* ── TODAY ACCORDION ── */
+.acc-section{
   border-bottom:1px solid var(--b1);
-  background:var(--bg);
-  position:sticky;top:0;z-index:10;
-  overflow-x:auto;
-  scrollbar-width:none;
-  -webkit-overflow-scrolling:touch;
-}
-.today-tab-bar::-webkit-scrollbar{display:none;}
-.t-tab{
-  flex-shrink:0;
-  padding:10px 14px 9px;
-  font-family:var(--mono);font-size:9px;letter-spacing:.5px;
-  color:var(--t3);cursor:pointer;
-  border-bottom:2px solid transparent;
-  transition:all .15s;white-space:nowrap;
-  display:flex;align-items:center;gap:5px;
-}
-.t-tab.on{color:var(--amber);border-bottom-color:var(--amber);}
-.t-tab .t-tab-dot{
-  width:6px;height:6px;border-radius:50%;
-  background:var(--b2);transition:background .2s;flex-shrink:0;
-}
-.t-tab.done-tab .t-tab-dot{background:var(--teal);}
-.t-tab.on.done-tab{color:var(--teal);border-bottom-color:var(--teal);}
-
-/* focus mode toggle */
-.focus-toggle{
-  margin-left:auto;flex-shrink:0;
-  padding:6px 12px;
-  font-family:var(--mono);font-size:8px;color:var(--t3);
-  cursor:pointer;border-left:1px solid var(--b1);
-  display:flex;align-items:center;gap:5px;
-  transition:color .15s;letter-spacing:.5px;
-  white-space:nowrap;
-}
-.focus-toggle.on{color:var(--amber);}
-.focus-toggle-pip{
-  width:8px;height:8px;border-radius:50%;
-  border:1.5px solid var(--t3);
-  transition:all .2s;
-}
-.focus-toggle.on .focus-toggle-pip{background:var(--amber);border-color:var(--amber);}
-
-/* Tab panels */
-.today-panels{
-  position:relative;
   overflow:hidden;
 }
-.today-panel{display:none;padding:14px 16px 16px;}
-.today-panel.on{display:block;}
-
-/* focus mode — hide done items */
-.today-panels.focus-mode .box-habit.done,
-.today-panels.focus-mode .check-item.done,
-.today-panels.focus-mode .check-item.done-teal,
-.today-panels.focus-mode .check-item.done-coral,
-.today-panels.focus-mode .check-item.done-rose,
-.today-panels.focus-mode .check-item.done-sky,
-.today-panels.focus-mode .check-item.done-lavender,
-.today-panels.focus-mode .sc-step.done,
-.today-panels.focus-mode .meal-btn.done,
-.today-panels.focus-mode .shake-row.done{
+.acc-header{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 16px;cursor:pointer;
+  transition:background .15s;
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;
+}
+.acc-header:active{background:var(--s1);}
+.acc-emoji{font-size:16px;flex-shrink:0;}
+.acc-title{
+  font-family:var(--serif);font-size:17px;font-style:italic;
+  color:var(--t1);flex:1;line-height:1;
+}
+.acc-right{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.acc-pct{font-family:var(--mono);font-size:9px;color:var(--t2);}
+.acc-done-badge{
+  font-family:var(--mono);font-size:8px;
+  color:var(--teal);background:rgba(62,207,184,.1);
+  border:1px solid rgba(62,207,184,.2);
+  border-radius:20px;padding:2px 8px;
   display:none;
 }
-/* focus mode — hide gym done state but keep visible so user can log */
-.today-panels.focus-mode .split-logged{display:none!important;}
-
-.focus-empty{
-  text-align:center;padding:32px 16px;
-  font-family:var(--mono);font-size:11px;color:var(--t2);
-  display:none;
+.acc-section.done .acc-done-badge{display:block;}
+.acc-section.done .acc-pct{display:none;}
+.acc-chevron{
+  font-size:10px;color:var(--t3);
+  transition:transform .22s ease;flex-shrink:0;
 }
-.focus-empty-icon{font-size:32px;margin-bottom:8px;}
-.focus-empty.show{display:block;}
+.acc-section.open .acc-chevron{transform:rotate(180deg);}
+
+.acc-body{
+  max-height:0;overflow:hidden;
+  transition:max-height .28s cubic-bezier(.4,0,.2,1);
+}
+.acc-section.open .acc-body{max-height:1200px;}
+.acc-inner{padding:0 14px 14px;}
+
+/* compact items */
+.check-item{
+  display:flex;align-items:center;gap:10px;
+  background:var(--s1);border:1px solid var(--b1);
+  border-radius:10px;padding:9px 12px;
+  cursor:pointer;transition:all .15s;
+  position:relative;overflow:hidden;
+  margin-bottom:5px;
+}
+.check-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--b1);transition:background .2s;}
+.check-item:active{transform:scale(.98);}
+.check-item.done{background:rgba(245,166,35,.05);border-color:rgba(245,166,35,.2);}
+.check-item.done::before{background:var(--amber);}
+.check-item.done-teal{background:rgba(62,207,184,.05);border-color:rgba(62,207,184,.2);}
+.check-item.done-teal::before{background:var(--teal);}
+.check-item.done-coral{background:rgba(255,112,88,.05);border-color:rgba(255,112,88,.2);}
+.check-item.done-coral::before{background:var(--coral);}
+.check-item.done-rose{background:rgba(242,120,159,.05);border-color:rgba(242,120,159,.2);}
+.check-item.done-rose::before{background:var(--rose);}
+.check-item.done-sky{background:rgba(106,180,240,.05);border-color:rgba(106,180,240,.2);}
+.check-item.done-sky::before{background:var(--sky);}
+.check-item.done-lavender{background:rgba(181,154,240,.05);border-color:rgba(181,154,240,.2);}
+.check-item.done-lavender::before{background:var(--lavender);}
+.ci-check{
+  width:20px;height:20px;border-radius:50%;
+  border:2px solid var(--b2);background:var(--s2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;color:transparent;flex-shrink:0;transition:all .2s;
+}
+.check-item.done .ci-check,.check-item.done-teal .ci-check,
+.check-item.done-coral .ci-check,.check-item.done-rose .ci-check,
+.check-item.done-sky .ci-check,.check-item.done-lavender .ci-check{color:#0f0d0b;font-weight:700;}
+.check-item.done .ci-check{background:var(--amber);border-color:var(--amber);}
+.check-item.done-teal .ci-check{background:var(--teal);border-color:var(--teal);}
+.check-item.done-coral .ci-check{background:var(--coral);border-color:var(--coral);}
+.check-item.done-rose .ci-check{background:var(--rose);border-color:var(--rose);}
+.check-item.done-sky .ci-check{background:var(--sky);border-color:var(--sky);}
+.check-item.done-lavender .ci-check{background:var(--lavender);border-color:var(--lavender);}
+.ci-info{flex:1;}
+.ci-name{font-size:12px;font-weight:600;color:var(--t1);line-height:1.2;}
+.ci-sub{font-family:var(--mono);font-size:8px;color:var(--t2);margin-top:1px;}
+.ci-streak{font-family:var(--mono);font-size:8px;color:var(--t3);text-align:right;flex-shrink:0;}
+.ci-streak span{display:block;font-size:16px;font-weight:500;color:var(--amber);line-height:1;}
+
+/* compact sec-lbl */
+.sec-lbl{font-family:var(--mono);font-size:8px;font-weight:500;color:var(--t3);letter-spacing:2px;text-transform:uppercase;margin-bottom:7px;}
+
+/* compact meals */
+.meal-btn{padding:10px 4px;}
+.meal-icon{font-size:18px;}
+.meal-name{font-family:var(--mono);font-size:7px;}
+
+/* compact hydration */
+.glass{width:24px;height:24px;border-radius:6px;font-size:12px;}
+
+/* compact day choice */
+.dc{padding:12px 10px;}
+.dc-icon{font-size:18px;}
+.dc-label{font-family:var(--serif);font-size:16px;font-style:italic;}
+.dc-sub{font-family:var(--mono);font-size:7px;color:var(--t2);margin-top:1px;}
+
+/* compact boxing habit */
+.box-habit{
+  display:flex;align-items:center;gap:10px;
+  background:var(--s1);border:1px solid var(--b1);
+  border-radius:10px;padding:9px 12px;
+  cursor:pointer;transition:all .15s;
+  position:relative;overflow:hidden;margin-bottom:5px;
+}
+.box-habit::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--b1);transition:background .2s;}
+.box-habit:active{transform:scale(.98);}
+.box-habit.done{background:rgba(255,112,88,.05);border-color:rgba(255,112,88,.2);}
+.box-habit.done::before{background:var(--coral);}
+.bh-check{
+  width:20px;height:20px;border-radius:50%;
+  border:2px solid var(--b2);background:var(--s2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;color:transparent;flex-shrink:0;transition:all .2s;
+}
+.box-habit.done .bh-check{background:var(--coral);border-color:var(--coral);color:#0f0d0b;font-weight:700;}
+.bh-info{flex:1;}
+.bh-name{font-size:12px;font-weight:600;color:var(--t1);line-height:1.2;}
+.bh-sub{font-family:var(--mono);font-size:8px;color:var(--t2);margin-top:1px;}
+.bh-streak{font-family:var(--mono);font-size:8px;color:var(--t3);text-align:right;flex-shrink:0;}
+.bh-streak span{display:block;font-size:16px;font-weight:500;color:var(--coral);line-height:1;}
+
+/* compact skincare step */
+.sc-step{
+  display:flex;align-items:center;gap:8px;
+  background:var(--s1);border:1px solid var(--b1);
+  border-radius:9px;padding:8px 12px;
+  cursor:pointer;transition:all .15s;margin-bottom:5px;
+}
+.sc-step:active{transform:scale(.98);}
+.sc-step.done{background:rgba(242,120,159,.05);border-color:rgba(242,120,159,.2);}
+.sc-num{width:18px;height:18px;border-radius:50%;background:var(--s3);border:1px solid var(--b1);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:8px;color:var(--t3);flex-shrink:0;transition:all .2s;}
+.sc-step.done .sc-num{background:var(--rose);border-color:var(--rose);color:#0f0d0b;font-weight:700;}
+.sc-step-name{flex:1;font-size:12px;font-weight:600;color:var(--t1);}
+.sc-step.done .sc-step-name{color:var(--rose);}
+.sc-step-emoji{font-size:14px;}
+
+/* today hero compact */
+.today-hero{padding:22px 16px 14px;position:relative;overflow:hidden;border-bottom:1px solid var(--b1);}
+.today-hero::before{content:'';position:absolute;top:-80px;right:-60px;width:260px;height:260px;background:radial-gradient(circle,rgba(245,166,35,.07) 0%,transparent 65%);pointer-events:none;}
+.today-hero::after{content:'';position:absolute;bottom:-40px;left:-30px;width:160px;height:160px;background:radial-gradient(circle,rgba(242,120,159,.05) 0%,transparent 65%);pointer-events:none;}
+.th-eyebrow{font-family:var(--mono);font-size:8px;color:var(--t2);letter-spacing:2px;text-transform:uppercase;margin-bottom:3px;}
+.th-title{font-family:var(--serif);font-size:26px;font-style:italic;color:var(--amber);line-height:1.1;margin-bottom:10px;}
+.th-title span{color:var(--t1);font-style:normal;}
+.streak-num{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--t1);}
+.streak-sub{font-family:var(--mono);font-size:8px;color:var(--t2);letter-spacing:.5px;margin-top:3px;}
+.streak-best{font-family:var(--mono);font-size:7px;color:var(--t3);margin-top:2px;}
 
 /* ── COMMON ── */
 .inp{background:var(--s2);border:1px solid var(--b1);border-radius:10px;padding:9px 12px;color:var(--t1);font-family:var(--mono);font-size:12px;outline:none;transition:border-color .15s;width:100%;}
@@ -608,13 +684,14 @@ nav{position:fixed;bottom:0;left:0;right:0;background:rgba(15,13,11,.97);backdro
 
 <!-- ════════════ TODAY ════════════ -->
 <div class="page on" id="pg-today">
+
   <!-- HERO -->
   <div class="today-hero">
     <div class="th-eyebrow">Health & Glow — Daily Log</div>
     <div class="th-title"><span>Hari</span> ini</div>
-    <div class="th-eyebrow" id="th-date" style="font-size:10px;color:var(--t2);margin-bottom:16px;"></div>
+    <div class="th-eyebrow" id="th-date" style="font-size:9px;color:var(--t2);margin-bottom:12px;"></div>
     <div class="progress-ring-wrap">
-      <svg class="ring-svg" width="72" height="72" viewBox="0 0 72 72">
+      <svg class="ring-svg" width="64" height="64" viewBox="0 0 72 72">
         <circle class="ring-bg" cx="36" cy="36" r="30"/>
         <circle class="ring-fill" id="ring-fill" cx="36" cy="36" r="30" stroke-dasharray="188.5" stroke-dashoffset="188.5"/>
         <text class="ring-pct" id="ring-pct" x="36" y="34">0%</text>
@@ -628,148 +705,154 @@ nav{position:fixed;bottom:0;left:0;right:0;background:rgba(15,13,11,.97);backdro
     </div>
   </div>
 
-  <!-- SWIPE TAB BAR -->
-  <div class="today-tab-bar" id="today-tab-bar">
-    <div class="t-tab on" id="ttab-gym"     onclick="switchTodayTab('gym',this)">    <span class="t-tab-dot"></span>🏋️ Gym</div>
-    <div class="t-tab"    id="ttab-boxing"  onclick="switchTodayTab('boxing',this)"> <span class="t-tab-dot"></span>🥊 Boxing</div>
-    <div class="t-tab"    id="ttab-nutrisi" onclick="switchTodayTab('nutrisi',this)"><span class="t-tab-dot"></span>🍱 Nutrisi</div>
-    <div class="t-tab"    id="ttab-kulit"   onclick="switchTodayTab('kulit',this)">  <span class="t-tab-dot"></span>✨ Kulit</div>
-    <div class="t-tab"    id="ttab-rambut"  onclick="switchTodayTab('rambut',this)"> <span class="t-tab-dot"></span>💆 Rambut</div>
-    <div class="focus-toggle" id="focus-toggle" onclick="toggleFocusMode()">
-      <div class="focus-toggle-pip"></div>FOCUS
+  <!-- GYM -->
+  <div class="acc-section open" id="acc-gym">
+    <div class="acc-header" onclick="toggleAcc('gym')">
+      <span class="acc-emoji">🏋️</span>
+      <div class="acc-title">Gym & Olahraga</div>
+      <div class="acc-right">
+        <span class="acc-done-badge">done ✓</span>
+        <span class="acc-pct" id="gym-pct"></span>
+        <span class="acc-chevron">▼</span>
+      </div>
+    </div>
+    <div class="acc-body">
+      <div class="acc-inner">
+        <div class="day-choice">
+          <div class="dc" id="btn-gym" onclick="setGym('gym')">
+            <div class="dc-icon">💪</div>
+            <div><div class="dc-label">Gym</div><div class="dc-sub">→ log split</div></div>
+          </div>
+          <div class="dc" id="btn-rest" onclick="setGym('rest')">
+            <div class="dc-icon">😴</div>
+            <div><div class="dc-label">Rest</div><div class="dc-sub">recovery = gains</div></div>
+          </div>
+        </div>
+        <div id="split-section" style="display:none;">
+          <div class="sec-lbl" style="margin-bottom:7px;">split hari ini</div>
+          <div class="split-chips" id="split-chips"></div>
+        </div>
+        <div id="split-logged" style="display:none;" class="split-logged"></div>
+      </div>
     </div>
   </div>
 
-  <!-- PANELS -->
-  <div class="today-panels" id="today-panels">
-
-    <!-- GYM PANEL -->
-    <div class="today-panel on" id="panel-gym">
-      <div class="sec-head" style="margin-bottom:12px;">
-        <div class="sec-title"><span class="sec-emoji">🏋️</span><div class="sec-name">Gym & Olahraga</div></div>
-        <div class="sec-pct" id="gym-pct"></div>
-      </div>
-      <div class="day-choice">
-        <div class="dc" id="btn-gym" onclick="setGym('gym')">
-          <div class="dc-icon">💪</div>
-          <div><div class="dc-label">Gym</div><div class="dc-sub">→ log split</div></div>
-        </div>
-        <div class="dc" id="btn-rest" onclick="setGym('rest')">
-          <div class="dc-icon">😴</div>
-          <div><div class="dc-label">Rest</div><div class="dc-sub">recovery = gains</div></div>
-        </div>
-      </div>
-      <div id="split-section" style="display:none;">
-        <div class="sec-lbl" style="margin-bottom:8px;">split hari ini</div>
-        <div class="split-chips" id="split-chips"></div>
-      </div>
-      <div id="split-logged" style="display:none;" class="split-logged"></div>
-      <div class="focus-empty" id="focus-empty-gym">
-        <div class="focus-empty-icon">🏋️</div>
-        Gym udah dicatat hari ini!
+  <!-- BOXING -->
+  <div class="acc-section open" id="acc-boxing">
+    <div class="acc-header" onclick="toggleAcc('boxing')">
+      <span class="acc-emoji">🥊</span>
+      <div class="acc-title">Boxing</div>
+      <div class="acc-right">
+        <span class="acc-done-badge">done ✓</span>
+        <span class="acc-pct" id="boxing-pct"></span>
+        <span class="acc-chevron">▼</span>
       </div>
     </div>
-
-    <!-- BOXING PANEL -->
-    <div class="today-panel" id="panel-boxing">
-      <div class="sec-head" style="margin-bottom:8px;">
-        <div class="sec-title"><span class="sec-emoji">🥊</span><div class="sec-name">Boxing</div></div>
-        <div class="sec-pct" id="boxing-pct"></div>
-      </div>
-      <div class="boxing-phase-badge" id="boxing-phase-badge">📅 Phase 1 — Foundation</div>
-      <div class="box-prog-bar"><div class="box-prog-fill" id="box-prog-fill" style="width:0%"></div></div>
-      <div id="boxing-habit-list"></div>
-      <div class="focus-empty" id="focus-empty-boxing">
-        <div class="focus-empty-icon">🥊</div>
-        Boxing habits semua done!<br>Beast mode activated.
-      </div>
-      <div style="font-family:var(--mono);font-size:8px;color:var(--t3);margin-top:6px;text-align:right;">
-        chain ga boleh putus 🔗
+    <div class="acc-body">
+      <div class="acc-inner">
+        <div class="boxing-phase-badge" id="boxing-phase-badge" style="margin-bottom:10px;">📅 Phase 1 — Foundation</div>
+        <div class="box-prog-bar"><div class="box-prog-fill" id="box-prog-fill" style="width:0%"></div></div>
+        <div id="boxing-habit-list"></div>
+        <div style="font-family:var(--mono);font-size:7px;color:var(--t3);margin-top:4px;text-align:right;">chain ga boleh putus 🔗</div>
       </div>
     </div>
+  </div>
 
-    <!-- NUTRISI PANEL -->
-    <div class="today-panel" id="panel-nutrisi">
-      <div class="sec-head" style="margin-bottom:12px;">
-        <div class="sec-title"><span class="sec-emoji">🍱</span><div class="sec-name">Nutrisi & Bulking</div></div>
-        <div class="sec-pct" id="makan-pct"></div>
-      </div>
-      <div class="sec-lbl" style="margin-bottom:8px;">makan harian</div>
-      <div class="meal-row">
-        <div class="meal-btn" id="meal-sahur" onclick="toggleMeal('sahur')">
-          <div class="meal-icon">🌅</div><div class="meal-name">Pagi</div><div class="meal-check">✓</div>
-        </div>
-        <div class="meal-btn" id="meal-siang" onclick="toggleMeal('siang')">
-          <div class="meal-icon">☀️</div><div class="meal-name">Siang</div><div class="meal-check">✓</div>
-        </div>
-        <div class="meal-btn" id="meal-malem" onclick="toggleMeal('malem')">
-          <div class="meal-icon">🌙</div><div class="meal-name">Malam</div><div class="meal-check">✓</div>
-        </div>
-      </div>
-      <div class="shake-row" id="shake-row" onclick="toggleShake()">
-        <div class="shake-toggle"></div>
-        <div class="shake-info">
-          <div class="shake-name">🥤 Protein Shake</div>
-          <div class="shake-sub">homemade shake hari ini</div>
-        </div>
-        <div class="ci-streak"><span id="shake-streak">0</span>hari</div>
-      </div>
-      <div style="margin-top:8px;" class="sec-lbl">hidrasi</div>
-      <div class="hydration-row">
-        <div class="hydration-glasses" id="glasses-wrap"></div>
-        <div class="hydration-label" id="hydration-label">0 / 8</div>
-      </div>
-      <div style="text-align:right;font-family:var(--mono);font-size:8px;color:var(--t3);margin-top:3px;">ketuk gelas untuk tambah / kurangi</div>
-      <div style="margin-top:12px;" class="sec-lbl">tidur semalam</div>
-      <div class="sleep-row">
-        <div class="sleep-label">⏰ jam</div>
-        <div class="sleep-btns" id="sleep-btns"></div>
-      </div>
-      <div class="focus-empty" id="focus-empty-nutrisi">
-        <div class="focus-empty-icon">🍱</div>
-        Semua nutrisi hari ini done!
+  <!-- NUTRISI -->
+  <div class="acc-section open" id="acc-nutrisi">
+    <div class="acc-header" onclick="toggleAcc('nutrisi')">
+      <span class="acc-emoji">🍱</span>
+      <div class="acc-title">Nutrisi & Bulking</div>
+      <div class="acc-right">
+        <span class="acc-done-badge">done ✓</span>
+        <span class="acc-pct" id="makan-pct"></span>
+        <span class="acc-chevron">▼</span>
       </div>
     </div>
-
-    <!-- KULIT PANEL -->
-    <div class="today-panel" id="panel-kulit">
-      <div class="sec-head" style="margin-bottom:12px;">
-        <div class="sec-title"><span class="sec-emoji">✨</span><div class="sec-name">Perawatan Wajah</div></div>
-        <div class="sec-pct" id="kulit-pct"></div>
-      </div>
-      <div class="sec-lbl" style="margin-bottom:6px;">rutinitas malam</div>
-      <div class="sc-progress-bar"><div class="sc-progress-fill" id="sc-prog-fill" style="width:0%"></div></div>
-      <div class="skincare-steps" id="skincare-steps"></div>
-      <div class="sc-add-row" id="sc-add-row">
-        <input class="inp" id="sc-new-name" placeholder="tambah step... (mis: Retinol)" style="flex:1;">
-        <button class="btn btn-a" style="padding:9px 14px;" onclick="addSkinStep()">+</button>
-      </div>
-      <div style="font-family:var(--mono);font-size:8px;color:var(--t3);margin-top:6px;">💡 step tersimpan otomatis — tap untuk centang hari ini</div>
-      <div class="focus-empty" id="focus-empty-kulit">
-        <div class="focus-empty-icon">✨</div>
-        Skincare malam done!<br>Glowing tomorrow.
-      </div>
-    </div>
-
-    <!-- RAMBUT PANEL -->
-    <div class="today-panel" id="panel-rambut">
-      <div class="sec-head" style="margin-bottom:12px;">
-        <div class="sec-title"><span class="sec-emoji">💆</span><div class="sec-name">Perawatan Rambut</div></div>
-        <div class="sec-pct" id="rambut-pct"></div>
-      </div>
-      <div class="check-list" id="hair-list"></div>
-      <div style="margin-top:10px;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:9px;color:var(--t3);">
-        <span>Target keramas:</span>
-        <input class="inp" id="keramas-target" type="number" min="1" max="7" style="width:50px;padding:4px 8px;font-size:11px;" onchange="saveKeramasTarget()">
-        <span>x/minggu</span>
-      </div>
-      <div class="focus-empty" id="focus-empty-rambut">
-        <div class="focus-empty-icon">💆</div>
-        Rambut udah dirawat hari ini!
+    <div class="acc-body">
+      <div class="acc-inner">
+        <div class="sec-lbl" style="margin-bottom:7px;">makan harian</div>
+        <div class="meal-row">
+          <div class="meal-btn" id="meal-sahur" onclick="toggleMeal('sahur')">
+            <div class="meal-icon">🌅</div><div class="meal-name">Pagi</div><div class="meal-check">✓</div>
+          </div>
+          <div class="meal-btn" id="meal-siang" onclick="toggleMeal('siang')">
+            <div class="meal-icon">☀️</div><div class="meal-name">Siang</div><div class="meal-check">✓</div>
+          </div>
+          <div class="meal-btn" id="meal-malem" onclick="toggleMeal('malem')">
+            <div class="meal-icon">🌙</div><div class="meal-name">Malam</div><div class="meal-check">✓</div>
+          </div>
+        </div>
+        <div class="shake-row" id="shake-row" onclick="toggleShake()">
+          <div class="shake-toggle"></div>
+          <div class="shake-info">
+            <div class="shake-name">🥤 Protein Shake</div>
+            <div class="shake-sub">homemade shake hari ini</div>
+          </div>
+          <div class="ci-streak"><span id="shake-streak">0</span>hari</div>
+        </div>
+        <div style="margin-top:8px;" class="sec-lbl">hidrasi</div>
+        <div class="hydration-row">
+          <div class="hydration-glasses" id="glasses-wrap"></div>
+          <div class="hydration-label" id="hydration-label">0 / 8</div>
+        </div>
+        <div style="margin-top:10px;" class="sec-lbl">tidur semalam</div>
+        <div class="sleep-row">
+          <div class="sleep-label">⏰ jam</div>
+          <div class="sleep-btns" id="sleep-btns"></div>
+        </div>
       </div>
     </div>
+  </div>
 
-  </div><!-- /today-panels -->
+  <!-- KULIT -->
+  <div class="acc-section open" id="acc-kulit">
+    <div class="acc-header" onclick="toggleAcc('kulit')">
+      <span class="acc-emoji">✨</span>
+      <div class="acc-title">Perawatan Wajah</div>
+      <div class="acc-right">
+        <span class="acc-done-badge">done ✓</span>
+        <span class="acc-pct" id="kulit-pct"></span>
+        <span class="acc-chevron">▼</span>
+      </div>
+    </div>
+    <div class="acc-body">
+      <div class="acc-inner">
+        <div class="sec-lbl" style="margin-bottom:5px;">rutinitas malam</div>
+        <div class="sc-progress-bar"><div class="sc-progress-fill" id="sc-prog-fill" style="width:0%"></div></div>
+        <div class="skincare-steps" id="skincare-steps"></div>
+        <div class="sc-add-row" id="sc-add-row" style="margin-top:7px;">
+          <input class="inp" id="sc-new-name" placeholder="tambah step... (mis: Retinol)" style="flex:1;">
+          <button class="btn btn-a" style="padding:8px 12px;" onclick="addSkinStep()">+</button>
+        </div>
+        <div style="font-family:var(--mono);font-size:7px;color:var(--t3);margin-top:5px;">💡 tap untuk centang hari ini</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RAMBUT -->
+  <div class="acc-section open" id="acc-rambut">
+    <div class="acc-header" onclick="toggleAcc('rambut')">
+      <span class="acc-emoji">💆</span>
+      <div class="acc-title">Perawatan Rambut</div>
+      <div class="acc-right">
+        <span class="acc-done-badge">done ✓</span>
+        <span class="acc-pct" id="rambut-pct"></span>
+        <span class="acc-chevron">▼</span>
+      </div>
+    </div>
+    <div class="acc-body">
+      <div class="acc-inner">
+        <div class="check-list" id="hair-list"></div>
+        <div style="margin-top:8px;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:8px;color:var(--t3);">
+          <span>Target keramas:</span>
+          <input class="inp" id="keramas-target" type="number" min="1" max="7" style="width:46px;padding:3px 7px;font-size:10px;" onchange="saveKeramasTarget()">
+          <span>x/minggu</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <!-- ════════════ CHAIN / CALENDAR ════════════ -->
@@ -927,73 +1010,38 @@ nav{position:fixed;bottom:0;left:0;right:0;background:rgba(15,13,11,.97);backdro
 
 <script>
 // ════════════════════════════════════════════
-// TODAY SWIPE TABS + FOCUS MODE
+// TODAY ACCORDION
 // ════════════════════════════════════════════
-let activeTodayTab='gym';
-let focusMode=false;
-
-function switchTodayTab(id,el){
-  activeTodayTab=id;
-  document.querySelectorAll('.t-tab').forEach(t=>t.classList.remove('on'));
-  document.querySelectorAll('.today-panel').forEach(p=>p.classList.remove('on'));
-  el.classList.add('on');
-  $('panel-'+id).classList.add('on');
-  updateFocusEmptyStates();
+function toggleAcc(id){
+  const sec=$('acc-'+id);
+  if(!sec)return;
+  sec.dataset.manualToggle='1';
+  sec.classList.toggle('open');
 }
 
-function toggleFocusMode(){
-  focusMode=!focusMode;
-  const toggle=$('focus-toggle');
-  const panels=$('today-panels');
-  toggle.classList.toggle('on',focusMode);
-  panels.classList.toggle('focus-mode',focusMode);
-  updateFocusEmptyStates();
-  toast(focusMode?'🎯 Focus mode — cuma yang belum done':'👁 Semua keliatan');
-}
-
-function updateFocusEmptyStates(){
-  if(!focusMode){
-    document.querySelectorAll('.focus-empty').forEach(el=>el.classList.remove('show'));
-    return;
-  }
-  // Gym: done if gymType set
+// Auto-collapse sections that are done, expand those that aren't
+function updateAccordions(){
   const t=todayStr();const dd=getDayData(t);
+
   const gymDone=!!(dd.gymType);
-  $('focus-empty-gym').classList.toggle('show',gymDone);
-
-  // Boxing: all habits done
   const bx=dd.boxing||{};
-  const bxAllDone=BOXING_HABITS.every(h=>bx[h.id]);
-  $('focus-empty-boxing').classList.toggle('show',bxAllDone);
-
-  // Nutrisi: meals + shake all done (water/sleep not hidden in focus)
+  const boxDone=BOXING_HABITS.every(h=>bx[h.id]);
   const meals=dd.meals||{};
-  const nutrisiAllDone=meals.sahur&&meals.siang&&meals.malem&&dd.shake;
-  $('focus-empty-nutrisi').classList.toggle('show',!!nutrisiAllDone);
-
-  // Kulit: all steps done
-  const sc=dd.skincare||{};
-  const steps=getSkinSteps();
-  const kulitAllDone=steps.length>0&&steps.every(s=>sc[s.id]);
-  $('focus-empty-kulit').classList.toggle('show',kulitAllDone);
-
-  // Rambut: any hair done
+  const nutrisiDone=!!(meals.sahur&&meals.siang&&meals.malem&&dd.shake);
+  const sc=dd.skincare||{};const steps=getSkinSteps();
+  const kulitDone=steps.length>0&&steps.every(s=>sc[s.id]);
   const hair=dd.hair||{};
-  const rambutAllDone=HAIR_ITEMS.every(h=>hair[h.id]);
-  $('focus-empty-rambut').classList.toggle('show',rambutAllDone);
-}
+  const rambutDone=HAIR_ITEMS.every(h=>hair[h.id]);
 
-function updateTabDots(){
-  const t=todayStr();
-  const gymDone=getCatDayScore(t,'gym');
-  const boxDone=getCatDayScore(t,'boxing');
-  const makDone=getCatDayScore(t,'makan');
-  const kulDone=getCatDayScore(t,'kulit');
-  const ramDone=getCatDayScore(t,'rambut');
-  ['gym','boxing','nutrisi','kulit','rambut'].forEach(id=>{
-    const tab=$('ttab-'+id);if(!tab)return;
-    const done={gym:gymDone,boxing:boxDone,nutrisi:makDone,kulit:kulDone,rambut:ramDone}[id];
-    tab.classList.toggle('done-tab',!!done);
+  const sections={gym:gymDone,boxing:boxDone,nutrisi:nutrisiDone,kulit:kulitDone,rambut:rambutDone};
+  Object.entries(sections).forEach(([id,done])=>{
+    const sec=$('acc-'+id);if(!sec)return;
+    sec.classList.toggle('done',done);
+    // auto-collapse when done, auto-open when not done
+    // but only if user hasn't manually toggled (we track with data attr)
+    if(!sec.dataset.manualToggle){
+      sec.classList.toggle('open',!done);
+    }
   });
 }
 
@@ -1399,14 +1447,13 @@ function updateAllProgress(){
   $('streak-num').textContent=streak;
   $('streak-best').textContent='best: '+getBestStreak()+' hari';
 
-  // category wins — now reflected in tab dots instead of cat-wins row
+  // category wins
   $('cw-gym') && ($('cw-gym').className='cw'+(getCatDayScore(t,'gym')?' done':''));
   $('cw-boxing') && ($('cw-boxing').className='cw'+(getCatDayScore(t,'boxing')?' done':''));
   $('cw-makan') && ($('cw-makan').className='cw'+(getCatDayScore(t,'makan')?' done':''));
   $('cw-kulit') && ($('cw-kulit').className='cw'+(getCatDayScore(t,'kulit')?' done':''));
 
-  updateTabDots();
-  updateFocusEmptyStates();
+  updateAccordions();
   renderCalendar();
 }
 
@@ -1843,6 +1890,10 @@ function init(){
   renderSkincareSteps();
   renderHairList();
   renderBoxingHabits();
+  // reset manual toggle flags on fresh init (new day)
+  ['gym','boxing','nutrisi','kulit','rambut'].forEach(id=>{
+    const sec=$('acc-'+id);if(sec)delete sec.dataset.manualToggle;
+  });
   updateAllProgress();
   renderCalendar();
 }
