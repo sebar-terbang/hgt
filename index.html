@@ -2,1904 +2,1838 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Health & Glow</title>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grind Log</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#0f0d0b;
-  --s1:#161310;
-  --s2:#1d1916;
-  --s3:#252018;
-  --b1:#2e2720;
-  --b2:#3a3028;
-  --t1:#f5efe8;
-  --t2:#7a6e65;
-  --t3:#3d3530;
-  --amber:#f5a623;
-  --ad:#1f1500;
-  --am:#7a4e00;
-  --coral:#ff7058;
-  --cd:#1f0a08;
-  --cm:#8a2a1a;
-  --teal:#3ecfb8;
-  --td:#041a17;
-  --tm:#1a7060;
-  --rose:#f2789f;
-  --rd2:#1f0a12;
-  --sky:#6ab4f0;
-  --skd:#071524;
-  --lavender:#b59af0;
-  --lad:#0e0a1f;
-  --serif:'Instrument Serif',serif;
-  --mono:'DM Mono',monospace;
-  --sans:'Nunito',sans-serif;
-}
-*{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--t1);font-family:var(--sans);min-height:100vh;padding-bottom:70px;-webkit-tap-highlight-color:transparent;overscroll-behavior:none;}
-::-webkit-scrollbar{width:2px;height:2px;}
-::-webkit-scrollbar-thumb{background:var(--b2);}
+  :root {
+    --bg: #0e0f11;
+    --surface: #16181c;
+    --surface2: #1e2127;
+    --border: #2a2d35;
+    --text: #e8eaf0;
+    --text-muted: #6b7280;
+    --text-dim: #3d4149;
+    --gym: #f97316;
+    --gym-dim: rgba(249,115,22,0.12);
+    --bulk: #22c55e;
+    --bulk-dim: rgba(34,197,94,0.12);
+    --box: #ef4444;
+    --box-dim: rgba(239,68,68,0.12);
+    --sleep: #818cf8;
+    --sleep-dim: rgba(129,140,248,0.12);
+    --skin: #f472b6;
+    --skin-dim: rgba(244,114,182,0.12);
+    --accent: #f97316;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
 
-/* ── NAV ── */
-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(15,13,11,.97);backdrop-filter:blur(20px);border-top:1px solid var(--b1);display:flex;z-index:50;}
-.nb{flex:1;padding:8px 4px 6px;background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--t3);font-family:var(--mono);font-size:7.5px;transition:color .15s;letter-spacing:.5px;}
-.nb.on{color:var(--amber);}
-.nb .ni{font-size:18px;line-height:1;}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ── PAGES ── */
-.page{display:none;max-width:500px;margin:0 auto;padding-bottom:20px;}
-.page.on{display:block;}
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: 80px;
+  }
 
-/* ── TODAY ACCORDION ── */
-.acc-section{
-  border-bottom:1px solid var(--b1);
-  overflow:hidden;
-}
-.acc-header{
-  display:flex;align-items:center;gap:10px;
-  padding:11px 16px;cursor:pointer;
-  transition:background .15s;
-  -webkit-tap-highlight-color:transparent;
-  user-select:none;
-}
-.acc-header:active{background:var(--s1);}
-.acc-emoji{font-size:16px;flex-shrink:0;}
-.acc-title{
-  font-family:var(--serif);font-size:17px;font-style:italic;
-  color:var(--t1);flex:1;line-height:1;
-}
-.acc-right{display:flex;align-items:center;gap:8px;flex-shrink:0;}
-.acc-pct{font-family:var(--mono);font-size:9px;color:var(--t2);}
-.acc-done-badge{
-  font-family:var(--mono);font-size:8px;
-  color:var(--teal);background:rgba(62,207,184,.1);
-  border:1px solid rgba(62,207,184,.2);
-  border-radius:20px;padding:2px 8px;
-  display:none;
-}
-.acc-section.done .acc-done-badge{display:block;}
-.acc-section.done .acc-pct{display:none;}
-.acc-chevron{
-  font-size:10px;color:var(--t3);
-  transition:transform .22s ease;flex-shrink:0;
-}
-.acc-section.open .acc-chevron{transform:rotate(180deg);}
+  /* HEADER */
+  .header {
+    padding: 24px 20px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 100;
+  }
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: -0.5px;
+  }
+  .logo span { color: var(--accent); }
+  .date-pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    background: var(--surface);
+    padding: 6px 12px;
+    border-radius: 99px;
+    border: 1px solid var(--border);
+  }
 
-.acc-body{
-  max-height:0;overflow:hidden;
-  transition:max-height .28s cubic-bezier(.4,0,.2,1);
-}
-.acc-section.open .acc-body{max-height:1200px;}
-.acc-inner{padding:0 14px 14px;}
+  /* NAV TABS */
+  .nav {
+    display: flex;
+    gap: 4px;
+    padding: 12px 20px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    position: sticky;
+    top: 65px;
+    z-index: 99;
+  }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 7px 14px;
+    border-radius: 99px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.18s;
+    letter-spacing: 0.3px;
+  }
+  .nav-btn:hover { border-color: var(--text-dim); color: var(--text); }
+  .nav-btn.active { color: #0e0f11; font-weight: 600; border-color: transparent; }
+  .nav-btn[data-tab="dashboard"].active { background: var(--text); }
+  .nav-btn[data-tab="gym"].active { background: var(--gym); }
+  .nav-btn[data-tab="bulking"].active { background: var(--bulk); }
+  .nav-btn[data-tab="boxing"].active { background: var(--box); }
+  .nav-btn[data-tab="sleep"].active { background: var(--sleep); }
+  .nav-btn[data-tab="skin"].active { background: var(--skin); }
 
-/* compact items */
-.check-item{
-  display:flex;align-items:center;gap:10px;
-  background:var(--s1);border:1px solid var(--b1);
-  border-radius:10px;padding:9px 12px;
-  cursor:pointer;transition:all .15s;
-  position:relative;overflow:hidden;
-  margin-bottom:5px;
-}
-.check-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--b1);transition:background .2s;}
-.check-item:active{transform:scale(.98);}
-.check-item.done{background:rgba(245,166,35,.05);border-color:rgba(245,166,35,.2);}
-.check-item.done::before{background:var(--amber);}
-.check-item.done-teal{background:rgba(62,207,184,.05);border-color:rgba(62,207,184,.2);}
-.check-item.done-teal::before{background:var(--teal);}
-.check-item.done-coral{background:rgba(255,112,88,.05);border-color:rgba(255,112,88,.2);}
-.check-item.done-coral::before{background:var(--coral);}
-.check-item.done-rose{background:rgba(242,120,159,.05);border-color:rgba(242,120,159,.2);}
-.check-item.done-rose::before{background:var(--rose);}
-.check-item.done-sky{background:rgba(106,180,240,.05);border-color:rgba(106,180,240,.2);}
-.check-item.done-sky::before{background:var(--sky);}
-.check-item.done-lavender{background:rgba(181,154,240,.05);border-color:rgba(181,154,240,.2);}
-.check-item.done-lavender::before{background:var(--lavender);}
-.ci-check{
-  width:20px;height:20px;border-radius:50%;
-  border:2px solid var(--b2);background:var(--s2);
-  display:flex;align-items:center;justify-content:center;
-  font-size:10px;color:transparent;flex-shrink:0;transition:all .2s;
-}
-.check-item.done .ci-check,.check-item.done-teal .ci-check,
-.check-item.done-coral .ci-check,.check-item.done-rose .ci-check,
-.check-item.done-sky .ci-check,.check-item.done-lavender .ci-check{color:#0f0d0b;font-weight:700;}
-.check-item.done .ci-check{background:var(--amber);border-color:var(--amber);}
-.check-item.done-teal .ci-check{background:var(--teal);border-color:var(--teal);}
-.check-item.done-coral .ci-check{background:var(--coral);border-color:var(--coral);}
-.check-item.done-rose .ci-check{background:var(--rose);border-color:var(--rose);}
-.check-item.done-sky .ci-check{background:var(--sky);border-color:var(--sky);}
-.check-item.done-lavender .ci-check{background:var(--lavender);border-color:var(--lavender);}
-.ci-info{flex:1;}
-.ci-name{font-size:12px;font-weight:600;color:var(--t1);line-height:1.2;}
-.ci-sub{font-family:var(--mono);font-size:8px;color:var(--t2);margin-top:1px;}
-.ci-streak{font-family:var(--mono);font-size:8px;color:var(--t3);text-align:right;flex-shrink:0;}
-.ci-streak span{display:block;font-size:16px;font-weight:500;color:var(--amber);line-height:1;}
+  /* CONTENT */
+  .content { padding: 20px; max-width: 680px; margin: 0 auto; }
+  .tab-pane { display: none; }
+  .tab-pane.active { display: block; }
 
-/* compact sec-lbl */
-.sec-lbl{font-family:var(--mono);font-size:8px;font-weight:500;color:var(--t3);letter-spacing:2px;text-transform:uppercase;margin-bottom:7px;}
+  /* SECTION CARD */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
 
-/* compact meals */
-.meal-btn{padding:10px 4px;}
-.meal-icon{font-size:18px;}
-.meal-name{font-family:var(--mono);font-size:7px;}
+  /* STREAK BADGE */
+  .streak {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 99px;
+    font-weight: 500;
+  }
 
-/* compact hydration */
-.glass{width:24px;height:24px;border-radius:6px;font-size:12px;}
+  /* DASHBOARD */
+  .today-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .today-item {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.18s;
+    position: relative;
+    overflow: hidden;
+  }
+  .today-item:hover { border-color: var(--text-dim); transform: translateY(-1px); }
+  .today-item.done { border-color: transparent; }
+  .today-item.done::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.08;
+  }
+  .today-item[data-cat="gym"].done { border-color: var(--gym); background: var(--gym-dim); }
+  .today-item[data-cat="bulk"].done { border-color: var(--bulk); background: var(--bulk-dim); }
+  .today-item[data-cat="box"].done { border-color: var(--box); background: var(--box-dim); }
+  .today-item[data-cat="sleep"].done { border-color: var(--sleep); background: var(--sleep-dim); }
+  .today-item[data-cat="skin-am"].done,
+  .today-item[data-cat="skin-pm"].done { border-color: var(--skin); background: var(--skin-dim); }
+  .today-emoji { font-size: 22px; margin-bottom: 8px; }
+  .today-label {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+  .today-sub { font-size: 11px; color: var(--text-muted); }
+  .today-check {
+    position: absolute;
+    top: 12px; right: 12px;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px;
+    transition: all 0.18s;
+  }
+  .today-item.done .today-check { border-color: transparent; }
+  .today-item[data-cat="gym"].done .today-check { background: var(--gym); }
+  .today-item[data-cat="bulk"].done .today-check { background: var(--bulk); }
+  .today-item[data-cat="box"].done .today-check { background: var(--box); }
+  .today-item[data-cat="sleep"].done .today-check { background: var(--sleep); }
+  .today-item[data-cat="skin-am"].done .today-check,
+  .today-item[data-cat="skin-pm"].done .today-check { background: var(--skin); }
 
-/* compact day choice */
-.dc{padding:12px 10px;}
-.dc-icon{font-size:18px;}
-.dc-label{font-family:var(--serif);font-size:16px;font-style:italic;}
-.dc-sub{font-family:var(--mono);font-size:7px;color:var(--t2);margin-top:1px;}
+  /* PROGRESS BAR */
+  .progress-bar {
+    height: 4px;
+    background: var(--border);
+    border-radius: 99px;
+    overflow: hidden;
+    margin-top: 12px;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 99px;
+    transition: width 0.4s ease;
+  }
+  .progress-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-top: 6px;
+    text-align: right;
+  }
 
-/* compact boxing habit */
-.box-habit{
-  display:flex;align-items:center;gap:10px;
-  background:var(--s1);border:1px solid var(--b1);
-  border-radius:10px;padding:9px 12px;
-  cursor:pointer;transition:all .15s;
-  position:relative;overflow:hidden;margin-bottom:5px;
-}
-.box-habit::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--b1);transition:background .2s;}
-.box-habit:active{transform:scale(.98);}
-.box-habit.done{background:rgba(255,112,88,.05);border-color:rgba(255,112,88,.2);}
-.box-habit.done::before{background:var(--coral);}
-.bh-check{
-  width:20px;height:20px;border-radius:50%;
-  border:2px solid var(--b2);background:var(--s2);
-  display:flex;align-items:center;justify-content:center;
-  font-size:10px;color:transparent;flex-shrink:0;transition:all .2s;
-}
-.box-habit.done .bh-check{background:var(--coral);border-color:var(--coral);color:#0f0d0b;font-weight:700;}
-.bh-info{flex:1;}
-.bh-name{font-size:12px;font-weight:600;color:var(--t1);line-height:1.2;}
-.bh-sub{font-family:var(--mono);font-size:8px;color:var(--t2);margin-top:1px;}
-.bh-streak{font-family:var(--mono);font-size:8px;color:var(--t3);text-align:right;flex-shrink:0;}
-.bh-streak span{display:block;font-size:16px;font-weight:500;color:var(--coral);line-height:1;}
+  /* INPUTS */
+  .input-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+    align-items: center;
+  }
+  input, select, textarea {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    padding: 9px 12px;
+    outline: none;
+    transition: border-color 0.18s;
+    width: 100%;
+  }
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--text-dim);
+  }
+  input[type="number"] { -moz-appearance: textfield; }
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+  select option { background: var(--surface2); }
 
-/* compact skincare step */
-.sc-step{
-  display:flex;align-items:center;gap:8px;
-  background:var(--s1);border:1px solid var(--b1);
-  border-radius:9px;padding:8px 12px;
-  cursor:pointer;transition:all .15s;margin-bottom:5px;
-}
-.sc-step:active{transform:scale(.98);}
-.sc-step.done{background:rgba(242,120,159,.05);border-color:rgba(242,120,159,.2);}
-.sc-num{width:18px;height:18px;border-radius:50%;background:var(--s3);border:1px solid var(--b1);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:8px;color:var(--t3);flex-shrink:0;transition:all .2s;}
-.sc-step.done .sc-num{background:var(--rose);border-color:var(--rose);color:#0f0d0b;font-weight:700;}
-.sc-step-name{flex:1;font-size:12px;font-weight:600;color:var(--t1);}
-.sc-step.done .sc-step-name{color:var(--rose);}
-.sc-step-emoji{font-size:14px;}
+  /* BUTTONS */
+  .btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 9px 16px;
+    border-radius: var(--radius-sm);
+    border: none;
+    cursor: pointer;
+    transition: all 0.18s;
+    white-space: nowrap;
+    letter-spacing: 0.3px;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-ghost {
+    background: var(--surface2);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover { color: var(--text); border-color: var(--text-dim); }
+  .btn-sm { padding: 6px 12px; font-size: 11px; }
+  .btn-danger { background: var(--box-dim); color: var(--box); border: 1px solid rgba(239,68,68,0.2); }
+  .btn-danger:hover { background: var(--box); color: #fff; }
 
-/* today hero compact */
-.today-hero{padding:22px 16px 14px;position:relative;overflow:hidden;border-bottom:1px solid var(--b1);}
-.today-hero::before{content:'';position:absolute;top:-80px;right:-60px;width:260px;height:260px;background:radial-gradient(circle,rgba(245,166,35,.07) 0%,transparent 65%);pointer-events:none;}
-.today-hero::after{content:'';position:absolute;bottom:-40px;left:-30px;width:160px;height:160px;background:radial-gradient(circle,rgba(242,120,159,.05) 0%,transparent 65%);pointer-events:none;}
-.th-eyebrow{font-family:var(--mono);font-size:8px;color:var(--t2);letter-spacing:2px;text-transform:uppercase;margin-bottom:3px;}
-.th-title{font-family:var(--serif);font-size:26px;font-style:italic;color:var(--amber);line-height:1.1;margin-bottom:10px;}
-.th-title span{color:var(--t1);font-style:normal;}
-.streak-num{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--t1);}
-.streak-sub{font-family:var(--mono);font-size:8px;color:var(--t2);letter-spacing:.5px;margin-top:3px;}
-.streak-best{font-family:var(--mono);font-size:7px;color:var(--t3);margin-top:2px;}
+  /* GYM */
+  .exercise-block {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 14px;
+    margin-bottom: 10px;
+  }
+  .exercise-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 10px;
+    color: var(--gym);
+  }
+  .sets-table { width: 100%; border-collapse: collapse; }
+  .sets-table th {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    text-align: left;
+    padding: 0 8px 8px 0;
+    letter-spacing: 0.5px;
+  }
+  .sets-table td { padding: 3px 8px 3px 0; }
+  .set-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    padding-top: 10px;
+  }
+  .set-input {
+    width: 70px !important;
+    text-align: center;
+    padding: 7px 8px;
+  }
 
-/* ── COMMON ── */
-.inp{background:var(--s2);border:1px solid var(--b1);border-radius:10px;padding:9px 12px;color:var(--t1);font-family:var(--mono);font-size:12px;outline:none;transition:border-color .15s;width:100%;}
-.inp:focus{border-color:var(--am);}
-.inp::placeholder{color:var(--t3);}
-.btn{font-family:var(--mono);border-radius:10px;cursor:pointer;transition:all .15s;border:none;letter-spacing:.3px;}
-.btn-a{background:var(--amber);color:#0f0d0b;font-size:12px;font-weight:700;padding:11px 18px;}
-.btn-a:active{opacity:.8;transform:scale(.97);}
-.btn-o{background:var(--s2);border:1px solid var(--b2);color:var(--t2);font-size:11px;padding:9px 14px;}
-.btn-r{background:var(--cd);border:1px solid #330d0d;color:var(--coral);font-size:10px;padding:5px 10px;}
-.sec-lbl{font-family:var(--mono);font-size:9px;font-weight:500;color:var(--t3);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;}
+  /* FOOD LOG */
+  .food-log-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .food-log-item:last-child { border-bottom: none; }
+  .food-name { font-size: 13px; font-weight: 500; }
+  .food-macros {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .food-macros span { color: var(--bulk); }
 
-/* ════════════════════════════════════
-   TODAY PAGE
-════════════════════════════════════ */
-#pg-today{padding:0;}
+  /* MACRO SUMMARY */
+  .macro-summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .macro-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 14px;
+    text-align: center;
+  }
+  .macro-val {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 24px;
+  }
+  .macro-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-top: 2px;
+    letter-spacing: 0.5px;
+  }
+  .macro-target { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
 
-.today-hero{
-  padding:32px 16px 20px;
-  position:relative;overflow:hidden;
-  border-bottom:1px solid var(--b1);
-}
-.today-hero::before{
-  content:'';position:absolute;
-  top:-80px;right:-60px;
-  width:260px;height:260px;
-  background:radial-gradient(circle,rgba(245,166,35,.07) 0%,transparent 65%);
-  pointer-events:none;
-}
-.today-hero::after{
-  content:'';position:absolute;
-  bottom:-40px;left:-30px;
-  width:160px;height:160px;
-  background:radial-gradient(circle,rgba(242,120,159,.05) 0%,transparent 65%);
-  pointer-events:none;
-}
-.th-eyebrow{font-family:var(--mono);font-size:8.5px;color:var(--t2);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;}
-.th-title{font-family:var(--serif);font-size:32px;font-style:italic;color:var(--amber);line-height:1.1;margin-bottom:14px;}
-.th-title span{color:var(--t1);font-style:normal;}
+  /* TEMPLATE GRID */
+  .template-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .template-chip {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 8px 14px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.18s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .template-chip:hover { border-color: var(--bulk); color: var(--bulk); }
+  .template-chip .chip-macro {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+  }
 
-/* Overall ring */
-.progress-ring-wrap{display:flex;align-items:center;gap:16px;margin-bottom:6px;}
-.ring-svg{flex-shrink:0;}
-.ring-bg{fill:none;stroke:var(--s3);stroke-width:5;}
-.ring-fill{fill:none;stroke:var(--amber);stroke-width:5;stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;transition:stroke-dashoffset .6s cubic-bezier(.34,1.1,.64,1);}
-.ring-pct{font-family:var(--serif);font-size:28px;text-anchor:middle;dominant-baseline:central;fill:var(--t1);}
-.ring-label{font-family:var(--mono);font-size:7px;text-anchor:middle;fill:var(--t2);letter-spacing:1px;}
-.streak-info{flex:1;}
-.streak-num{font-family:var(--serif);font-size:64px;line-height:.9;color:var(--t1);}
-.streak-sub{font-family:var(--mono);font-size:9px;color:var(--t2);letter-spacing:.5px;margin-top:4px;}
-.streak-best{font-family:var(--mono);font-size:8px;color:var(--t3);margin-top:3px;}
+  /* SLEEP */
+  .sleep-visual {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--surface2);
+    border-radius: var(--radius-sm);
+    padding: 14px;
+    margin-bottom: 12px;
+  }
+  .sleep-time-block { text-align: center; flex: 1; }
+  .sleep-time-val {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--sleep);
+  }
+  .sleep-time-lbl {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+  .sleep-arrow { color: var(--text-dim); font-size: 18px; }
+  .sleep-duration {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: center;
+    border-left: 1px solid var(--border);
+    padding-left: 12px;
+    flex: 0 0 auto;
+  }
+  .sleep-dur-val {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--sleep);
+    display: block;
+  }
 
-/* CATEGORY WINS */
-.cat-wins{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-bottom:1px solid var(--b1);}
-.cw{
-  padding:12px 8px;text-align:center;
-  border-right:1px solid var(--b1);
-  transition:background .2s;
-  cursor:default;
-}
-.cw:last-child{border-right:none;}
-.cw.done{background:rgba(245,166,35,.07);}
-.cw-icon{font-size:20px;margin-bottom:4px;display:block;filter:grayscale(1);transition:filter .2s;}
-.cw.done .cw-icon{filter:none;}
-.cw-name{font-family:var(--mono);font-size:7px;color:var(--t3);letter-spacing:.5px;text-transform:uppercase;}
-.cw.done .cw-name{color:var(--amber);}
+  /* SLEEP CHART */
+  .sleep-chart { margin-top: 8px; }
+  .sleep-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .sleep-bar-lbl {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    width: 28px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .sleep-bar-track {
+    flex: 1;
+    height: 18px;
+    background: var(--surface2);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+  .sleep-bar-fill {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    background: var(--sleep);
+    border-radius: 4px;
+    opacity: 0.7;
+    display: flex;
+    align-items: center;
+    padding: 0 6px;
+  }
+  .sleep-bar-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: #fff;
+    white-space: nowrap;
+  }
 
-/* SECTION BLOCKS */
-.sec-block{padding:16px;}
-.sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
-.sec-title{display:flex;align-items:center;gap:8px;}
-.sec-emoji{font-size:18px;}
-.sec-name{font-family:var(--serif);font-size:20px;font-style:italic;color:var(--t1);}
-.sec-pct{font-family:var(--mono);font-size:10px;color:var(--t2);}
+  /* SKINCARE */
+  .skin-rating {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .rating-btn {
+    flex: 1;
+    min-width: 60px;
+    padding: 10px 8px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.18s;
+    font-size: 18px;
+  }
+  .rating-btn:hover { border-color: var(--skin); }
+  .rating-btn.active { border-color: var(--skin); background: var(--skin-dim); }
+  .rating-lbl {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--text-muted);
+    display: block;
+    margin-top: 4px;
+  }
 
-/* CHECKLIST ITEMS */
-.check-list{display:flex;flex-direction:column;gap:6px;}
-.check-item{
-  display:flex;align-items:center;gap:12px;
-  background:var(--s1);border:1px solid var(--b1);
-  border-radius:12px;padding:12px 14px;
-  cursor:pointer;transition:all .18s;
-  position:relative;overflow:hidden;
-}
-.check-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--b1);transition:background .2s;}
-.check-item:active{transform:scale(.98);}
-.check-item.done{background:rgba(245,166,35,.06);border-color:rgba(245,166,35,.25);}
-.check-item.done::before{background:var(--amber);}
-.check-item.done-teal{background:rgba(62,207,184,.06);border-color:rgba(62,207,184,.25);}
-.check-item.done-teal::before{background:var(--teal);}
-.check-item.done-coral{background:rgba(255,112,88,.06);border-color:rgba(255,112,88,.25);}
-.check-item.done-coral::before{background:var(--coral);}
-.check-item.done-rose{background:rgba(242,120,159,.06);border-color:rgba(242,120,159,.25);}
-.check-item.done-rose::before{background:var(--rose);}
-.check-item.done-sky{background:rgba(106,180,240,.06);border-color:rgba(106,180,240,.25);}
-.check-item.done-sky::before{background:var(--sky);}
-.check-item.done-lavender{background:rgba(181,154,240,.06);border-color:rgba(181,154,240,.25);}
-.check-item.done-lavender::before{background:var(--lavender);}
+  /* CHECKLIST */
+  .checklist-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+  }
+  .checklist-item:last-child { border-bottom: none; }
+  .check-box {
+    width: 22px; height: 22px;
+    border-radius: 6px;
+    border: 1.5px solid var(--border);
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    transition: all 0.18s;
+  }
+  .checklist-item.done .check-box {
+    background: var(--skin);
+    border-color: var(--skin);
+  }
+  .check-label { font-size: 13px; }
+  .checklist-item.done .check-label { text-decoration: line-through; color: var(--text-muted); }
 
-.ci-check{
-  width:22px;height:22px;border-radius:50%;
-  border:2px solid var(--b2);background:var(--s2);
-  display:flex;align-items:center;justify-content:center;
-  font-size:11px;color:transparent;flex-shrink:0;
-  transition:all .2s;
-}
-.check-item.done .ci-check,.check-item.done-teal .ci-check,
-.check-item.done-coral .ci-check,.check-item.done-rose .ci-check,
-.check-item.done-sky .ci-check,.check-item.done-lavender .ci-check{
-  color:#0f0d0b;font-weight:700;
-}
-.check-item.done .ci-check{background:var(--amber);border-color:var(--amber);}
-.check-item.done-teal .ci-check{background:var(--teal);border-color:var(--teal);}
-.check-item.done-coral .ci-check{background:var(--coral);border-color:var(--coral);}
-.check-item.done-rose .ci-check{background:var(--rose);border-color:var(--rose);}
-.check-item.done-sky .ci-check{background:var(--sky);border-color:var(--sky);}
-.check-item.done-lavender .ci-check{background:var(--lavender);border-color:var(--lavender);}
+  /* HISTORY TABLE */
+  .history-table { width: 100%; border-collapse: collapse; }
+  .history-table th {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    text-align: left;
+    padding: 0 0 10px;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border);
+  }
+  .history-table td {
+    padding: 10px 0;
+    font-size: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .history-table tr:last-child td { border-bottom: none; }
 
-.ci-info{flex:1;}
-.ci-name{font-size:13px;font-weight:600;color:var(--t1);line-height:1.2;}
-.ci-sub{font-family:var(--mono);font-size:9px;color:var(--t2);margin-top:2px;}
-.ci-streak{font-family:var(--mono);font-size:9px;color:var(--t3);text-align:right;flex-shrink:0;}
-.ci-streak span{display:block;font-size:18px;font-weight:500;color:var(--amber);line-height:1;}
+  /* WEIGHT LOG */
+  .weight-entry {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .weight-entry:last-child { border-bottom: none; }
+  .weight-val {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--bulk);
+  }
+  .weight-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .weight-delta {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 99px;
+  }
+  .delta-up { background: rgba(34,197,94,0.15); color: var(--bulk); }
+  .delta-down { background: rgba(239,68,68,0.15); color: var(--box); }
 
-/* SKINCARE STEPS */
-.skincare-steps{display:flex;flex-direction:column;gap:5px;}
-.sc-step{
-  display:flex;align-items:center;gap:10px;
-  background:var(--s1);border:1px solid var(--b1);
-  border-radius:10px;padding:10px 14px;
-  cursor:pointer;transition:all .18s;
-}
-.sc-step:active{transform:scale(.98);}
-.sc-step.done{background:rgba(242,120,159,.06);border-color:rgba(242,120,159,.25);}
-.sc-num{
-  width:20px;height:20px;border-radius:50%;
-  background:var(--s3);border:1px solid var(--b1);
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--mono);font-size:9px;color:var(--t3);flex-shrink:0;
-  transition:all .2s;
-}
-.sc-step.done .sc-num{background:var(--rose);border-color:var(--rose);color:#0f0d0b;font-weight:700;}
-.sc-step-name{flex:1;font-size:13px;font-weight:600;color:var(--t1);}
-.sc-step.done .sc-step-name{color:var(--rose);}
-.sc-step-emoji{font-size:16px;}
-.sc-step-del{background:none;border:none;color:var(--t3);cursor:pointer;padding:4px;font-size:12px;transition:color .15s;}
-.sc-step-del:hover{color:var(--coral);}
+  /* SECTION LABEL */
+  .section-lbl {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.8px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
 
-.sc-add-row{display:flex;gap:6px;margin-top:8px;}
-.sc-progress-bar{height:3px;background:var(--s3);border-radius:2px;overflow:hidden;margin-bottom:10px;}
-.sc-progress-fill{height:100%;background:var(--rose);border-radius:2px;transition:width .4s cubic-bezier(.34,1.1,.64,1);}
+  /* COLLAPSE TOGGLE */
+  .collapse-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0;
+  }
+  .collapse-btn:hover { color: var(--text); }
+  .collapse-content { overflow: hidden; transition: max-height 0.3s ease; }
 
-/* GYM/REST TOGGLE */
-.day-choice{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
-.dc{
-  padding:16px 12px;border-radius:12px;
-  border:1px solid var(--b1);background:var(--s1);
-  cursor:pointer;transition:all .2s;user-select:none;
-  display:flex;align-items:center;gap:10px;
-}
-.dc:active{transform:scale(.97);}
-.dc.gym-sel{background:rgba(245,166,35,.08);border-color:var(--am);}
-.dc.rest-sel{background:rgba(62,207,184,.08);border-color:var(--tm);}
-.dc-icon{font-size:22px;flex-shrink:0;}
-.dc-label{font-family:var(--serif);font-size:18px;font-style:italic;line-height:1;}
-.dc-sub{font-family:var(--mono);font-size:8px;color:var(--t2);margin-top:2px;}
-.dc.gym-sel .dc-label{color:var(--amber);}
-.dc.rest-sel .dc-label{color:var(--teal);}
+  /* EMPTY STATE */
+  .empty {
+    text-align: center;
+    padding: 32px 0;
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+  .empty-icon { font-size: 32px; margin-bottom: 8px; }
 
-/* SPLIT CHIPS */
-.split-chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
-.sc{font-family:var(--mono);font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid var(--b2);background:var(--s2);color:var(--t2);cursor:pointer;transition:all .15s;}
-.sc.on{background:rgba(245,166,35,.12);border-color:var(--am);color:var(--amber);}
-.split-logged{background:rgba(245,166,35,.06);border:1px solid rgba(245,166,35,.2);border-radius:10px;padding:10px 14px;font-family:var(--mono);font-size:10px;color:var(--amber);}
+  /* MODAL */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 200;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px 20px 0 0;
+    padding: 24px 20px 40px;
+    width: 100%;
+    max-width: 680px;
+    transform: translateY(20px);
+    transition: transform 0.2s;
+  }
+  .modal-overlay.open .modal { transform: translateY(0); }
+  .modal-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+  .modal-close {
+    float: right;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    border-radius: 50%;
+    width: 28px; height: 28px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex; align-items: center; justify-content: center;
+  }
 
-/* NUTRITION */
-.meal-row{display:flex;gap:6px;margin-bottom:6px;}
-.meal-btn{
-  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:14px 6px;border-radius:12px;border:1px solid var(--b1);background:var(--s1);
-  cursor:pointer;transition:all .18s;gap:4px;
-}
-.meal-btn.done{background:rgba(62,207,184,.07);border-color:rgba(62,207,184,.3);}
-.meal-btn:active{transform:scale(.96);}
-.meal-icon{font-size:22px;}
-.meal-name{font-family:var(--mono);font-size:8px;color:var(--t2);letter-spacing:.5px;text-transform:uppercase;}
-.meal-btn.done .meal-name{color:var(--teal);}
-.meal-check{font-size:10px;color:transparent;height:14px;}
-.meal-btn.done .meal-check{color:var(--teal);}
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    padding: 10px 20px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--text);
+    z-index: 300;
+    opacity: 0;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 
-/* HYDRATION */
-.hydration-row{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--s1);border:1px solid var(--b1);border-radius:12px;margin-bottom:6px;}
-.hydration-glasses{display:flex;gap:4px;flex:1;flex-wrap:wrap;}
-.glass{
-  width:28px;height:28px;border-radius:7px;
-  background:var(--s3);border:1px solid var(--b1);
-  display:flex;align-items:center;justify-content:center;
-  font-size:14px;cursor:pointer;transition:all .15s;
-  filter:grayscale(1);opacity:.4;
-}
-.glass.filled{filter:none;opacity:1;background:rgba(106,180,240,.15);border-color:rgba(106,180,240,.4);}
-.glass:active{transform:scale(.88);}
-.hydration-label{font-family:var(--mono);font-size:9px;color:var(--t2);text-align:right;min-width:40px;}
-
-/* SLEEP */
-.sleep-row{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--s1);border:1px solid var(--b1);border-radius:12px;}
-.sleep-label{font-family:var(--mono);font-size:9px;color:var(--t2);min-width:50px;}
-.sleep-btns{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
-.sleep-btn{
-  padding:5px 10px;border-radius:8px;border:1px solid var(--b1);
-  background:var(--s2);font-family:var(--mono);font-size:10px;color:var(--t2);
-  cursor:pointer;transition:all .15s;
-}
-.sleep-btn.on{background:rgba(181,154,240,.15);border-color:rgba(181,154,240,.4);color:var(--lavender);}
-
-/* SHAKE TOGGLE */
-.shake-row{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--s1);border:1px solid var(--b1);border-radius:12px;cursor:pointer;transition:all .18s;}
-.shake-row.done{background:rgba(62,207,184,.06);border-color:rgba(62,207,184,.3);}
-.shake-toggle{width:36px;height:20px;border-radius:10px;background:var(--s3);border:1px solid var(--b2);position:relative;flex-shrink:0;transition:all .2s;}
-.shake-toggle::after{content:'';position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:var(--t3);transition:all .2s;}
-.shake-row.done .shake-toggle{background:rgba(62,207,184,.3);border-color:var(--teal);}
-.shake-row.done .shake-toggle::after{left:18px;background:var(--teal);}
-.shake-info{flex:1;}
-.shake-name{font-size:13px;font-weight:600;color:var(--t1);}
-.shake-sub{font-family:var(--mono);font-size:9px;color:var(--t2);margin-top:2px;}
-
-/* divider */
-.sec-divider{height:1px;background:var(--b1);margin:0 16px;}
-
-/* ════════════════════════════════════
-   CHAIN / CALENDAR PAGE
-════════════════════════════════════ */
-#pg-chain{padding:0 16px;}
-.chain-hero{padding:32px 0 20px;}
-.chain-title-big{font-family:var(--serif);font-size:48px;font-style:italic;line-height:.95;color:var(--t1);margin-bottom:4px;}
-.chain-title-big span{color:var(--amber);}
-.chain-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px;}
-.cstat{background:var(--s1);border:1px solid var(--b1);border-radius:12px;padding:12px 10px;text-align:center;}
-.cstat-v{font-family:var(--serif);font-size:36px;line-height:1;color:var(--t1);}
-.cstat-l{font-family:var(--mono);font-size:7.5px;color:var(--t2);margin-top:3px;letter-spacing:.5px;text-transform:uppercase;}
-
-/* category filter tabs */
-.cat-tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:14px;}
-.cat-tab{font-family:var(--mono);font-size:9px;padding:5px 11px;border-radius:20px;border:1px solid var(--b2);background:var(--s2);color:var(--t2);cursor:pointer;transition:all .15s;}
-.cat-tab.on{border-color:var(--am);color:var(--amber);background:rgba(245,166,35,.1);}
-
-.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
-.cal-mnth{font-family:var(--serif);font-size:22px;font-style:italic;color:var(--t1);}
-.cal-nbtn{background:var(--s2);border:1px solid var(--b1);border-radius:8px;padding:6px 14px;color:var(--t1);font-family:var(--mono);font-size:10px;cursor:pointer;transition:all .15s;}
-.cal-nbtn:hover{border-color:var(--am);}
-
-.dow-row{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:4px;}
-.dow-c{text-align:center;font-family:var(--mono);font-size:7.5px;color:var(--t3);padding:3px 0;}
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;}
-.cc{
-  aspect-ratio:1;border-radius:8px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  font-family:var(--mono);font-size:9px;
-  background:var(--s2);border:1px solid transparent;
-  color:var(--t3);position:relative;transition:all .15s;cursor:pointer;
-  gap:1px;
-}
-.cc.empty{background:transparent;border-color:transparent;cursor:default;pointer-events:none;}
-.cc.future{background:var(--s1);opacity:.4;cursor:default;pointer-events:none;}
-.cc.today{border:1.5px solid var(--t2) !important;}
-.cc.full{background:rgba(245,166,35,.15);border-color:rgba(245,166,35,.4);}
-.cc.full::after{content:'✕';position:absolute;font-size:15px;font-weight:900;font-family:var(--serif);top:50%;left:50%;transform:translate(-50%,-54%);color:var(--amber);opacity:.6;line-height:1;}
-.cc.partial{background:rgba(245,166,35,.05);border-color:rgba(245,166,35,.15);}
-.cc.partial .cc-dots{display:flex;}
-.cc-dots{display:none;gap:2px;justify-content:center;position:absolute;bottom:3px;flex-wrap:wrap;padding:0 2px;}
-.cc-dot{width:4px;height:4px;border-radius:50%;}
-.cc-num{position:relative;z-index:1;}
-
-.cal-legend{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap;}
-.leg{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:8px;color:var(--t2);}
-.leg-dot{width:9px;height:9px;border-radius:3px;}
-
-/* ════════════════════════════════════
-   STATS PAGE
-════════════════════════════════════ */
-#pg-stats{padding:0 16px;}
-.stats-hero{padding:32px 0 16px;}
-.stats-title{font-family:var(--serif);font-size:40px;font-style:italic;color:var(--t1);line-height:1;}
-.stats-title span{color:var(--amber);}
-.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;}
-.stat-card{background:var(--s1);border:1px solid var(--b1);border-radius:12px;padding:14px 14px;}
-.stat-card-n{font-family:var(--serif);font-size:38px;line-height:1;color:var(--t1);}
-.stat-card-l{font-family:var(--mono);font-size:8px;color:var(--t2);margin-top:4px;letter-spacing:.5px;text-transform:uppercase;}
-.stat-card-s{font-family:var(--mono);font-size:8px;color:var(--t3);margin-top:2px;}
-
-.habit-stat{background:var(--s1);border:1px solid var(--b1);border-radius:12px;padding:12px 14px;margin-bottom:6px;display:flex;align-items:center;gap:10px;}
-.hs-emoji{font-size:16px;flex-shrink:0;}
-.hs-name{flex:1;font-size:12px;font-weight:600;color:var(--t1);}
-.hs-bar-wrap{width:80px;height:3px;background:var(--s3);border-radius:2px;overflow:hidden;}
-.hs-bar-fill{height:100%;border-radius:2px;transition:width .5s ease;}
-.hs-pct{font-family:var(--mono);font-size:9px;color:var(--t2);min-width:30px;text-align:right;}
-.hs-streak{font-family:var(--serif);font-size:18px;color:var(--amber);min-width:28px;text-align:right;}
-
-/* ════════════════════════════════════
-   SETTINGS PAGE
-════════════════════════════════════ */
-#pg-settings{padding:0 16px;}
-.settings-hero{padding:32px 0 16px;}
-.settings-title{font-family:var(--serif);font-size:40px;font-style:italic;color:var(--t1);}
-.settings-section{background:var(--s1);border:1px solid var(--b1);border-radius:14px;padding:16px;margin-bottom:10px;}
-.settings-sec-title{font-family:var(--mono);font-size:9px;color:var(--t2);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;}
-.settings-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--b1);}
-.settings-row:last-child{border:none;}
-.settings-row label{flex:1;font-size:13px;font-weight:500;color:var(--t1);}
-.settings-row input[type=number]{background:var(--s2);border:1px solid var(--b1);border-radius:8px;color:var(--t1);font-family:var(--mono);font-size:12px;padding:5px 8px;width:70px;text-align:center;outline:none;}
-.settings-row input:focus{border-color:var(--am);}
-
-/* ════════════════════════════════════
-   OVERLAYS / MODALS
-════════════════════════════════════ */
-.ov{position:fixed;inset:0;background:rgba(0,0,0,.88);display:flex;align-items:flex-end;justify-content:center;z-index:100;opacity:0;pointer-events:none;transition:opacity .2s;}
-.ov.on{opacity:1;pointer-events:all;}
-.modal{background:var(--s1);border:1px solid var(--b2);border-top:2px solid var(--b2);border-radius:20px 20px 0 0;padding:20px;width:100%;max-width:500px;max-height:88vh;overflow-y:auto;transform:translateY(40px);transition:transform .28s cubic-bezier(.34,1.1,.64,1);}
-.ov.on .modal{transform:translateY(0);}
-.modal-handle{width:36px;height:3px;background:var(--b2);border-radius:2px;margin:0 auto 16px;}
-.modal-title{font-family:var(--serif);font-size:24px;font-style:italic;color:var(--t1);margin-bottom:14px;}
-.modal-x{position:absolute;top:16px;right:16px;background:var(--s2);border:1px solid var(--b2);border-radius:50%;width:28px;height:28px;color:var(--t2);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
-
-/* Day detail modal */
-.day-detail-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--b1);font-size:12px;}
-.day-detail-item:last-child{border:none;}
-.ddi-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
-
-/* TOAST */
-.toast{position:fixed;top:14px;left:50%;transform:translateX(-50%) translateY(-60px);background:var(--s1);border:1px solid var(--am);border-radius:10px;padding:10px 18px;font-family:var(--mono);font-size:11px;color:var(--amber);z-index:999;transition:transform .3s cubic-bezier(.34,1.56,.64,1);white-space:nowrap;pointer-events:none;}
-.toast.on{transform:translateX(-50%) translateY(0);}
-
-/* Animations */
-@keyframes checkBounce{0%{transform:scale(1)}40%{transform:scale(1.08)}100%{transform:scale(1)}}
-.bounce{animation:checkBounce .2s ease;}
-
-/* ════════════════════════════════════
-   BOXING SECTION
-════════════════════════════════════ */
---coral2:#ff7058;
-.boxing-hero-label{font-family:var(--mono);font-size:8px;color:var(--t3);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;}
-
-/* Phase badge */
-.boxing-phase-badge{
-  display:inline-flex;align-items:center;gap:6px;
-  background:rgba(255,112,88,.12);border:1px solid rgba(255,112,88,.3);
-  border-radius:20px;padding:4px 12px;
-  font-family:var(--mono);font-size:9px;color:var(--coral);
-  letter-spacing:.5px;margin-bottom:14px;
-}
-
-/* Boxing habit items */
-.box-habit{
-  display:flex;align-items:center;gap:12px;
-  background:var(--s1);border:1px solid var(--b1);
-  border-radius:12px;padding:12px 14px;
-  cursor:pointer;transition:all .18s;
-  position:relative;overflow:hidden;
-  margin-bottom:6px;
-}
-.box-habit::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--b1);transition:background .2s;}
-.box-habit:active{transform:scale(.98);}
-.box-habit.done{background:rgba(255,112,88,.06);border-color:rgba(255,112,88,.25);}
-.box-habit.done::before{background:var(--coral);}
-.bh-check{
-  width:22px;height:22px;border-radius:50%;
-  border:2px solid var(--b2);background:var(--s2);
-  display:flex;align-items:center;justify-content:center;
-  font-size:11px;color:transparent;flex-shrink:0;
-  transition:all .2s;
-}
-.box-habit.done .bh-check{background:var(--coral);border-color:var(--coral);color:#0f0d0b;font-weight:700;}
-.bh-info{flex:1;}
-.bh-name{font-size:13px;font-weight:600;color:var(--t1);line-height:1.2;}
-.bh-sub{font-family:var(--mono);font-size:9px;color:var(--t2);margin-top:2px;}
-.bh-streak{font-family:var(--mono);font-size:9px;color:var(--t3);text-align:right;flex-shrink:0;}
-.bh-streak span{display:block;font-size:18px;font-weight:500;color:var(--coral);line-height:1;}
-
-/* Boxing progress bar */
-.box-prog-bar{height:3px;background:var(--s3);border-radius:2px;overflow:hidden;margin-bottom:12px;}
-.box-prog-fill{height:100%;background:var(--coral);border-radius:2px;transition:width .4s cubic-bezier(.34,1.1,.64,1);}
-
-/* ── CURRICULUM / SKILL PAGE ── */
-#pg-boxing{padding:0 16px;}
-.boxing-page-hero{padding:32px 0 16px;}
-.boxing-page-title{font-family:var(--serif);font-size:40px;font-style:italic;line-height:1;color:var(--t1);}
-.boxing-page-title span{color:var(--coral);}
-
-/* Phase tabs */
-.phase-tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:16px;}
-.phase-tab{
-  font-family:var(--mono);font-size:9px;padding:6px 12px;
-  border-radius:20px;border:1px solid var(--b2);
-  background:var(--s2);color:var(--t2);cursor:pointer;transition:all .15s;
-}
-.phase-tab.on{border-color:rgba(255,112,88,.5);color:var(--coral);background:rgba(255,112,88,.1);}
-
-/* Skill card */
-.skill-card{
-  background:var(--s1);border:1px solid var(--b1);
-  border-radius:14px;padding:0;
-  margin-bottom:8px;overflow:hidden;
-  transition:border-color .2s;
-}
-.skill-card.lvl-1{border-left:3px solid var(--b2);}
-.skill-card.lvl-2{border-left:3px solid var(--sky);}
-.skill-card.lvl-3{border-left:3px solid var(--amber);}
-.skill-card.lvl-4{border-left:3px solid var(--coral);}
-
-.skill-header{
-  display:flex;align-items:center;gap:12px;
-  padding:12px 14px;cursor:pointer;
-}
-.skill-icon{font-size:20px;flex-shrink:0;}
-.skill-meta{flex:1;}
-.skill-name{font-size:13px;font-weight:700;color:var(--t1);}
-.skill-phase-tag{font-family:var(--mono);font-size:8px;color:var(--t3);margin-top:1px;}
-.skill-lvl-wrap{display:flex;align-items:center;gap:6px;flex-shrink:0;}
-
-/* Level selector — tap through 4 levels */
-.lvl-pip-row{display:flex;gap:4px;}
-.lvl-pip{
-  width:10px;height:10px;border-radius:50%;
-  border:1.5px solid var(--b2);background:transparent;
-  transition:all .2s;cursor:pointer;
-}
-.lvl-pip.l1{border-color:var(--sky);}
-.lvl-pip.l1.filled{background:var(--sky);}
-.lvl-pip.l2{border-color:var(--amber);}
-.lvl-pip.l2.filled{background:var(--amber);}
-.lvl-pip.l3{border-color:var(--coral);}
-.lvl-pip.l3.filled{background:var(--coral);}
-.lvl-pip.l4{border-color:var(--rose);}
-.lvl-pip.l4.filled{background:var(--rose);}
-
-.lvl-label{font-family:var(--mono);font-size:8px;color:var(--t3);}
-.lvl-label.lbl-0{color:var(--t3);}
-.lvl-label.lbl-1{color:var(--sky);}
-.lvl-label.lbl-2{color:var(--amber);}
-.lvl-label.lbl-3{color:var(--coral);}
-.lvl-label.lbl-4{color:var(--rose);}
-
-/* skill note */
-.skill-note-wrap{padding:0 14px 12px;display:none;}
-.skill-note-wrap.open{display:block;}
-.skill-note{
-  width:100%;background:var(--s2);border:1px solid var(--b1);
-  border-radius:8px;padding:8px 10px;color:var(--t1);
-  font-family:var(--mono);font-size:11px;outline:none;
-  resize:none;min-height:48px;line-height:1.5;
-  transition:border-color .15s;
-}
-.skill-note:focus{border-color:rgba(255,112,88,.4);}
-.skill-note::placeholder{color:var(--t3);}
-.skill-note-hint{font-family:var(--mono);font-size:8px;color:var(--t3);margin-top:4px;}
-
-/* Overall skill progress bar */
-.skill-overall{
-  background:var(--s1);border:1px solid var(--b1);border-radius:14px;
-  padding:14px;margin-bottom:12px;
-}
-.skill-ov-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
-.skill-ov-title{font-family:var(--mono);font-size:9px;color:var(--t2);letter-spacing:1.5px;text-transform:uppercase;}
-.skill-ov-pct{font-family:var(--serif);font-size:28px;color:var(--coral);}
-.skill-ov-bar{height:4px;background:var(--s3);border-radius:2px;overflow:hidden;}
-.skill-ov-fill{height:100%;background:linear-gradient(90deg,var(--sky),var(--amber),var(--coral));border-radius:2px;transition:width .5s cubic-bezier(.34,1.1,.64,1);}
-.skill-ov-sub{font-family:var(--mono);font-size:8px;color:var(--t3);margin-top:6px;}
-
-/* Phase summary mini cards */
-.phase-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:14px;}
-.ps-card{background:var(--s1);border:1px solid var(--b1);border-radius:10px;padding:10px 8px;text-align:center;}
-.ps-num{font-family:var(--serif);font-size:26px;line-height:1;}
-.ps-lbl{font-family:var(--mono);font-size:7px;color:var(--t2);margin-top:2px;letter-spacing:.5px;text-transform:uppercase;}
+  /* UTILITY */
+  .flex { display: flex; }
+  .flex-between { display: flex; justify-content: space-between; align-items: center; }
+  .flex-center { display: flex; justify-content: center; align-items: center; }
+  .gap-8 { gap: 8px; }
+  .gap-12 { gap: 12px; }
+  .mt-8 { margin-top: 8px; }
+  .mt-12 { margin-top: 12px; }
+  .mt-16 { margin-top: 16px; }
+  .mb-0 { margin-bottom: 0; }
+  .text-muted { color: var(--text-muted); font-size: 12px; }
+  .text-mono { font-family: 'DM Mono', monospace; }
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 99px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+  }
 </style>
 </head>
 <body>
+
+<div class="header">
+  <div class="logo">GRIND<span>.</span>LOG</div>
+  <div class="date-pill" id="headerDate"></div>
+</div>
+
+<div class="nav">
+  <button class="nav-btn active" data-tab="dashboard">TODAY</button>
+  <button class="nav-btn" data-tab="gym">GYM 🏋️</button>
+  <button class="nav-btn" data-tab="bulking">BULKING 🍗</button>
+  <button class="nav-btn" data-tab="boxing">BOXING 🥊</button>
+  <button class="nav-btn" data-tab="sleep">TIDUR 😴</button>
+  <button class="nav-btn" data-tab="skin">SKINCARE 🧴</button>
+</div>
+
+<div class="content">
+
+  <!-- DASHBOARD TAB -->
+  <div class="tab-pane active" id="tab-dashboard">
+    <div class="card" style="margin-bottom:16px;">
+      <div class="flex-between" style="margin-bottom:12px;">
+        <div class="card-title">
+          <span>Hari Ini</span>
+        </div>
+        <span class="text-muted text-mono" id="dashProgress">0/6 done</span>
+      </div>
+      <div class="today-grid" id="todayGrid">
+        <div class="today-item" data-cat="gym" onclick="goToTab('gym')">
+          <div class="today-check">✓</div>
+          <div class="today-emoji">🏋️</div>
+          <div class="today-label">Gym</div>
+          <div class="today-sub" id="dash-gym-sub">Belum log latihan</div>
+        </div>
+        <div class="today-item" data-cat="bulk" onclick="goToTab('bulking')">
+          <div class="today-check">✓</div>
+          <div class="today-emoji">🍗</div>
+          <div class="today-label">Bulking</div>
+          <div class="today-sub" id="dash-bulk-sub">0 kal · 0g protein</div>
+        </div>
+        <div class="today-item" data-cat="box" onclick="goToTab('boxing')">
+          <div class="today-check">✓</div>
+          <div class="today-emoji">🥊</div>
+          <div class="today-label">Boxing</div>
+          <div class="today-sub">Tap untuk check-in</div>
+        </div>
+        <div class="today-item" data-cat="sleep" onclick="goToTab('sleep')">
+          <div class="today-check">✓</div>
+          <div class="today-emoji">😴</div>
+          <div class="today-label">Tidur</div>
+          <div class="today-sub" id="dash-sleep-sub">Belum log tidur</div>
+        </div>
+        <div class="today-item" data-cat="skin-am" onclick="goToTab('skin')">
+          <div class="today-check">✓</div>
+          <div class="today-emoji">🌅</div>
+          <div class="today-label">Skincare Pagi</div>
+          <div class="today-sub">Routine pagi</div>
+        </div>
+        <div class="today-item" data-cat="skin-pm" onclick="goToTab('skin')">
+          <div class="today-check">✓</div>
+          <div class="today-emoji">🌙</div>
+          <div class="today-label">Skincare Malam</div>
+          <div class="today-sub">Routine malam</div>
+        </div>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="dashProgressBar" style="width:0%;background:var(--accent);"></div>
+      </div>
+      <div class="progress-label" id="dashProgressLabel">0% complete</div>
+    </div>
+
+    <!-- STREAK OVERVIEW -->
+    <div class="card">
+      <div class="card-title" style="margin-bottom:14px;">🔥 Streak Overview</div>
+      <div id="streakOverview"></div>
+    </div>
+  </div>
+
+  <!-- GYM TAB -->
+  <div class="tab-pane" id="tab-gym">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><span class="dot" style="background:var(--gym)"></span>Log Latihan Hari Ini</div>
+        <div class="streak" id="gymStreak" style="background:var(--gym-dim);color:var(--gym);"></div>
+      </div>
+
+      <div id="gymExercises"></div>
+
+      <div style="margin-top:12px;">
+        <div class="input-row">
+          <input type="text" id="newExerciseName" placeholder="Nama exercise (misal: Bench Press)" />
+          <button class="btn btn-primary" onclick="addExercise()">+ Add</button>
+        </div>
+      </div>
+
+      <div style="margin-top:8px;text-align:right;">
+        <button class="btn btn-primary" onclick="saveGymSession()">💾 Simpan Sesi</button>
+      </div>
+    </div>
+
+    <!-- GYM HISTORY -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><span class="dot" style="background:var(--gym)"></span>History Latihan</div>
+        <button class="collapse-btn" onclick="toggleCollapse('gymHistory')">
+          <span id="gymHistoryToggle">▼ LIHAT</span>
+        </button>
+      </div>
+      <div class="collapse-content" id="gymHistory" style="max-height:0">
+        <div id="gymHistoryContent"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BULKING TAB -->
+  <div class="tab-pane" id="tab-bulking">
+
+    <!-- TARGETS -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><span class="dot" style="background:var(--bulk)"></span>Target Harian</div>
+        <button class="btn btn-ghost btn-sm" onclick="openModal('targetModal')">Edit</button>
+      </div>
+      <div class="macro-summary">
+        <div class="macro-box">
+          <div class="macro-val" style="color:var(--bulk)" id="totalKal">0</div>
+          <div class="macro-label">KALORI</div>
+          <div class="macro-target">target: <span id="targetKalDisplay">—</span> kal</div>
+          <div class="progress-bar" style="margin-top:8px;">
+            <div class="progress-fill" id="kalBar" style="width:0%;background:var(--bulk);"></div>
+          </div>
+        </div>
+        <div class="macro-box">
+          <div class="macro-val" style="color:#60a5fa" id="totalProt">0</div>
+          <div class="macro-label">PROTEIN (g)</div>
+          <div class="macro-target">target: <span id="targetProtDisplay">—</span>g</div>
+          <div class="progress-bar" style="margin-top:8px;">
+            <div class="progress-fill" id="protBar" style="width:0%;background:#60a5fa;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOD TEMPLATES -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><span class="dot" style="background:var(--bulk)"></span>Template Makanan</div>
+        <button class="btn btn-ghost btn-sm" onclick="openModal('templateModal')">+ Buat</button>
+      </div>
+      <div class="section-lbl">ITEM SATUAN</div>
+      <div class="template-grid" id="itemTemplates"></div>
+      <div class="section-lbl" style="margin-top:12px;">PAKET KOMBINASI</div>
+      <div class="template-grid" id="packageTemplates"></div>
+    </div>
+
+    <!-- FOOD LOG TODAY -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><span class="dot" style="background:var(--bulk)"></span>Log Makanan Hari Ini</div>
+        <button class="btn btn-ghost btn-sm" onclick="openModal('addFoodModal')">+ Manual</button>
+      </div>
+      <div id="foodLogList">
+        <div class="empty"><div class="empty-icon">🍽️</div>Belum ada makanan hari ini</div>
+      </div>
+    </div>
+
+    <!-- WEIGHT LOG -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><span class="dot" style="background:var(--bulk)"></span>Berat Badan (Mingguan)</div>
+        <button class="btn btn-ghost btn-sm" onclick="openModal('weightModal')">+ Catat</button>
+      </div>
+      <div id="weightLog">
+        <div class="empty"><div class="empty-icon">⚖️</div>Belum ada data berat</div>
+      </div>
+    </div>
+
+    <!-- FOTO PROGRESS -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><span class="dot" style="background:var(--bulk)"></span>📸 Foto Progress Badan</div>
+        <span id="photoReminderBadge" class="streak" style="background:var(--bulk-dim);color:var(--bulk);"></span>
+      </div>
+      <div id="photoReminderBox" style="padding:16px;background:var(--bulk-dim);border-radius:var(--radius-sm);border:1px solid rgba(34,197,94,0.25);margin-bottom:14px;">
+        <div style="font-size:13px;color:var(--bulk);font-weight:600;margin-bottom:6px;" id="photoReminderTitle">📅 Jadwal Foto Progress</div>
+        <div class="text-muted" id="photoReminderText">Foto badan tiap minggu (Senin pagi, sebelum makan) buat ngeliat perubahan massa otot secara visual. Konsisten lebih penting dari hasil instan.</div>
+      </div>
+      <div style="margin-bottom:12px;">
+        <div class="section-lbl">SUDAH FOTO MINGGU INI?</div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-primary" style="flex:1;" onclick="markPhotoDone()">✅ Udah foto!</button>
+          <button class="btn btn-ghost" style="flex:1;" onclick="skipPhotoThisWeek()">⏭ Minggu depan</button>
+        </div>
+      </div>
+      <div id="photoLogList">
+        <div class="empty"><div class="empty-icon">📷</div>Belum ada log foto progress</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOXING TAB -->
+  <div class="tab-pane" id="tab-boxing">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><span class="dot" style="background:var(--box)"></span>Boxing Check-in</div>
+        <div class="streak" id="boxStreak" style="background:var(--box-dim);color:var(--box);"></div>
+      </div>
+      <div style="text-align:center;padding:20px 0;">
+        <div id="boxCheckBtn" onclick="toggleBoxing()" style="cursor:pointer;font-size:64px;margin-bottom:12px;transition:transform 0.2s;">🥊</div>
+        <div id="boxStatus" style="font-family:'Syne',sans-serif;font-weight:700;font-size:18px;margin-bottom:8px;">Belum latihan hari ini</div>
+        <div class="text-muted">Tap emoji untuk check-in</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><span class="dot" style="background:var(--box)"></span>History Boxing</div>
+      </div>
+      <div id="boxHistory">
+        <div class="empty"><div class="empty-icon">📅</div>Belum ada data boxing</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLEEP TAB -->
+  <div class="tab-pane" id="tab-sleep">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><span class="dot" style="background:var(--sleep)"></span>Log Tidur</div>
+        <div class="streak" id="sleepStreak" style="background:var(--sleep-dim);color:var(--sleep);"></div>
+      </div>
+
+      <div id="todaySleepDisplay" style="margin-bottom:16px;display:none;"></div>
+
+      <div class="section-lbl">CATAT TIDUR MALAM INI</div>
+      <div class="input-row">
+        <div style="flex:1;">
+          <div class="text-muted" style="margin-bottom:4px;">Jam Tidur</div>
+          <input type="time" id="sleepStart" value="22:00" />
+        </div>
+        <div style="flex:1;">
+          <div class="text-muted" style="margin-bottom:4px;">Jam Bangun</div>
+          <input type="time" id="sleepEnd" value="06:00" />
+        </div>
+      </div>
+      <button class="btn btn-primary" style="width:100%;margin-top:4px;" onclick="logSleep()">💾 Simpan</button>
+    </div>
+
+    <!-- SLEEP HISTORY + CHART -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><span class="dot" style="background:var(--sleep)"></span>History & Pattern</div>
+      </div>
+      <div id="sleepHistoryList">
+        <div class="empty"><div class="empty-icon">🌙</div>Belum ada data tidur</div>
+      </div>
+      <div id="sleepChart" style="margin-top:16px;"></div>
+    </div>
+  </div>
+
+  <!-- SKIN TAB -->
+  <div class="tab-pane" id="tab-skin">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><span class="dot" style="background:var(--skin)"></span>Routine Pagi</div>
+        <div class="streak" id="skinAmStreak" style="background:var(--skin-dim);color:var(--skin);"></div>
+      </div>
+      <div id="skinAmChecklist"></div>
+      <div class="input-row" style="margin-top:12px;">
+        <input type="text" id="newSkinAmStep" placeholder="Tambah langkah (misal: sunscreen SPF50)" />
+        <button class="btn btn-primary" onclick="addSkinStep('am')">+</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><span class="dot" style="background:var(--skin)"></span>Routine Malam</div>
+        <div class="streak" id="skinPmStreak" style="background:var(--skin-dim);color:var(--skin);"></div>
+      </div>
+      <div id="skinPmChecklist"></div>
+      <div class="input-row" style="margin-top:12px;">
+        <input type="text" id="newSkinPmStep" placeholder="Tambah langkah (misal: retinol serum)" />
+        <button class="btn btn-primary" onclick="addSkinStep('pm')">+</button>
+      </div>
+    </div>
+
+    <!-- KONDISI JERAWAT -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><span class="dot" style="background:var(--skin)"></span>Kondisi Kulit Hari Ini</div>
+      </div>
+      <div class="section-lbl">RATING KONDISI (1=buruk · 5=bagus)</div>
+      <div class="skin-rating" id="skinRating">
+        <div class="rating-btn" data-val="1" onclick="setSkinRating(1)">😤<span class="rating-lbl">Jerawatan</span></div>
+        <div class="rating-btn" data-val="2" onclick="setSkinRating(2)">😕<span class="rating-lbl">Lumayan</span></div>
+        <div class="rating-btn" data-val="3" onclick="setSkinRating(3)">😐<span class="rating-lbl">Biasa</span></div>
+        <div class="rating-btn" data-val="4" onclick="setSkinRating(4)">🙂<span class="rating-lbl">Oke</span></div>
+        <div class="rating-btn" data-val="5" onclick="setSkinRating(5)">😊<span class="rating-lbl">Glowing</span></div>
+      </div>
+      <div style="margin-top:12px;padding:12px;background:var(--skin-dim);border-radius:var(--radius-sm);border:1px solid rgba(244,114,182,0.2);">
+        <div style="font-size:12px;color:var(--skin);margin-bottom:6px;">📸 Foto Progress Reminder</div>
+        <div class="text-muted">Foto wajah kamu tiap minggu (Senin pagi sebelum skincare) untuk track visual progress bekas jerawat.</div>
+      </div>
+    </div>
+
+    <!-- SKIN HISTORY -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><span class="dot" style="background:var(--skin)"></span>History Kondisi Kulit</div>
+        <button class="collapse-btn" onclick="toggleCollapse('skinHistory')">
+          <span id="skinHistoryToggle">▼ LIHAT</span>
+        </button>
+      </div>
+      <div class="collapse-content" id="skinHistory" style="max-height:0">
+        <div id="skinHistoryContent"></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /content -->
+
+<!-- MODALS -->
+
+<!-- Target Modal -->
+<div class="modal-overlay" id="targetModal">
+  <div class="modal">
+    <div class="flex-between" style="margin-bottom:16px;">
+      <div class="modal-title">Target Harian</div>
+      <button class="modal-close" onclick="closeModal('targetModal')">✕</button>
+    </div>
+    <div class="input-row">
+      <div style="flex:1;">
+        <div class="text-muted" style="margin-bottom:4px;">Target Kalori</div>
+        <input type="number" id="targetKalInput" placeholder="misal: 3000" />
+      </div>
+      <div style="flex:1;">
+        <div class="text-muted" style="margin-bottom:4px;">Target Protein (g)</div>
+        <input type="number" id="targetProtInput" placeholder="misal: 150" />
+      </div>
+    </div>
+    <button class="btn btn-primary" style="width:100%;margin-top:8px;" onclick="saveTargets()">Simpan</button>
+  </div>
+</div>
+
+<!-- Template Modal -->
+<div class="modal-overlay" id="templateModal">
+  <div class="modal">
+    <div class="flex-between" style="margin-bottom:16px;">
+      <div class="modal-title">Buat Template Makanan</div>
+      <button class="modal-close" onclick="closeModal('templateModal')">✕</button>
+    </div>
+    <div style="margin-bottom:12px;">
+      <div class="text-muted" style="margin-bottom:6px;">Jenis Template</div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-primary btn-sm" id="typeItemBtn" onclick="setTemplateType('item')">Item Satuan</button>
+        <button class="btn btn-ghost btn-sm" id="typePkgBtn" onclick="setTemplateType('package')">Paket Kombinasi</button>
+      </div>
+    </div>
+    <div class="input-row">
+      <input type="text" id="tplName" placeholder="Nama (misal: Nasi putih 1 porsi)" />
+    </div>
+    <div class="input-row">
+      <div style="flex:1;">
+        <div class="text-muted" style="margin-bottom:4px;">Kalori</div>
+        <input type="number" id="tplKal" placeholder="kcal" />
+      </div>
+      <div style="flex:1;">
+        <div class="text-muted" style="margin-bottom:4px;">Protein (g)</div>
+        <input type="number" id="tplProt" placeholder="gram" />
+      </div>
+    </div>
+    <div style="margin-bottom:10px;">
+      <div class="text-muted" style="margin-bottom:4px;">Catatan (opsional)</div>
+      <input type="text" id="tplNote" placeholder="misal: dari warung depan" />
+    </div>
+    <button class="btn btn-primary" style="width:100%;" onclick="saveTemplate()">Simpan Template</button>
+  </div>
+</div>
+
+<!-- Add Food Manual Modal -->
+<div class="modal-overlay" id="addFoodModal">
+  <div class="modal">
+    <div class="flex-between" style="margin-bottom:16px;">
+      <div class="modal-title">Tambah Makanan Manual</div>
+      <button class="modal-close" onclick="closeModal('addFoodModal')">✕</button>
+    </div>
+    <div class="input-row">
+      <input type="text" id="manualFoodName" placeholder="Nama makanan" />
+    </div>
+    <div class="input-row">
+      <div style="flex:1;">
+        <div class="text-muted" style="margin-bottom:4px;">Kalori</div>
+        <input type="number" id="manualFoodKal" placeholder="kcal" />
+      </div>
+      <div style="flex:1;">
+        <div class="text-muted" style="margin-bottom:4px;">Protein (g)</div>
+        <input type="number" id="manualFoodProt" placeholder="gram" />
+      </div>
+    </div>
+    <button class="btn btn-primary" style="width:100%;margin-top:4px;" onclick="addManualFood()">Tambah</button>
+  </div>
+</div>
+
+<!-- Weight Modal -->
+<div class="modal-overlay" id="weightModal">
+  <div class="modal">
+    <div class="flex-between" style="margin-bottom:16px;">
+      <div class="modal-title">Catat Berat Badan</div>
+      <button class="modal-close" onclick="closeModal('weightModal')">✕</button>
+    </div>
+    <div class="input-row">
+      <div style="flex:1;">
+        <div class="text-muted" style="margin-bottom:4px;">Berat (kg)</div>
+        <input type="number" id="weightInput" placeholder="misal: 60.5" step="0.1" />
+      </div>
+      <div style="flex:1;">
+        <div class="text-muted" style="margin-bottom:4px;">Tanggal</div>
+        <input type="date" id="weightDate" />
+      </div>
+    </div>
+    <button class="btn btn-primary" style="width:100%;margin-top:4px;" onclick="saveWeight()">Simpan</button>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
-<!-- ════════════ TODAY ════════════ -->
-<div class="page on" id="pg-today">
-
-  <!-- HERO -->
-  <div class="today-hero">
-    <div class="th-eyebrow">Health & Glow — Daily Log</div>
-    <div class="th-title"><span>Hari</span> ini</div>
-    <div class="th-eyebrow" id="th-date" style="font-size:9px;color:var(--t2);margin-bottom:12px;"></div>
-    <div class="progress-ring-wrap">
-      <svg class="ring-svg" width="64" height="64" viewBox="0 0 72 72">
-        <circle class="ring-bg" cx="36" cy="36" r="30"/>
-        <circle class="ring-fill" id="ring-fill" cx="36" cy="36" r="30" stroke-dasharray="188.5" stroke-dashoffset="188.5"/>
-        <text class="ring-pct" id="ring-pct" x="36" y="34">0%</text>
-        <text class="ring-label" x="36" y="46">DONE</text>
-      </svg>
-      <div class="streak-info">
-        <div class="streak-num" id="streak-num">0</div>
-        <div class="streak-sub">HARI STREAK</div>
-        <div class="streak-best" id="streak-best">best: 0 hari</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- GYM -->
-  <div class="acc-section open" id="acc-gym">
-    <div class="acc-header" onclick="toggleAcc('gym')">
-      <span class="acc-emoji">🏋️</span>
-      <div class="acc-title">Gym & Olahraga</div>
-      <div class="acc-right">
-        <span class="acc-done-badge">done ✓</span>
-        <span class="acc-pct" id="gym-pct"></span>
-        <span class="acc-chevron">▼</span>
-      </div>
-    </div>
-    <div class="acc-body">
-      <div class="acc-inner">
-        <div class="day-choice">
-          <div class="dc" id="btn-gym" onclick="setGym('gym')">
-            <div class="dc-icon">💪</div>
-            <div><div class="dc-label">Gym</div><div class="dc-sub">→ log split</div></div>
-          </div>
-          <div class="dc" id="btn-rest" onclick="setGym('rest')">
-            <div class="dc-icon">😴</div>
-            <div><div class="dc-label">Rest</div><div class="dc-sub">recovery = gains</div></div>
-          </div>
-        </div>
-        <div id="split-section" style="display:none;">
-          <div class="sec-lbl" style="margin-bottom:7px;">split hari ini</div>
-          <div class="split-chips" id="split-chips"></div>
-        </div>
-        <div id="split-logged" style="display:none;" class="split-logged"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- BOXING -->
-  <div class="acc-section open" id="acc-boxing">
-    <div class="acc-header" onclick="toggleAcc('boxing')">
-      <span class="acc-emoji">🥊</span>
-      <div class="acc-title">Boxing</div>
-      <div class="acc-right">
-        <span class="acc-done-badge">done ✓</span>
-        <span class="acc-pct" id="boxing-pct"></span>
-        <span class="acc-chevron">▼</span>
-      </div>
-    </div>
-    <div class="acc-body">
-      <div class="acc-inner">
-        <div class="boxing-phase-badge" id="boxing-phase-badge" style="margin-bottom:10px;">📅 Phase 1 — Foundation</div>
-        <div class="box-prog-bar"><div class="box-prog-fill" id="box-prog-fill" style="width:0%"></div></div>
-        <div id="boxing-habit-list"></div>
-        <div style="font-family:var(--mono);font-size:7px;color:var(--t3);margin-top:4px;text-align:right;">chain ga boleh putus 🔗</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- NUTRISI -->
-  <div class="acc-section open" id="acc-nutrisi">
-    <div class="acc-header" onclick="toggleAcc('nutrisi')">
-      <span class="acc-emoji">🍱</span>
-      <div class="acc-title">Nutrisi & Bulking</div>
-      <div class="acc-right">
-        <span class="acc-done-badge">done ✓</span>
-        <span class="acc-pct" id="makan-pct"></span>
-        <span class="acc-chevron">▼</span>
-      </div>
-    </div>
-    <div class="acc-body">
-      <div class="acc-inner">
-        <div class="sec-lbl" style="margin-bottom:7px;">makan harian</div>
-        <div class="meal-row">
-          <div class="meal-btn" id="meal-sahur" onclick="toggleMeal('sahur')">
-            <div class="meal-icon">🌅</div><div class="meal-name">Pagi</div><div class="meal-check">✓</div>
-          </div>
-          <div class="meal-btn" id="meal-siang" onclick="toggleMeal('siang')">
-            <div class="meal-icon">☀️</div><div class="meal-name">Siang</div><div class="meal-check">✓</div>
-          </div>
-          <div class="meal-btn" id="meal-malem" onclick="toggleMeal('malem')">
-            <div class="meal-icon">🌙</div><div class="meal-name">Malam</div><div class="meal-check">✓</div>
-          </div>
-        </div>
-        <div class="shake-row" id="shake-row" onclick="toggleShake()">
-          <div class="shake-toggle"></div>
-          <div class="shake-info">
-            <div class="shake-name">🥤 Protein Shake</div>
-            <div class="shake-sub">homemade shake hari ini</div>
-          </div>
-          <div class="ci-streak"><span id="shake-streak">0</span>hari</div>
-        </div>
-        <div style="margin-top:8px;" class="sec-lbl">hidrasi</div>
-        <div class="hydration-row">
-          <div class="hydration-glasses" id="glasses-wrap"></div>
-          <div class="hydration-label" id="hydration-label">0 / 8</div>
-        </div>
-        <div style="margin-top:10px;" class="sec-lbl">tidur semalam</div>
-        <div class="sleep-row">
-          <div class="sleep-label">⏰ jam</div>
-          <div class="sleep-btns" id="sleep-btns"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- KULIT -->
-  <div class="acc-section open" id="acc-kulit">
-    <div class="acc-header" onclick="toggleAcc('kulit')">
-      <span class="acc-emoji">✨</span>
-      <div class="acc-title">Perawatan Wajah</div>
-      <div class="acc-right">
-        <span class="acc-done-badge">done ✓</span>
-        <span class="acc-pct" id="kulit-pct"></span>
-        <span class="acc-chevron">▼</span>
-      </div>
-    </div>
-    <div class="acc-body">
-      <div class="acc-inner">
-        <div class="sec-lbl" style="margin-bottom:5px;">rutinitas malam</div>
-        <div class="sc-progress-bar"><div class="sc-progress-fill" id="sc-prog-fill" style="width:0%"></div></div>
-        <div class="skincare-steps" id="skincare-steps"></div>
-        <div class="sc-add-row" id="sc-add-row" style="margin-top:7px;">
-          <input class="inp" id="sc-new-name" placeholder="tambah step... (mis: Retinol)" style="flex:1;">
-          <button class="btn btn-a" style="padding:8px 12px;" onclick="addSkinStep()">+</button>
-        </div>
-        <div style="font-family:var(--mono);font-size:7px;color:var(--t3);margin-top:5px;">💡 tap untuk centang hari ini</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- RAMBUT -->
-  <div class="acc-section open" id="acc-rambut">
-    <div class="acc-header" onclick="toggleAcc('rambut')">
-      <span class="acc-emoji">💆</span>
-      <div class="acc-title">Perawatan Rambut</div>
-      <div class="acc-right">
-        <span class="acc-done-badge">done ✓</span>
-        <span class="acc-pct" id="rambut-pct"></span>
-        <span class="acc-chevron">▼</span>
-      </div>
-    </div>
-    <div class="acc-body">
-      <div class="acc-inner">
-        <div class="check-list" id="hair-list"></div>
-        <div style="margin-top:8px;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:8px;color:var(--t3);">
-          <span>Target keramas:</span>
-          <input class="inp" id="keramas-target" type="number" min="1" max="7" style="width:46px;padding:3px 7px;font-size:10px;" onchange="saveKeramasTarget()">
-          <span>x/minggu</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<!-- ════════════ CHAIN / CALENDAR ════════════ -->
-<div class="page" id="pg-chain">
-  <div class="chain-hero">
-    <div class="chain-title-big">Don't break<br>the <span>chain.</span></div>
-  </div>
-  <div class="chain-stats">
-    <div class="cstat"><div class="cstat-v" id="ch-cur" style="color:var(--amber)">0</div><div class="cstat-l">Streak</div></div>
-    <div class="cstat"><div class="cstat-v" id="ch-best2">0</div><div class="cstat-l">Best</div></div>
-    <div class="cstat"><div class="cstat-v" id="ch-month">0</div><div class="cstat-l">Bulan ini</div></div>
-  </div>
-
-  <div class="cat-tabs" id="cat-tabs">
-    <div class="cat-tab on" onclick="setCatFilter('all',this)">Semua</div>
-    <div class="cat-tab" onclick="setCatFilter('gym',this)">🏋️ Gym</div>
-    <div class="cat-tab" onclick="setCatFilter('boxing',this)">🥊 Boxing</div>
-    <div class="cat-tab" onclick="setCatFilter('makan',this)">🍱 Makan</div>
-    <div class="cat-tab" onclick="setCatFilter('kulit',this)">✨ Kulit</div>
-    <div class="cat-tab" onclick="setCatFilter('rambut',this)">💆 Rambut</div>
-  </div>
-
-  <div class="cal-nav">
-    <button class="cal-nbtn" onclick="changeMonth(-1)">‹</button>
-    <div class="cal-mnth" id="cal-mnth"></div>
-    <button class="cal-nbtn" onclick="changeMonth(1)">›</button>
-  </div>
-  <div class="dow-row">
-    <div class="dow-c">Min</div><div class="dow-c">Sen</div><div class="dow-c">Sel</div>
-    <div class="dow-c">Rab</div><div class="dow-c">Kam</div><div class="dow-c">Jum</div><div class="dow-c">Sab</div>
-  </div>
-  <div class="cal-grid" id="cal-grid"></div>
-  <div class="cal-legend">
-    <div class="leg"><div class="leg-dot" style="background:var(--amber);opacity:.6"></div> Semua selesai</div>
-    <div class="leg"><div class="leg-dot" style="background:var(--s3);border:1px solid var(--b2)"></div> Parsial</div>
-    <div class="leg"><div class="leg-dot" style="background:var(--s1);border:1px solid var(--b1)"></div> Kosong</div>
-  </div>
-</div>
-
-<!-- ════════════ STATS ════════════ -->
-<div class="page" id="pg-stats">
-  <div class="stats-hero">
-    <div class="stats-title">Progress <span>&</span><br>Statistik</div>
-  </div>
-  <div class="stat-grid" id="stat-grid"></div>
-  <div class="sec-lbl" style="margin-bottom:8px;">per kebiasaan</div>
-  <div id="habit-stat-list"></div>
-</div>
-
-<!-- ════════════ SETTINGS ════════════ -->
-<div class="page" id="pg-settings">
-  <div class="settings-hero">
-    <div class="settings-title">Pengaturan</div>
-  </div>
-
-  <div class="settings-section">
-    <div class="settings-sec-title">⚙️ Gym — Split Templates</div>
-    <div id="split-tpl-list"></div>
-    <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;">
-      <input class="inp" id="new-split-name" placeholder="nama split... (mis: Push)" style="flex:1;min-width:120px;">
-      <button class="btn btn-a" style="padding:9px 14px;" onclick="addSplitTpl()">+ Tambah</button>
-    </div>
-  </div>
-
-  <div class="settings-section">
-    <div class="settings-sec-title">🍱 Nutrisi</div>
-    <div class="settings-row">
-      <label>Target tidur (jam)</label>
-      <input type="number" id="sleep-target-inp" min="4" max="12" value="7" onchange="saveSleepTarget()">
-    </div>
-    <div class="settings-row">
-      <label>Target air (gelas/hari)</label>
-      <input type="number" id="water-target-inp" min="4" max="16" value="8" onchange="saveWaterTarget()">
-    </div>
-  </div>
-
-  <div class="settings-section">
-    <div class="settings-sec-title">🥊 Boxing</div>
-    <div class="settings-row">
-      <label>Phase saat ini</label>
-      <select id="boxing-phase-inp" onchange="saveBoxingPhase()" style="background:var(--s2);border:1px solid var(--b1);border-radius:8px;color:var(--t1);font-family:var(--mono);font-size:11px;padding:5px 8px;outline:none;">
-        <option value="1">Phase 1 — Foundation</option>
-        <option value="2">Phase 2 — Development</option>
-        <option value="3">Phase 3 — Sharpening</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="settings-section">
-    <div class="settings-sec-title">💾 Data</div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;">
-      <button class="btn btn-o" onclick="exportData()">Export JSON</button>
-      <button class="btn btn-o" onclick="document.getElementById('import-file').click()">Import JSON</button>
-      <input type="file" id="import-file" accept=".json" style="display:none" onchange="importData(event)">
-      <button class="btn btn-r" onclick="confirmReset()">Reset Data</button>
-    </div>
-    <div style="font-family:var(--mono);font-size:8px;color:var(--t3);margin-top:10px;line-height:1.6;">
-      semua data tersimpan di localStorage browser kamu. tidak ada yang dikirim ke server.
-    </div>
-  </div>
-</div>
-
-<!-- ════════════ BOXING CURRICULUM ════════════ -->
-<div class="page" id="pg-boxing">
-  <div class="boxing-page-hero">
-    <div class="boxing-page-title">Kurikulum<br><span>Boxing</span></div>
-  </div>
-
-  <!-- Overall progress -->
-  <div class="skill-overall">
-    <div class="skill-ov-row">
-      <div class="skill-ov-title">Penguasaan keseluruhan</div>
-      <div class="skill-ov-pct" id="skill-ov-pct">0%</div>
-    </div>
-    <div class="skill-ov-bar"><div class="skill-ov-fill" id="skill-ov-fill" style="width:0%"></div></div>
-    <div class="skill-ov-sub" id="skill-ov-sub">0 dari 0 skill dikuasai</div>
-  </div>
-
-  <!-- Phase summary -->
-  <div class="phase-summary">
-    <div class="ps-card"><div class="ps-num" id="ps-1" style="color:var(--sky)">0</div><div class="ps-lbl">Phase 1<br>Foundation</div></div>
-    <div class="ps-card"><div class="ps-num" id="ps-2" style="color:var(--amber)">0</div><div class="ps-lbl">Phase 2<br>Develop</div></div>
-    <div class="ps-card"><div class="ps-num" id="ps-3" style="color:var(--coral)">0</div><div class="ps-lbl">Phase 3<br>Sharp</div></div>
-  </div>
-
-  <!-- Phase tabs -->
-  <div class="phase-tabs">
-    <div class="phase-tab on" onclick="setPhaseFilter('all',this)">Semua</div>
-    <div class="phase-tab" onclick="setPhaseFilter('1',this)">⚡ Phase 1</div>
-    <div class="phase-tab" onclick="setPhaseFilter('2',this)">🔥 Phase 2</div>
-    <div class="phase-tab" onclick="setPhaseFilter('3',this)">💀 Phase 3</div>
-  </div>
-
-  <div id="skill-list"></div>
-</div>
-
-<!-- ════════════ NAV ════════════ -->
-<nav>
-  <button class="nb on" onclick="nav('today',this)"><span class="ni">🌿</span>Hari ini</button>
-  <button class="nb" onclick="nav('chain',this)"><span class="ni">🔗</span>Chain</button>
-  <button class="nb" onclick="nav('boxing',this)"><span class="ni">🥊</span>Boxing</button>
-  <button class="nb" onclick="nav('stats',this)"><span class="ni">📈</span>Stats</button>
-  <button class="nb" onclick="nav('settings',this)"><span class="ni">⚙️</span>Settings</button>
-</nav>
-
-<!-- Day Detail Modal -->
-<div class="ov" id="ov-day">
-  <div class="modal" style="position:relative;">
-    <button class="modal-x" onclick="closeOv('ov-day')">✕</button>
-    <div class="modal-handle"></div>
-    <div class="modal-title" id="day-modal-title"></div>
-    <div id="day-modal-content"></div>
-  </div>
-</div>
-
 <script>
-// ════════════════════════════════════════════
-// TODAY ACCORDION
-// ════════════════════════════════════════════
-function toggleAcc(id){
-  const sec=$('acc-'+id);
-  if(!sec)return;
-  sec.dataset.manualToggle='1';
-  sec.classList.toggle('open');
-}
-
-// Auto-collapse sections that are done, expand those that aren't
-function updateAccordions(){
-  const t=todayStr();const dd=getDayData(t);
-
-  const gymDone=!!(dd.gymType);
-  const bx=dd.boxing||{};
-  const boxDone=BOXING_HABITS.every(h=>bx[h.id]);
-  const meals=dd.meals||{};
-  const nutrisiDone=!!(meals.sahur&&meals.siang&&meals.malem&&dd.shake);
-  const sc=dd.skincare||{};const steps=getSkinSteps();
-  const kulitDone=steps.length>0&&steps.every(s=>sc[s.id]);
-  const hair=dd.hair||{};
-  const rambutDone=HAIR_ITEMS.every(h=>hair[h.id]);
-
-  const sections={gym:gymDone,boxing:boxDone,nutrisi:nutrisiDone,kulit:kulitDone,rambut:rambutDone};
-  Object.entries(sections).forEach(([id,done])=>{
-    const sec=$('acc-'+id);if(!sec)return;
-    sec.classList.toggle('done',done);
-    // auto-collapse when done, auto-open when not done
-    // but only if user hasn't manually toggled (we track with data attr)
-    if(!sec.dataset.manualToggle){
-      sec.classList.toggle('open',!done);
-    }
-  });
-}
-
-// ════════════════════════════════════════════
-// STORAGE
-// ════════════════════════════════════════════
-const S={
-  get:k=>{try{const v=localStorage.getItem('hg_'+k);return v?JSON.parse(v):null;}catch{return null;}},
-  set:(k,v)=>{try{localStorage.setItem('hg_'+k,JSON.stringify(v));}catch{}}
+// ========== STATE ==========
+const TODAY = new Date().toISOString().slice(0,10);
+let state = {
+  targets: { kal: 0, prot: 0 },
+  foodLog: {}, // date -> [{name,kal,prot}]
+  templates: [], // {id,type:'item'|'package',name,kal,prot,note}
+  weights: [], // [{date,kg}]
+  gym: {}, // date -> {exercises:[{name,sets:[{reps,weight}]}]}
+  boxing: {}, // date -> bool
+  sleep: {}, // date -> {start,end,dur}
+  skin: {
+    amSteps: ['Cuci muka', 'Toner', 'Moisturizer', 'Sunscreen'],
+    pmSteps: ['Double cleanse', 'Toner', 'Serum', 'Moisturizer'],
+    amLog: {}, // date -> [bool]
+    pmLog: {}, // date -> [bool]
+    condition: {} // date -> 1-5
+  }
 };
-const $=id=>document.getElementById(id);
-const DAYS=['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
-const MONTHS=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
-const CIRC=2*Math.PI*30; // ring circumference
 
-function todayStr(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
-function getDayData(d){const all=S.get('days')||{};return all[d]||{};}
-function setDayData(d,patch){const all=S.get('days')||{};all[d]={...(all[d]||{}),...patch};S.set('days',all);}
-
-// ── SETTINGS state ──
-let sleepTarget=S.get('sleepTarget')||7;
-let waterTarget=S.get('waterTarget')||8;
-let keramasTarget=S.get('keramasTarget')||3;
-let calYear=new Date().getFullYear(), calMonth=new Date().getMonth();
-let calCatFilter='all';
-
-// ════════════════════════════════════════════
-// SPLIT TEMPLATES
-// ════════════════════════════════════════════
-const DEFAULT_SPLITS=[
-  {id:'push',name:'Push 💪'},
-  {id:'pull',name:'Pull 🦾'},
-  {id:'legs',name:'Legs 🦵'},
-  {id:'fullbody',name:'Full Body 🔥'},
-];
-function getSplits(){return S.get('splits')||DEFAULT_SPLITS;}
-function saveSplits(s){S.set('splits',s);}
-
-function addSplitTpl(){
-  const name=$('new-split-name').value.trim();
-  if(!name){toast('⚠ isi nama split dulu!');return;}
-  const splits=getSplits();
-  splits.push({id:'spl_'+Date.now(),name});
-  saveSplits(splits);
-  $('new-split-name').value='';
-  renderSplitTplList();
-  renderSplitChips();
-  toast('✓ Split "'+name+'" ditambah!');
-}
-function deleteSplitTpl(id){
-  saveSplits(getSplits().filter(s=>s.id!==id));
-  renderSplitTplList();renderSplitChips();
-  toast('Split dihapus');
-}
-function renderSplitTplList(){
-  const list=$('split-tpl-list');list.innerHTML='';
-  getSplits().forEach(s=>{
-    const row=document.createElement('div');
-    row.style.cssText='display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--b1);';
-    row.innerHTML=`<span style="flex:1;font-size:13px;font-weight:600;">${s.name}</span><button class="btn btn-r" style="padding:4px 8px;" onclick="deleteSplitTpl('${s.id}')">✕</button>`;
-    list.appendChild(row);
-  });
-}
-function renderSplitChips(){
-  const chips=$('split-chips');chips.innerHTML='';
-  const t=todayStr();const dd=getDayData(t);
-  getSplits().forEach(s=>{
-    const chip=document.createElement('div');
-    chip.className='sc'+(dd.gymSplit===s.id?' on':'');
-    chip.textContent=s.name;
-    chip.onclick=()=>setSplit(s.id,s.name);
-    chips.appendChild(chip);
-  });
-}
-
-// ════════════════════════════════════════════
-// SKINCARE STEPS
-// ════════════════════════════════════════════
-const SC_EMOJIS=['🧼','💧','🧴','💊','✨','🌙','💦','🌿','🍯','🪷'];
-const DEFAULT_STEPS=[
-  {id:'sc_cleanser',name:'Cleanser'},
-  {id:'sc_toner',name:'Toner'},
-  {id:'sc_obat',name:'Obat Jerawat'},
-  {id:'sc_moisturizer',name:'Moisturizer'},
-];
-function getSkinSteps(){return S.get('skinSteps')||DEFAULT_STEPS;}
-function saveSkinSteps(s){S.set('skinSteps',s);}
-
-function addSkinStep(){
-  const name=$('sc-new-name').value.trim();
-  if(!name){toast('⚠ isi nama step dulu!');return;}
-  const steps=getSkinSteps();
-  steps.push({id:'sc_'+Date.now(),name});
-  saveSkinSteps(steps);
-  $('sc-new-name').value='';
-  renderSkincareSteps();
-  toast('✓ Step "'+name+'" ditambah!');
-}
-function deleteSkinStep(id){
-  saveSkinSteps(getSkinSteps().filter(s=>s.id!==id));
-  const t=todayStr();const dd=getDayData(t);
-  if(dd.skincare){delete dd.skincare[id];setDayData(t,{skincare:dd.skincare});}
-  renderSkincareSteps();
-  updateAllProgress();
-}
-function toggleSkinStep(id){
-  const t=todayStr();const dd=getDayData(t);
-  const sc=dd.skincare||{};
-  sc[id]=!sc[id];
-  setDayData(t,{skincare:sc});
-  renderSkincareSteps();
-  updateAllProgress();
-}
-function renderSkincareSteps(){
-  const steps=getSkinSteps();
-  const t=todayStr();const dd=getDayData(t);
-  const sc=dd.skincare||{};
-  const cont=$('skincare-steps');cont.innerHTML='';
-  const done=steps.filter(s=>sc[s.id]).length;
-  $('sc-prog-fill').style.width=(steps.length?Math.round(done/steps.length*100):0)+'%';
-  steps.forEach((s,i)=>{
-    const isDone=!!sc[s.id];
-    const el=document.createElement('div');
-    el.className='sc-step'+(isDone?' done':'');
-    el.onclick=()=>toggleSkinStep(s.id);
-    el.innerHTML=`
-      <div class="sc-num">${isDone?'✓':i+1}</div>
-      <div class="sc-step-name">${s.name}</div>
-      <div class="sc-step-emoji">${SC_EMOJIS[i%SC_EMOJIS.length]}</div>
-      <button class="sc-step-del" onclick="event.stopPropagation();deleteSkinStep('${s.id}')">✕</button>
-    `;
-    cont.appendChild(el);
-  });
-  $('kulit-pct').textContent=steps.length?done+'/'+steps.length:'—';
-}
-
-// ════════════════════════════════════════════
-// HAIR
-// ════════════════════════════════════════════
-const HAIR_ITEMS=[
-  {id:'keramas',name:'Keramas',emoji:'🚿',sub:'cuci rambut',color:'sky'},
-  {id:'kondisioner',name:'Kondisioner',emoji:'💆',sub:'setelah keramas',color:'lavender'},
-];
-function renderHairList(){
-  const t=todayStr();const dd=getDayData(t);
-  const list=$('hair-list');list.innerHTML='';
-  HAIR_ITEMS.forEach(h=>{
-    const done=!!dd.hair&&!!dd.hair[h.id];
-    const streak=getHabitStreak(h.id,'hair');
-    const el=document.createElement('div');
-    el.className=`check-item${done?' done-'+h.color:''}`;
-    el.onclick=()=>{
-      const d2=getDayData(t);const hair=d2.hair||{};
-      hair[h.id]=!hair[h.id];
-      setDayData(t,{hair});
-      renderHairList();updateAllProgress();
-      if(hair[h.id])toast(h.emoji+' '+h.name+'!');
-    };
-    el.innerHTML=`
-      <div class="ci-check">${done?'✓':''}</div>
-      <div class="ci-info"><div class="ci-name">${h.emoji} ${h.name}</div><div class="ci-sub">${h.sub}</div></div>
-      <div class="ci-streak"><span>${streak}</span>hari</div>
-    `;
-    list.appendChild(el);
-  });
-  // Keramas frequency this week
-  const weekDone=getKeramasThisWeek();
-  const targetK=S.get('keramasTarget')||3;
-  const info=document.createElement('div');
-  info.style.cssText='font-family:var(--mono);font-size:8.5px;color:var(--t3);margin-top:8px;text-align:right;';
-  info.textContent=`keramas minggu ini: ${weekDone}/${targetK}x`;
-  list.appendChild(info);
-  $('rambut-pct').textContent=Object.values(dd.hair||{}).filter(Boolean).length+'/'+HAIR_ITEMS.length;
-}
-function getKeramasThisWeek(){
-  const now=new Date();
-  const day=now.getDay();
-  let count=0;
-  for(let i=0;i<=day;i++){
-    const d=new Date(now);d.setDate(now.getDate()-i);
-    const k=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-    const dd=getDayData(k);
-    if(dd.hair&&dd.hair.keramas)count++;
+function loadState() {
+  const saved = localStorage.getItem('grindlog_v1');
+  if (saved) {
+    try { state = JSON.parse(saved); } catch(e) {}
   }
-  return count;
 }
-function saveKeramasTarget(){
-  const v=parseInt($('keramas-target').value)||3;
-  S.set('keramasTarget',v);
-  keramasTarget=v;
-  renderHairList();
-  toast('✓ Target keramas '+v+'x/minggu disimpan');
+function saveState() {
+  localStorage.setItem('grindlog_v1', JSON.stringify(state));
 }
 
-// ════════════════════════════════════════════
-// GYM
-// ════════════════════════════════════════════
-function setGym(type){
-  const t=todayStr();const dd=getDayData(t);
-  if(dd.gymType===type){setDayData(t,{gymType:null,gymSplit:null});toast('Unchecked');}
-  else{
-    setDayData(t,{gymType:type});
-    toast(type==='gym'?'💪 Let\'s go! Pilih split-nya':'😴 Rest day. Growth happens here too.');
-  }
-  renderGymSection();updateAllProgress();
+// ========== UTILS ==========
+function fmt(date) {
+  return new Date(date + 'T00:00:00').toLocaleDateString('id-ID', {day:'numeric',month:'short',year:'numeric'});
 }
-function setSplit(id,name){
-  const t=todayStr();const dd=getDayData(t);
-  if(dd.gymSplit===id){setDayData(t,{gymSplit:null});toast('Split unset');}
-  else{setDayData(t,{gymSplit:id,gymSplitName:name});toast('💪 '+name+' — let\'s goooo!');}
-  renderGymSection();updateAllProgress();
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
 }
-function renderGymSection(){
-  const t=todayStr();const dd=getDayData(t);
-  $('btn-gym').className='dc'+(dd.gymType==='gym'?' gym-sel':'');
-  $('btn-rest').className='dc'+(dd.gymType==='rest'?' rest-sel':'');
-  const showSplit=dd.gymType==='gym';
-  $('split-section').style.display=showSplit?'block':'none';
-  $('split-logged').style.display=(showSplit&&dd.gymSplit)?'block':'none';
-  if(showSplit&&dd.gymSplit)$('split-logged').textContent='✓ '+dd.gymSplitName+' logged!';
-  renderSplitChips();
-  const gymDone=dd.gymType==='gym'||dd.gymType==='rest';
-  $('gym-pct').textContent=gymDone?(dd.gymType==='gym'?(dd.gymSplit?'done 💪':'set split'):'rest ✓'):'—';
-}
-
-// ════════════════════════════════════════════
-// NUTRITION / MEALS
-// ════════════════════════════════════════════
-function toggleMeal(meal){
-  const t=todayStr();const dd=getDayData(t);
-  const meals=dd.meals||{};
-  meals[meal]=!meals[meal];
-  setDayData(t,{meals});
-  renderMeals();updateAllProgress();
-  if(meals[meal])toast({sahur:'🌅 Makan pagi ✓',siang:'☀️ Makan siang ✓',malem:'🌙 Makan malam ✓'}[meal]);
-}
-function renderMeals(){
-  const t=todayStr();const dd=getDayData(t);
-  const meals=dd.meals||{};
-  ['sahur','siang','malem'].forEach(m=>{
-    $('meal-'+m).className='meal-btn'+(meals[m]?' done':'');
-  });
-  const done=Object.values(meals).filter(Boolean).length;
-  $('makan-pct').textContent=done+'/3 makan'+(dd.shake?' + shake':'');
-}
-function toggleShake(){
-  const t=todayStr();const dd=getDayData(t);
-  const v=!dd.shake;
-  setDayData(t,{shake:v});
-  renderShake();renderMeals();updateAllProgress();
-  toast(v?'🥤 Shake done! Gains loading...':'Shake unchecked');
-}
-function renderShake(){
-  const t=todayStr();const dd=getDayData(t);
-  $('shake-row').className='shake-row'+(dd.shake?' done':'');
-  $('shake-streak').textContent=getHabitStreak('shake','shake');
-}
-
-// ════════════════════════════════════════════
-// HYDRATION
-// ════════════════════════════════════════════
-function renderGlasses(){
-  const t=todayStr();const dd=getDayData(t);
-  const filled=dd.water||0;
-  const target=S.get('waterTarget')||8;
-  const wrap=$('glasses-wrap');wrap.innerHTML='';
-  for(let i=0;i<target;i++){
-    const g=document.createElement('div');
-    g.className='glass'+(i<filled?' filled':'');
-    g.textContent='💧';
-    g.onclick=()=>{
-      const dd2=getDayData(todayStr());
-      const cur=dd2.water||0;
-      const newVal=i<cur?i:i+1;
-      setDayData(todayStr(),{water:newVal});
-      renderGlasses();updateAllProgress();
-    };
-    wrap.appendChild(g);
-  }
-  $('hydration-label').textContent=filled+' / '+target;
-}
-
-// ════════════════════════════════════════════
-// SLEEP
-// ════════════════════════════════════════════
-function renderSleepBtns(){
-  const t=todayStr();const dd=getDayData(t);
-  const cur=dd.sleep||null;
-  const cont=$('sleep-btns');cont.innerHTML='';
-  [5,6,7,8,9].forEach(h=>{
-    const b=document.createElement('button');
-    b.className='sleep-btn'+(cur===h?' on':'');
-    b.textContent=h+'j';
-    b.onclick=()=>{
-      const dd2=getDayData(todayStr());
-      const newVal=dd2.sleep===h?null:h;
-      setDayData(todayStr(),{sleep:newVal});
-      renderSleepBtns();updateAllProgress();
-      if(newVal){const msg=newVal>=(S.get('sleepTarget')||7)?'😴 Tidur cukup, mantap!':'😴 '+newVal+' jam dicatat';toast(msg);}
-    };
-    cont.appendChild(b);
-  });
-}
-
-// ════════════════════════════════════════════
-// STREAK HELPERS
-// ════════════════════════════════════════════
-function getHabitStreak(habitId,field){
-  let streak=0;
-  const today=new Date();
-  for(let i=0;i<365;i++){
-    const d=new Date(today);d.setDate(today.getDate()-i);
-    const k=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-    const dd=getDayData(k);
-    let done=false;
-    if(field==='hair')done=!!(dd.hair&&dd.hair[habitId]);
-    else if(field==='shake')done=!!dd.shake;
-    if(done)streak++;
-    else if(i>0)break;
+function calcStreak(dateSet) {
+  let streak = 0;
+  let d = new Date(TODAY);
+  while(true) {
+    const ds = d.toISOString().slice(0,10);
+    if (dateSet.has(ds)) { streak++; d.setDate(d.getDate()-1); }
+    else break;
   }
   return streak;
 }
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.modal-overlay').forEach(m => {
+  m.addEventListener('click', e => { if(e.target===m) m.classList.remove('open'); });
+});
 
-function isDaySuccess(dateStr){
-  const dd=getDayData(dateStr);
-  const gymOk=(dd.gymType==='gym'||dd.gymType==='rest');
-  const meals=dd.meals||{};
-  const mealOk=meals.sahur&&meals.siang&&meals.malem;
-  const scSteps=getSkinSteps();
-  const sc=dd.skincare||{};
-  const skinOk=scSteps.length>0&&scSteps.every(s=>sc[s.id]);
-  return gymOk&&mealOk&&skinOk;
+// ========== TABS ==========
+document.querySelectorAll('.nav-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    renderAll();
+  });
+});
+function goToTab(tab) {
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelector(`.nav-btn[data-tab="${tab}"]`).classList.add('active');
+  document.getElementById('tab-' + tab).classList.add('active');
+  renderAll();
 }
 
-function getCatDayScore(dateStr,cat){
-  const dd=getDayData(dateStr);
-  if(cat==='gym')return dd.gymType==='gym'||dd.gymType==='rest';
-  if(cat==='makan'){const m=dd.meals||{};return m.sahur&&m.siang&&m.malem;}
-  if(cat==='kulit'){const sc=dd.skincare||{};const steps=getSkinSteps();return steps.length>0&&steps.every(s=>sc[s.id]);}
-  if(cat==='rambut'){const h=dd.hair||{};return HAIR_ITEMS.some(i=>h[i.id]);}
-  if(cat==='boxing'){const bx=dd.boxing||{};const done=BOXING_HABITS.filter(h=>bx[h.id]).length;return done>=Math.ceil(BOXING_HABITS.length*0.6);}
-  return isDaySuccess(dateStr);
+// ========== HEADER DATE ==========
+function renderDate() {
+  const d = new Date();
+  document.getElementById('headerDate').textContent = d.toLocaleDateString('id-ID', {weekday:'short',day:'numeric',month:'long'});
 }
 
-function getOverallStreak(){
-  let streak=0;const today=new Date();
-  for(let i=1;i<365;i++){
-    const d=new Date(today);d.setDate(today.getDate()-i);
-    const k=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-    if(isDaySuccess(k))streak++;else break;
+// ========== DASHBOARD ==========
+function renderDashboard() {
+  const gymDone = !!(state.gym[TODAY] && state.gym[TODAY].exercises && state.gym[TODAY].exercises.length > 0);
+  const bulkDone = !!(state.foodLog[TODAY] && state.foodLog[TODAY].length > 0);
+  const boxDone = !!state.boxing[TODAY];
+  const sleepDone = !!state.sleep[TODAY];
+  const skinAmDone = checklistAllDone('am');
+  const skinPmDone = checklistAllDone('pm');
+
+  const cats = {gym: gymDone, bulk: bulkDone, box: boxDone, sleep: sleepDone, 'skin-am': skinAmDone, 'skin-pm': skinPmDone};
+  let done = 0;
+  document.querySelectorAll('.today-item').forEach(el => {
+    const cat = el.dataset.cat;
+    if (cats[cat]) { el.classList.add('done'); done++; }
+    else el.classList.remove('done');
+  });
+
+  document.getElementById('dashProgress').textContent = `${done}/6 done`;
+  document.getElementById('dashProgressBar').style.width = `${Math.round(done/6*100)}%`;
+  document.getElementById('dashProgressLabel').textContent = `${Math.round(done/6*100)}% complete`;
+
+  // Subtitles
+  if (gymDone) {
+    const ex = state.gym[TODAY].exercises.length;
+    document.getElementById('dash-gym-sub').textContent = `${ex} exercise hari ini`;
+  } else {
+    document.getElementById('dash-gym-sub').textContent = 'Belum log latihan';
   }
-  return streak;
-}
-function getBestStreak(){
-  const all=S.get('days')||{};
-  const keys=Object.keys(all).sort();
-  let best=0,cur=0;
-  keys.forEach(k=>{if(isDaySuccess(k)){cur++;best=Math.max(best,cur);}else cur=0;});
-  return best;
-}
-
-// ════════════════════════════════════════════
-// OVERALL PROGRESS RING
-// ════════════════════════════════════════════
-function getDayProgress(dateStr){
-  const dd=getDayData(dateStr);
-  let done=0,total=0;
-  // gym
-  total++;if(dd.gymType==='gym'||dd.gymType==='rest')done++;
-  // meals 3x
-  const meals=dd.meals||{};
-  total+=3;
-  if(meals.sahur)done++;if(meals.siang)done++;if(meals.malem)done++;
-  // shake
-  total++;if(dd.shake)done++;
-  // water
-  const wt=S.get('waterTarget')||8;
-  total++;if((dd.water||0)>=wt)done++;
-  // sleep
-  total++;if((dd.sleep||0)>=(S.get('sleepTarget')||7))done++;
-  // skincare
-  const steps=getSkinSteps();
-  const sc=dd.skincare||{};
-  steps.forEach(s=>{total++;if(sc[s.id])done++;});
-  // hair
-  HAIR_ITEMS.forEach(h=>{total++;if(dd.hair&&dd.hair[h.id])done++;});
-  // boxing
-  const bxData=dd.boxing||{};
-  BOXING_HABITS.forEach(h=>{total++;if(bxData[h.id])done++;});
-  return total>0?Math.round(done/total*100):0;
-}
-
-function updateAllProgress(){
-  const t=todayStr();
-  const pct=getDayProgress(t);
-  const offset=CIRC-(CIRC*pct/100);
-  $('ring-fill').style.strokeDashoffset=offset;
-  $('ring-pct').textContent=pct+'%';
-  $('ring-fill').style.stroke=pct>=80?'#3ecfb8':pct>=50?'#f5a623':'#f2789f';
-
-  // streak
-  const streak=getOverallStreak();
-  $('streak-num').textContent=streak;
-  $('streak-best').textContent='best: '+getBestStreak()+' hari';
-
-  // category wins
-  $('cw-gym') && ($('cw-gym').className='cw'+(getCatDayScore(t,'gym')?' done':''));
-  $('cw-boxing') && ($('cw-boxing').className='cw'+(getCatDayScore(t,'boxing')?' done':''));
-  $('cw-makan') && ($('cw-makan').className='cw'+(getCatDayScore(t,'makan')?' done':''));
-  $('cw-kulit') && ($('cw-kulit').className='cw'+(getCatDayScore(t,'kulit')?' done':''));
-
-  updateAccordions();
-  renderCalendar();
-}
-
-// ════════════════════════════════════════════
-// CALENDAR
-// ════════════════════════════════════════════
-function changeMonth(dir){
-  calMonth+=dir;
-  if(calMonth>11){calMonth=0;calYear++;}
-  if(calMonth<0){calMonth=11;calYear--;}
-  renderCalendar();
-}
-function setCatFilter(f,el){
-  calCatFilter=f;
-  document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('on'));
-  el.classList.add('on');
-  renderCalendar();
-}
-function renderCalendar(){
-  $('cal-mnth').textContent=MONTHS[calMonth]+' '+calYear;
-  const grid=$('cal-grid');grid.innerHTML='';
-  const first=new Date(calYear,calMonth,1).getDay();
-  const days=new Date(calYear,calMonth+1,0).getDate();
-  const today=new Date();
-  const todayKey=todayStr();
-
-  for(let i=0;i<first;i++){const e=document.createElement('div');e.className='cc empty';grid.appendChild(e);}
-  for(let d=1;d<=days;d++){
-    const k=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    const cellDate=new Date(calYear,calMonth,d);
-    const isFuture=cellDate>today&&k!==todayKey;
-    const isToday=k===todayKey;
-    const dd=getDayData(k);
-    const hasData=dd&&Object.keys(dd).length>0;
-
-    let cls='cc';
-    if(isFuture)cls+=' future';
-    else if(isToday)cls+=' today';
-
-    if(!isFuture&&hasData){
-      const score=getCatDayScore(k,calCatFilter);
-      const fullScore=calCatFilter==='all'?isDaySuccess(k):score;
-      if(fullScore)cls+=' full';
-      else if(score||Object.keys(dd).length>1)cls+=' partial';
-    }
-
-    const cell=document.createElement('div');
-    cell.className=cls;
-    cell.innerHTML=`<span class="cc-num">${d}</span>`;
-
-    // dots for partial
-    if(!isFuture&&hasData&&!cls.includes('full')){
-      const dotWrap=document.createElement('div');
-      dotWrap.className='cc-dots';
-      const cats=['gym','boxing','makan','kulit'];
-      const colors=['var(--amber)','var(--coral)','var(--teal)','var(--rose)'];
-      cats.forEach((c,i)=>{
-        if(getCatDayScore(k,c)){
-          const dot=document.createElement('div');
-          dot.className='cc-dot';
-          dot.style.background=colors[i];
-          dotWrap.appendChild(dot);
-        }
-      });
-      if(dotWrap.children.length)cell.appendChild(dotWrap);
-    }
-
-    if(!isFuture&&hasData){
-      cell.onclick=()=>openDayDetail(calYear,calMonth,d,k);
-    }
-    grid.appendChild(cell);
+  const totalKal = getTodayTotals().kal;
+  const totalProt = getTodayTotals().prot;
+  document.getElementById('dash-bulk-sub').textContent = `${totalKal} kal · ${totalProt}g protein`;
+  if (sleepDone && state.sleep[TODAY]) {
+    const s = state.sleep[TODAY];
+    document.getElementById('dash-sleep-sub').textContent = `${s.start} → ${s.end} (${s.dur})`;
   }
 
-  // Chain stats
-  const streak=getOverallStreak();
-  const best=getBestStreak();
-  $('ch-cur').textContent=streak;
-  $('ch-best2').textContent=best;
-  // month count
-  const all=S.get('days')||{};
-  let monthCount=0;
-  for(let d=1;d<=days;d++){
-    const k=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    if(isDaySuccess(k))monthCount++;
-  }
-  $('ch-month').textContent=monthCount;
+  // Streaks overview
+  renderStreakOverview();
 }
 
-// ════════════════════════════════════════════
-// DAY DETAIL MODAL
-// ════════════════════════════════════════════
-function openDayDetail(y,m,d,k){
-  const label=DAYS[new Date(y,m,d).getDay()]+', '+d+' '+MONTHS[m]+' '+y;
-  $('day-modal-title').textContent=label;
-  const dd=getDayData(k);
-  const cont=$('day-modal-content');cont.innerHTML='';
-  const items=[
-    {label:'Gym: '+(dd.gymType||'—')+(dd.gymSplitName?' ('+dd.gymSplitName+')':''),color:'var(--amber)',done:dd.gymType},
-    {label:'Makan pagi',color:'var(--teal)',done:dd.meals&&dd.meals.sahur},
-    {label:'Makan siang',color:'var(--teal)',done:dd.meals&&dd.meals.siang},
-    {label:'Makan malam',color:'var(--teal)',done:dd.meals&&dd.meals.malem},
-    {label:'Protein shake',color:'var(--teal)',done:dd.shake},
-    {label:`Air: ${dd.water||0}/${S.get('waterTarget')||8} gelas`,color:'var(--sky)',done:(dd.water||0)>=(S.get('waterTarget')||8)},
-    {label:`Tidur: ${dd.sleep||'—'} jam`,color:'var(--lavender)',done:(dd.sleep||0)>=(S.get('sleepTarget')||7)},
-    ...getSkinSteps().map(s=>({label:s.name,color:'var(--rose)',done:dd.skincare&&dd.skincare[s.id]})),
-    ...HAIR_ITEMS.map(h=>({label:h.emoji+' '+h.name,color:'var(--sky)',done:dd.hair&&dd.hair[h.id]})),
-    ...BOXING_HABITS.map(h=>({label:h.emoji+' '+h.name,color:'var(--coral)',done:dd.boxing&&dd.boxing[h.id]})),
+function renderStreakOverview() {
+  const gymSet = new Set(Object.keys(state.gym).filter(d => state.gym[d] && state.gym[d].exercises && state.gym[d].exercises.length > 0));
+  const boxSet = new Set(Object.keys(state.boxing).filter(d => state.boxing[d]));
+  const sleepSet = new Set(Object.keys(state.sleep));
+  const skinAmSet = new Set(Object.keys(state.skin.amLog).filter(d => (state.skin.amLog[d]||[]).every(Boolean)));
+  const skinPmSet = new Set(Object.keys(state.skin.pmLog).filter(d => (state.skin.pmLog[d]||[]).every(Boolean)));
+
+  const items = [
+    {label:'Gym', streak: calcStreak(gymSet), color:'var(--gym)'},
+    {label:'Boxing', streak: calcStreak(boxSet), color:'var(--box)'},
+    {label:'Tidur', streak: calcStreak(sleepSet), color:'var(--sleep)'},
+    {label:'Skincare Pagi', streak: calcStreak(skinAmSet), color:'var(--skin)'},
+    {label:'Skincare Malam', streak: calcStreak(skinPmSet), color:'var(--skin)'},
   ];
-  items.forEach(item=>{
-    const row=document.createElement('div');
-    row.className='day-detail-item';
-    row.innerHTML=`<div class="ddi-dot" style="background:${item.done?item.color:'var(--b2)'}"></div><span style="flex:1;color:${item.done?'var(--t1)':'var(--t2)'};font-size:12px;">${item.label}</span><span style="font-family:var(--mono);font-size:10px;color:${item.done?item.color:'var(--t3)'};">${item.done?'✓':'—'}</span>`;
-    cont.appendChild(row);
-  });
-  openOv('ov-day');
+
+  document.getElementById('streakOverview').innerHTML = items.map(item => `
+    <div class="flex-between" style="padding:10px 0;border-bottom:1px solid var(--border);">
+      <span style="font-size:13px;">${item.label}</span>
+      <span class="streak" style="background:${item.color}22;color:${item.color};">🔥 ${item.streak} hari</span>
+    </div>
+  `).join('').replace(/border-bottom:1px solid var\(--border\);"><\/div>$/, 'border:none;"></div>');
 }
 
-// ════════════════════════════════════════════
-// STATS
-// ════════════════════════════════════════════
-function renderStats(){
-  const all=S.get('days')||{};
-  const keys=Object.keys(all).sort();
-  const activeDays=keys.filter(k=>Object.keys(all[k]).length>1).length;
-  const fullDays=keys.filter(k=>isDaySuccess(k)).length;
-  const totalGym=keys.filter(k=>all[k].gymType==='gym').length;
-  const totalShake=keys.filter(k=>all[k].shake).length;
-  const streak=getOverallStreak();
-  const best=getBestStreak();
+// ========== GYM ==========
+let gymExercises = []; // [{name, sets:[{reps,weight}]}]
 
-  const grid=$('stat-grid');grid.innerHTML='';
-  [
-    {n:streak,l:'Streak Sekarang',s:'hari berturut-turut',c:'var(--amber)'},
-    {n:best,l:'Best Streak',s:'hari terbaik',c:'var(--teal)'},
-    {n:fullDays,l:'Hari Sempurna',s:'semua kategori done',c:'var(--rose)'},
-    {n:activeDays,l:'Hari Aktif',s:'total ada data',c:'var(--sky)'},
-  ].forEach(s=>{
-    const card=document.createElement('div');
-    card.className='stat-card';
-    card.innerHTML=`<div class="stat-card-n" style="color:${s.c}">${s.n}</div><div class="stat-card-l">${s.l}</div><div class="stat-card-s">${s.s}</div>`;
-    grid.appendChild(card);
-  });
-
-  // per habit
-  const list=$('habit-stat-list');list.innerHTML='';
-  const habits=[
-    {id:'gym',emoji:'🏋️',name:'Gym / Rest',getScore:k=>getCatDayScore(k,'gym'),color:'var(--amber)'},
-    {id:'makan',emoji:'🍱',name:'Makan 3x',getScore:k=>{const m=all[k]&&all[k].meals||{};return m.sahur&&m.siang&&m.malem;},color:'var(--teal)'},
-    {id:'shake',emoji:'🥤',name:'Protein Shake',getScore:k=>!!(all[k]&&all[k].shake),color:'var(--teal)'},
-    {id:'water',emoji:'💧',name:'Hidrasi Cukup',getScore:k=>(all[k]&&all[k].water||0)>=(S.get('waterTarget')||8),color:'var(--sky)'},
-    {id:'sleep',emoji:'😴',name:'Tidur Cukup',getScore:k=>(all[k]&&all[k].sleep||0)>=(S.get('sleepTarget')||7),color:'var(--lavender)'},
-    {id:'skin',emoji:'✨',name:'Skincare Malam',getScore:k=>{const sc=all[k]&&all[k].skincare||{};return getSkinSteps().length>0&&getSkinSteps().every(s=>sc[s.id]);},color:'var(--rose)'},
-    {id:'keramas',emoji:'🚿',name:'Keramas',getScore:k=>!!(all[k]&&all[k].hair&&all[k].hair.keramas),color:'var(--sky)'},
-    ...BOXING_HABITS.map(h=>({id:'bx_'+h.id,emoji:h.emoji,name:h.name,getScore:k=>!!(all[k]&&all[k].boxing&&all[k].boxing[h.id]),color:'var(--coral)'})),
-  ];
-  habits.forEach((h,idx)=>{
-    const done=activeDays>0?keys.filter(k=>h.getScore(k)).length:0;
-    const pct=activeDays>0?Math.round(done/Math.max(activeDays,1)*100):0;
-    let streak2=0,today2=new Date();
-    for(let i=0;i<365;i++){
-      const d=new Date(today2);d.setDate(today2.getDate()-i);
-      const k=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-      if(h.getScore(k))streak2++;else if(i>0)break;
-    }
-    const row=document.createElement('div');row.className='habit-stat';
-    row.innerHTML=`<div class="hs-emoji">${h.emoji}</div><div class="hs-name">${h.name}</div><div class="hs-bar-wrap"><div class="hs-bar-fill" style="width:${pct}%;background:${h.color}"></div></div><div class="hs-pct">${pct}%</div><div class="hs-streak">${streak2}🔥</div>`;
-    list.appendChild(row);
-  });
+function loadGymToday() {
+  gymExercises = (state.gym[TODAY] && state.gym[TODAY].exercises) ? JSON.parse(JSON.stringify(state.gym[TODAY].exercises)) : [];
 }
 
-// ════════════════════════════════════════════
-// OVERLAYS
-// ════════════════════════════════════════════
-function openOv(id){$(id).classList.add('on');}
-function closeOv(id){$(id).classList.remove('on');}
-document.querySelectorAll('.ov').forEach(ov=>{ov.addEventListener('click',e=>{if(e.target===ov)ov.classList.remove('on');});});
+function renderGym() {
+  const streak = calcStreak(new Set(Object.keys(state.gym).filter(d => state.gym[d] && state.gym[d].exercises && state.gym[d].exercises.length > 0)));
+  document.getElementById('gymStreak').textContent = `🔥 ${streak} hari`;
 
-// ════════════════════════════════════════════
-// SETTINGS SAVES
-// ════════════════════════════════════════════
-function saveSleepTarget(){const v=parseInt($('sleep-target-inp').value)||7;S.set('sleepTarget',v);sleepTarget=v;renderSleepBtns();toast('✓ Target tidur: '+v+' jam');}
-function saveWaterTarget(){const v=parseInt($('water-target-inp').value)||8;S.set('waterTarget',v);waterTarget=v;renderGlasses();toast('✓ Target air: '+v+' gelas');}
-function saveBoxingPhase(){const v=parseInt($('boxing-phase-inp').value)||1;S.set('boxingPhase',v);renderBoxingHabits();toast('🥊 Boxing phase '+v+' aktif!');}
-
-function exportData(){
-  const blob=new Blob([JSON.stringify({days:S.get('days'),skinSteps:S.get('skinSteps'),splits:S.get('splits'),boxingSkills:S.get('boxingSkills'),settings:{sleepTarget:S.get('sleepTarget'),waterTarget:S.get('waterTarget'),keramasTarget:S.get('keramasTarget'),boxingPhase:S.get('boxingPhase')}},null,2)],{type:'application/json'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`health-glow-backup-${todayStr()}.json`;a.click();toast('📦 Data diekspor!');
-}
-function importData(e){
-  const f=e.target.files[0];if(!f)return;
-  const r=new FileReader();
-  r.onload=ev=>{
-    try{
-      const p=JSON.parse(ev.target.result);
-      if(p.days)S.set('days',p.days);
-      if(p.skinSteps)S.set('skinSteps',p.skinSteps);
-      if(p.splits)S.set('splits',p.splits);
-      if(p.boxingSkills)S.set('boxingSkills',p.boxingSkills);
-      if(p.settings){if(p.settings.sleepTarget)S.set('sleepTarget',p.settings.sleepTarget);if(p.settings.waterTarget)S.set('waterTarget',p.settings.waterTarget);if(p.settings.keramasTarget)S.set('keramasTarget',p.settings.keramasTarget);if(p.settings.boxingPhase)S.set('boxingPhase',p.settings.boxingPhase);}
-      init();toast('✓ Data berhasil diimpor!');
-    }catch{toast('⚠ File tidak valid');}
-  };
-  r.readAsText(f);e.target.value='';
-}
-function confirmReset(){
-  if(confirm('Reset semua data? Tidak bisa dibatalkan!')){
-    ['days','skinSteps','splits','sleepTarget','waterTarget','keramasTarget','boxingSkills','boxingPhase'].forEach(k=>localStorage.removeItem('hg_'+k));
-    init();toast('Data direset');
+  const container = document.getElementById('gymExercises');
+  if (gymExercises.length === 0) {
+    container.innerHTML = '<div class="empty"><div class="empty-icon">🏋️</div>Belum ada exercise hari ini</div>';
+    return;
   }
-}
-
-// ════════════════════════════════════════════
-// BOXING — DAILY HABITS
-// ════════════════════════════════════════════
-const BOXING_HABITS=[
-  {id:'shadow',emoji:'🌅',name:'Shadow Boxing Pagi',sub:'10 menit — sebelum ngapa-ngapain',phase:1},
-  {id:'pushup',emoji:'💪',name:'100 Push-up',sub:'bisa dipecah 4x25 — no skip',phase:1},
-  {id:'roadwork',emoji:'🏃',name:'Roadwork / Lari',sub:'3-5km — bangun cardio base',phase:1},
-  {id:'gymboxing',emoji:'🥊',name:'Gym Boxing Session',sub:'teknik, drilling, pad work — no sparring ok',phase:1},
-  {id:'visualize',emoji:'🧠',name:'Visualisasi Mental',sub:'5 menit sebelum tidur — otak dilatih',phase:1},
-];
-
-function getBoxingHabitStreak(id){
-  let streak=0;const today=new Date();
-  for(let i=0;i<365;i++){
-    const d=new Date(today);d.setDate(today.getDate()-i);
-    const k=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-    const dd=getDayData(k);
-    if(dd.boxing&&dd.boxing[id])streak++;
-    else if(i>0)break;
-  }
-  return streak;
-}
-
-function toggleBoxingHabit(id){
-  const t=todayStr();const dd=getDayData(t);
-  const bx=dd.boxing||{};
-  bx[id]=!bx[id];
-  setDayData(t,{boxing:bx});
-  renderBoxingHabits();updateAllProgress();
-  const h=BOXING_HABITS.find(x=>x.id===id);
-  if(bx[id])toast(h.emoji+' '+h.name+' ✓');
-}
-
-function getBoxingPhase(){
-  // determine phase based on start date or manual — stored as setting
-  const phase=S.get('boxingPhase')||1;
-  return phase;
-}
-
-function renderBoxingHabits(){
-  const t=todayStr();const dd=getDayData(t);
-  const bx=dd.boxing||{};
-  const list=$('boxing-habit-list');list.innerHTML='';
-  const phase=getBoxingPhase();
-
-  const phaseName=['','Phase 1 — Foundation','Phase 2 — Development','Phase 3 — Sharpening'];
-  $('boxing-phase-badge').textContent='📅 '+phaseName[phase];
-
-  let done=0,total=BOXING_HABITS.length;
-  BOXING_HABITS.forEach(h=>{
-    const isDone=!!bx[h.id];
-    if(isDone)done++;
-    const streak=getBoxingHabitStreak(h.id);
-    const el=document.createElement('div');
-    el.className='box-habit'+(isDone?' done':'');
-    el.onclick=()=>toggleBoxingHabit(h.id);
-    el.innerHTML=`
-      <div class="bh-check">${isDone?'✓':''}</div>
-      <div class="bh-info">
-        <div class="bh-name">${h.emoji} ${h.name}</div>
-        <div class="bh-sub">${h.sub}</div>
-      </div>
-      <div class="bh-streak"><span>${streak}</span>hari</div>
-    `;
-    list.appendChild(el);
-  });
-
-  const pct=total>0?Math.round(done/total*100):0;
-  $('box-prog-fill').style.width=pct+'%';
-  $('boxing-pct').textContent=done+'/'+total;
-}
-
-// ════════════════════════════════════════════
-// BOXING — SKILL CURRICULUM
-// ════════════════════════════════════════════
-const BOXING_SKILLS=[
-  // Phase 1 — Foundation
-  {id:'sk_stance',phase:'1',icon:'🦶',name:'Stance & Guard',desc:'Orthodox/southpaw — tangan up, chin down'},
-  {id:'sk_jab',phase:'1',icon:'👊',name:'Jab',desc:'Senjata utama — setup semua combo'},
-  {id:'sk_cross',phase:'1',icon:'💥',name:'Cross (Straight Right)',desc:'Power punch — pindah berat badan'},
-  {id:'sk_hook',phase:'1',icon:'🌀',name:'Hook',desc:'Kiri & kanan — dari pinggang, bukan lengan'},
-  {id:'sk_uppercut',phase:'1',icon:'⬆️',name:'Uppercut',desc:'Close range — dari bawah ke atas'},
-  {id:'sk_footwork',phase:'1',icon:'👟',name:'Footwork Dasar',desc:'Advance, retreat, pivot — jangan crossed feet'},
-  {id:'sk_combo12',phase:'1',icon:'🔢',name:'Combo 1-2',desc:'Jab-Cross — drill sampai automatic'},
-  {id:'sk_combo123',phase:'1',icon:'🔢',name:'Combo 1-2-3',desc:'Jab-Cross-Hook kiri'},
-  // Phase 2 — Development
-  {id:'sk_slip',phase:'2',icon:'👀',name:'Slip Kiri & Kanan',desc:'Defense utama — bergerak dari pinggang'},
-  {id:'sk_block',phase:'2',icon:'🛡️',name:'Block & Parry',desc:'High guard block, deflect jab'},
-  {id:'sk_roll',phase:'2',icon:'🌊',name:'Roll / Duck',desc:'Under hooks — bukan tutup mata'},
-  {id:'sk_counter',phase:'2',icon:'⚡',name:'Counter Punching',desc:'Balas setelah defend — reflex, bukan pikir'},
-  {id:'sk_clinch',phase:'2',icon:'🤼',name:'Clinch & Break',desc:'Masuk clinch, survive, keluar clean'},
-  {id:'sk_sparring',phase:'2',icon:'🥊',name:'Sparring Survival',desc:'3 rounds tanpa panik — tenang di api'},
-  // Phase 3 — Sharpening
-  {id:'sk_pressure',phase:'3',icon:'😤',name:'Pressure Fighting',desc:'Walk orang down — control jarak & tempo'},
-  {id:'sk_combo_adv',phase:'3',icon:'🎯',name:'Advanced Combos 6+',desc:'Setup trap, feint, dan finish'},
-  {id:'sk_ring_iq',phase:'3',icon:'🧩',name:'Ring IQ',desc:'Baca lawan, adjust, hunting weakness'},
-  {id:'sk_mindset',phase:'3',icon:'💀',name:'Zero Fear / Zero Doubt',desc:'Kena pukul = data. Berdiri. Lanjut.'},
-];
-
-const LEVEL_LABELS=['Belum','Latihan','Solid','Master'];
-const LEVEL_COLORS=['var(--t3)','var(--sky)','var(--amber)','var(--coral)'];
-let activePhaseFilter='all';
-
-function getSkillData(){return S.get('boxingSkills')||{};}
-function setSkillLevel(id,lvl){
-  const sk=getSkillData();
-  const cur=sk[id]||{lvl:0,note:''};
-  const newLvl=cur.lvl===lvl?0:lvl; // tap same = unset
-  sk[id]={...cur,lvl:newLvl};
-  S.set('boxingSkills',sk);
-  renderSkills();
-}
-function saveSkillNote(id,val){
-  const sk=getSkillData();
-  const cur=sk[id]||{lvl:0};
-  sk[id]={...cur,note:val};
-  S.set('boxingSkills',sk);
-}
-
-function setPhaseFilter(f,el){
-  activePhaseFilter=f;
-  document.querySelectorAll('.phase-tab').forEach(t=>t.classList.remove('on'));
-  el.classList.add('on');
-  renderSkills();
-}
-
-function renderSkills(){
-  const sk=getSkillData();
-  const list=$('skill-list');list.innerHTML='';
-
-  const filtered=activePhaseFilter==='all'?BOXING_SKILLS:BOXING_SKILLS.filter(s=>s.phase===activePhaseFilter);
-
-  // per-phase mastered count
-  ['1','2','3'].forEach(p=>{
-    const total=BOXING_SKILLS.filter(s=>s.phase===p).length;
-    const mastered=BOXING_SKILLS.filter(s=>s.phase===p&&(sk[s.id]?.lvl||0)>=3).length;
-    $('ps-'+p).textContent=mastered+'/'+total;
-  });
-
-  // overall progress
-  const allTotal=BOXING_SKILLS.length;
-  const allPoints=BOXING_SKILLS.reduce((sum,s)=>sum+(sk[s.id]?.lvl||0),0);
-  const maxPoints=allTotal*3;
-  const pct=maxPoints>0?Math.round(allPoints/maxPoints*100):0;
-  $('skill-ov-pct').textContent=pct+'%';
-  $('skill-ov-fill').style.width=pct+'%';
-  const mastered=BOXING_SKILLS.filter(s=>(sk[s.id]?.lvl||0)>=3).length;
-  $('skill-ov-sub').textContent=mastered+' dari '+allTotal+' skill dikuasai (Solid+)';
-
-  filtered.forEach(skill=>{
-    const data=sk[skill.id]||{lvl:0,note:''};
-    const lvl=data.lvl||0;
-    const noteId='note_'+skill.id;
-
-    const card=document.createElement('div');
-    card.className='skill-card lvl-'+lvl;
-
-    const phaseBadge={1:'⚡ Phase 1',2:'🔥 Phase 2',3:'💀 Phase 3'}[skill.phase];
-    const pips=[1,2,3].map(i=>`<div class="lvl-pip l${i}${lvl>=i?' filled':''}" onclick="event.stopPropagation();setSkillLevel('${skill.id}',${i})"></div>`).join('');
-
-    card.innerHTML=`
-      <div class="skill-header" onclick="toggleSkillNote('${noteId}')">
-        <div class="skill-icon">${skill.icon}</div>
-        <div class="skill-meta">
-          <div class="skill-name">${skill.name}</div>
-          <div class="skill-phase-tag">${phaseBadge} · ${skill.desc}</div>
+  container.innerHTML = gymExercises.map((ex, ei) => `
+    <div class="exercise-block">
+      <div class="flex-between">
+        <div class="exercise-name">${ex.name}</div>
+        <div style="display:flex;gap:6px;">
+          <button class="btn btn-ghost btn-sm" onclick="addSet(${ei})">+ Set</button>
+          <button class="btn btn-danger btn-sm" onclick="removeExercise(${ei})">✕</button>
         </div>
-        <div class="skill-lvl-wrap">
-          <div>
-            <div class="lvl-pip-row">${pips}</div>
-            <div class="lvl-label lbl-${lvl}" style="text-align:right;margin-top:3px;">${LEVEL_LABELS[lvl]}</div>
+      </div>
+      <table class="sets-table">
+        <tr><th>SET</th><th>REPS</th><th>BERAT (kg)</th><th></th></tr>
+        ${ex.sets.map((s,si) => `
+          <tr>
+            <td class="set-num">${si+1}</td>
+            <td><input type="number" class="set-input" value="${s.reps}" placeholder="0" onchange="updateSet(${ei},${si},'reps',this.value)" /></td>
+            <td><input type="number" class="set-input" value="${s.weight}" placeholder="0" step="0.5" onchange="updateSet(${ei},${si},'weight',this.value)" /></td>
+            <td><button class="btn btn-danger btn-sm" onclick="removeSet(${ei},${si})" style="padding:4px 8px;">✕</button></td>
+          </tr>
+        `).join('')}
+      </table>
+    </div>
+  `).join('');
+
+  renderGymHistory();
+}
+
+function addExercise() {
+  const name = document.getElementById('newExerciseName').value.trim();
+  if (!name) return showToast('Masukin nama exercise dulu!');
+  gymExercises.push({name, sets:[{reps:'',weight:''}]});
+  document.getElementById('newExerciseName').value = '';
+  renderGym();
+}
+function removeExercise(ei) { gymExercises.splice(ei,1); renderGym(); }
+function addSet(ei) { gymExercises[ei].sets.push({reps:'',weight:''}); renderGym(); }
+function removeSet(ei,si) { gymExercises[ei].sets.splice(si,1); renderGym(); }
+function updateSet(ei,si,field,val) { gymExercises[ei].sets[si][field] = val; }
+function saveGymSession() {
+  if (gymExercises.length === 0) return showToast('Belum ada exercise!');
+  if (!state.gym[TODAY]) state.gym[TODAY] = {};
+  state.gym[TODAY].exercises = JSON.parse(JSON.stringify(gymExercises));
+  saveState();
+  showToast('✅ Sesi gym tersimpan!');
+  renderDashboard();
+  renderGymHistory();
+}
+
+function renderGymHistory() {
+  const days = Object.keys(state.gym).filter(d => state.gym[d] && state.gym[d].exercises && state.gym[d].exercises.length > 0).sort().reverse().slice(0,10);
+  const el = document.getElementById('gymHistoryContent');
+  if (days.length === 0) { el.innerHTML = '<div class="empty"><div class="empty-icon">📅</div>Belum ada history</div>'; return; }
+  el.innerHTML = days.map(d => {
+    const exList = state.gym[d].exercises;
+    return `
+      <div style="padding:14px 0;border-bottom:1px solid var(--border);">
+        <div class="flex-between" style="margin-bottom:8px;">
+          <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;">${fmt(d)}</span>
+          <span class="tag">${exList.length} exercise</span>
+        </div>
+        ${exList.map(ex => `
+          <div style="font-size:12px;color:var(--text-muted);margin-bottom:4px;">
+            <span style="color:var(--gym);font-weight:500;">${ex.name}</span>
+            — ${ex.sets.length} set
+            ${ex.sets.map((s,i) => `<span class="text-mono" style="font-size:11px;">${s.weight}kg×${s.reps}</span>`).join(' · ')}
           </div>
-        </div>
-      </div>
-      <div class="skill-note-wrap" id="${noteId}">
-        <textarea class="skill-note" placeholder="kapan lo ngerasa skill ini 'klik'? tulis di sini..." rows="2"
-          onchange="saveSkillNote('${skill.id}',this.value)">${data.note||''}</textarea>
-        <div class="skill-note-hint">💡 catatan tersimpan otomatis</div>
+        `).join('')}
       </div>
     `;
-    list.appendChild(card);
+  }).join('');
+}
+
+function toggleCollapse(id) {
+  const el = document.getElementById(id);
+  const isOpen = el.style.maxHeight !== '0px' && el.style.maxHeight !== '0';
+  el.style.maxHeight = isOpen ? '0' : el.scrollHeight + 'px';
+  const toggleEl = document.getElementById(id + 'Toggle');
+  if (toggleEl) toggleEl.textContent = isOpen ? '▼ LIHAT' : '▲ TUTUP';
+  if (!isOpen) setTimeout(() => el.style.maxHeight = 'none', 300);
+}
+
+// ========== BULKING ==========
+let templateType = 'item';
+function setTemplateType(t) {
+  templateType = t;
+  document.getElementById('typeItemBtn').className = t==='item' ? 'btn btn-primary btn-sm' : 'btn btn-ghost btn-sm';
+  document.getElementById('typePkgBtn').className = t==='package' ? 'btn btn-primary btn-sm' : 'btn btn-ghost btn-sm';
+}
+function saveTargets() {
+  const k = parseFloat(document.getElementById('targetKalInput').value) || 0;
+  const p = parseFloat(document.getElementById('targetProtInput').value) || 0;
+  state.targets = {kal: k, prot: p};
+  saveState();
+  closeModal('targetModal');
+  showToast('✅ Target disimpan!');
+  renderBulking();
+}
+function saveTemplate() {
+  const name = document.getElementById('tplName').value.trim();
+  const kal = parseFloat(document.getElementById('tplKal').value) || 0;
+  const prot = parseFloat(document.getElementById('tplProt').value) || 0;
+  const note = document.getElementById('tplNote').value.trim();
+  if (!name) return showToast('Masukin nama template!');
+  state.templates.push({id: Date.now(), type: templateType, name, kal, prot, note});
+  saveState();
+  closeModal('templateModal');
+  showToast('✅ Template tersimpan!');
+  document.getElementById('tplName').value = '';
+  document.getElementById('tplKal').value = '';
+  document.getElementById('tplProt').value = '';
+  document.getElementById('tplNote').value = '';
+  renderBulking();
+}
+function addFromTemplate(id) {
+  const tpl = state.templates.find(t => t.id === id);
+  if (!tpl) return;
+  if (!state.foodLog[TODAY]) state.foodLog[TODAY] = [];
+  state.foodLog[TODAY].push({name: tpl.name, kal: tpl.kal, prot: tpl.prot});
+  saveState();
+  showToast(`✅ ${tpl.name} ditambah!`);
+  renderBulking();
+  renderDashboard();
+}
+function addManualFood() {
+  const name = document.getElementById('manualFoodName').value.trim();
+  const kal = parseFloat(document.getElementById('manualFoodKal').value) || 0;
+  const prot = parseFloat(document.getElementById('manualFoodProt').value) || 0;
+  if (!name) return showToast('Masukin nama makanan!');
+  if (!state.foodLog[TODAY]) state.foodLog[TODAY] = [];
+  state.foodLog[TODAY].push({name, kal, prot});
+  saveState();
+  closeModal('addFoodModal');
+  showToast('✅ Makanan ditambah!');
+  document.getElementById('manualFoodName').value = '';
+  document.getElementById('manualFoodKal').value = '';
+  document.getElementById('manualFoodProt').value = '';
+  renderBulking();
+  renderDashboard();
+}
+function removeFoodLog(i) {
+  state.foodLog[TODAY].splice(i,1);
+  saveState();
+  renderBulking();
+  renderDashboard();
+}
+function deleteTemplate(id) {
+  state.templates = state.templates.filter(t => t.id !== id);
+  saveState();
+  renderBulking();
+}
+function getTodayTotals() {
+  const foods = state.foodLog[TODAY] || [];
+  return {
+    kal: foods.reduce((a,f) => a+f.kal, 0),
+    prot: foods.reduce((a,f) => a+f.prot, 0)
+  };
+}
+function renderBulking() {
+  // targets
+  document.getElementById('targetKalDisplay').textContent = state.targets.kal || '—';
+  document.getElementById('targetProtDisplay').textContent = state.targets.prot || '—';
+  document.getElementById('targetKalInput').value = state.targets.kal || '';
+  document.getElementById('targetProtInput').value = state.targets.prot || '';
+
+  const {kal, prot} = getTodayTotals();
+  document.getElementById('totalKal').textContent = kal;
+  document.getElementById('totalProt').textContent = prot;
+  document.getElementById('kalBar').style.width = state.targets.kal ? Math.min(100, Math.round(kal/state.targets.kal*100)) + '%' : '0%';
+  document.getElementById('protBar').style.width = state.targets.prot ? Math.min(100, Math.round(prot/state.targets.prot*100)) + '%' : '0%';
+
+  // templates
+  const itemTpls = state.templates.filter(t => t.type === 'item');
+  const pkgTpls = state.templates.filter(t => t.type === 'package');
+  const renderTpls = (arr, containerId) => {
+    const el = document.getElementById(containerId);
+    if (arr.length === 0) { el.innerHTML = '<span class="text-muted">Belum ada template</span>'; return; }
+    el.innerHTML = arr.map(t => `
+      <div class="template-chip" onclick="addFromTemplate(${t.id})">
+        <span>${t.name}</span>
+        <span class="chip-macro">${t.kal}kal · ${t.prot}g</span>
+        <span onclick="event.stopPropagation();deleteTemplate(${t.id})" style="color:var(--box);margin-left:4px;font-size:12px;">✕</span>
+      </div>
+    `).join('');
+  };
+  renderTpls(itemTpls, 'itemTemplates');
+  renderTpls(pkgTpls, 'packageTemplates');
+
+  // food log
+  const foods = state.foodLog[TODAY] || [];
+  const foodEl = document.getElementById('foodLogList');
+  if (foods.length === 0) { foodEl.innerHTML = '<div class="empty"><div class="empty-icon">🍽️</div>Belum ada makanan hari ini</div>'; }
+  else {
+    foodEl.innerHTML = foods.map((f,i) => `
+      <div class="food-log-item">
+        <div>
+          <div class="food-name">${f.name}</div>
+          <div class="food-macros"><span>${f.kal} kal</span> · ${f.prot}g protein</div>
+        </div>
+        <button class="btn btn-danger btn-sm" onclick="removeFoodLog(${i})">✕</button>
+      </div>
+    `).join('');
+  }
+
+  // weight log
+  const wEl = document.getElementById('weightLog');
+  if (state.weights.length === 0) { wEl.innerHTML = '<div class="empty"><div class="empty-icon">⚖️</div>Belum ada data berat</div>'; }
+  else {
+    const sorted = [...state.weights].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,8);
+    wEl.innerHTML = sorted.map((w,i) => {
+      const prev = sorted[i+1];
+      let delta = '';
+      if (prev) {
+        const diff = w.kg - prev.kg;
+        delta = `<span class="weight-delta ${diff>=0?'delta-up':'delta-down'}">${diff>=0?'+':''}${diff.toFixed(1)} kg</span>`;
+      }
+      return `<div class="weight-entry">
+        <div>
+          <div class="weight-val">${w.kg} kg</div>
+          <div class="weight-date">${fmt(w.date)}</div>
+        </div>
+        ${delta}
+        <button class="btn btn-danger btn-sm" onclick="removeWeight('${w.date}')">✕</button>
+      </div>`;
+    }).join('');
+  }
+}
+function saveWeight() {
+  const kg = parseFloat(document.getElementById('weightInput').value);
+  const date = document.getElementById('weightDate').value || TODAY;
+  if (!kg) return showToast('Masukin berat dulu!');
+  state.weights = state.weights.filter(w => w.date !== date);
+  state.weights.push({date, kg});
+  state.weights.sort((a,b) => a.date.localeCompare(b.date));
+  saveState();
+  closeModal('weightModal');
+  showToast('✅ Berat tersimpan!');
+  document.getElementById('weightInput').value = '';
+  renderBulking();
+}
+function removeWeight(date) {
+  state.weights = state.weights.filter(w => w.date !== date);
+  saveState();
+  renderBulking();
+}
+
+// ========== FOTO PROGRESS BULKING ==========
+function getWeekKey() {
+  const d = new Date(TODAY + 'T00:00:00');
+  const jan1 = new Date(d.getFullYear(), 0, 1);
+  const week = Math.ceil(((d - jan1) / 86400000 + jan1.getDay() + 1) / 7);
+  return `${d.getFullYear()}-W${String(week).padStart(2,'0')}`;
+}
+function markPhotoDone() {
+  const wk = getWeekKey();
+  if (!state.photoLog) state.photoLog = [];
+  state.photoLog = state.photoLog.filter(p => p.week !== wk);
+  state.photoLog.push({ week: wk, date: TODAY, skipped: false });
+  saveState();
+  showToast('📸 Foto progress dicatat!');
+  renderPhotoProgress();
+}
+function skipPhotoThisWeek() {
+  const wk = getWeekKey();
+  if (!state.photoLog) state.photoLog = [];
+  state.photoLog = state.photoLog.filter(p => p.week !== wk);
+  state.photoLog.push({ week: wk, date: TODAY, skipped: true });
+  saveState();
+  showToast('⏭ Oke, diingetin minggu depan!');
+  renderPhotoProgress();
+}
+function renderPhotoProgress() {
+  if (!state.photoLog) state.photoLog = [];
+  const wk = getWeekKey();
+  const thisWeek = state.photoLog.find(p => p.week === wk);
+  const badge = document.getElementById('photoReminderBadge');
+  const box = document.getElementById('photoReminderBox');
+  const title = document.getElementById('photoReminderTitle');
+  const text = document.getElementById('photoReminderText');
+
+  if (thisWeek && !thisWeek.skipped) {
+    badge.textContent = '✅ Minggu ini done';
+    box.style.background = 'var(--bulk-dim)';
+    box.style.borderColor = 'rgba(34,197,94,0.4)';
+    title.textContent = '✅ Foto minggu ini sudah!';
+    text.textContent = 'Dicatat tanggal ' + fmt(thisWeek.date) + '. Konsisten terus bro, hasilnya keliatan dalam beberapa minggu!';
+  } else if (thisWeek && thisWeek.skipped) {
+    badge.textContent = '⏭ Skip minggu ini';
+    box.style.background = 'rgba(249,115,22,0.08)';
+    box.style.borderColor = 'rgba(249,115,22,0.2)';
+    title.textContent = '⏭ Skip minggu ini';
+    text.textContent = 'Ga apa-apa, ingetin lagi minggu depan. Foto progress penting buat ngeliat perubahan yang ga keliatan di timbangan!';
+  } else {
+    badge.textContent = '⚠️ Belum foto!';
+    box.style.background = 'rgba(249,115,22,0.08)';
+    box.style.borderColor = 'rgba(249,115,22,0.25)';
+    title.textContent = '📅 Reminder: Foto minggu ini!';
+    text.textContent = 'Foto badan tiap minggu (Senin pagi, sebelum makan) buat ngeliat perubahan massa otot. Front, side, back. Konsisten lebih penting dari hasil instan.';
+  }
+
+  const el = document.getElementById('photoLogList');
+  const sorted = [...state.photoLog].sort((a,b) => b.date.localeCompare(a.date)).slice(0,8);
+  if (sorted.length === 0) {
+    el.innerHTML = '<div class="empty"><div class="empty-icon">📷</div>Belum ada log foto progress</div>';
+    return;
+  }
+  el.innerHTML = sorted.map(p => `
+    <div class="flex-between" style="padding:10px 0;border-bottom:1px solid var(--border);">
+      <div>
+        <div style="font-size:13px;font-weight:500;">${p.week}</div>
+        <div class="text-muted">${fmt(p.date)}</div>
+      </div>
+      <span class="tag" style="${!p.skipped ? 'color:var(--bulk);border-color:rgba(34,197,94,0.3);' : ''}">
+        ${p.skipped ? '⏭ Skip' : '📸 Done'}
+      </span>
+    </div>
+  `).join('');
+}
+
+// ========== BOXING ==========
+function toggleBoxing() {
+  state.boxing[TODAY] = !state.boxing[TODAY];
+  saveState();
+  renderBoxing();
+  renderDashboard();
+}
+function renderBoxing() {
+  const done = !!state.boxing[TODAY];
+  const boxSet = new Set(Object.keys(state.boxing).filter(d => state.boxing[d]));
+  const streak = calcStreak(boxSet);
+  document.getElementById('boxStreak').textContent = `🔥 ${streak} hari`;
+  document.getElementById('boxCheckBtn').style.transform = done ? 'scale(1.2)' : 'scale(1)';
+  document.getElementById('boxStatus').textContent = done ? '✅ Udah latihan hari ini!' : 'Belum latihan hari ini';
+  document.getElementById('boxStatus').style.color = done ? 'var(--box)' : 'var(--text)';
+
+  const histEl = document.getElementById('boxHistory');
+  const days = Object.keys(state.boxing).filter(d => state.boxing[d]).sort().reverse().slice(0,14);
+  if (days.length === 0) { histEl.innerHTML = '<div class="empty"><div class="empty-icon">📅</div>Belum ada data boxing</div>'; return; }
+  histEl.innerHTML = `<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;">` +
+    days.map(d => `<span class="tag" style="color:var(--box);border-color:rgba(239,68,68,0.3);">🥊 ${fmt(d)}</span>`).join('') +
+    `</div>`;
+}
+
+// ========== SLEEP ==========
+function calcDuration(start, end) {
+  let [sh,sm] = start.split(':').map(Number);
+  let [eh,em] = end.split(':').map(Number);
+  let mins = (eh*60+em) - (sh*60+sm);
+  if (mins < 0) mins += 24*60;
+  const h = Math.floor(mins/60);
+  const m = mins%60;
+  return `${h}j ${m}m`;
+}
+function logSleep() {
+  const start = document.getElementById('sleepStart').value;
+  const end = document.getElementById('sleepEnd').value;
+  if (!start || !end) return showToast('Isi jam tidur & bangun dulu!');
+  const dur = calcDuration(start, end);
+  state.sleep[TODAY] = {start, end, dur};
+  saveState();
+  showToast('✅ Tidur tersimpan!');
+  renderSleep();
+  renderDashboard();
+}
+function renderSleep() {
+  const sleepSet = new Set(Object.keys(state.sleep));
+  const streak = calcStreak(sleepSet);
+  document.getElementById('sleepStreak').textContent = `🔥 ${streak} hari`;
+
+  const todayDisplay = document.getElementById('todaySleepDisplay');
+  if (state.sleep[TODAY]) {
+    const s = state.sleep[TODAY];
+    todayDisplay.style.display = 'block';
+    todayDisplay.innerHTML = `
+      <div class="sleep-visual">
+        <div class="sleep-time-block">
+          <div class="sleep-time-val">${s.start}</div>
+          <div class="sleep-time-lbl">TIDUR</div>
+        </div>
+        <div class="sleep-arrow">→</div>
+        <div class="sleep-time-block">
+          <div class="sleep-time-val">${s.end}</div>
+          <div class="sleep-time-lbl">BANGUN</div>
+        </div>
+        <div class="sleep-duration">
+          <span class="sleep-dur-val">${s.dur}</span>
+          <span>durasi</span>
+        </div>
+      </div>
+    `;
+  } else { todayDisplay.style.display = 'none'; }
+
+  const days = Object.keys(state.sleep).sort().reverse().slice(0,7);
+  const histEl = document.getElementById('sleepHistoryList');
+  if (days.length === 0) { histEl.innerHTML = '<div class="empty"><div class="empty-icon">🌙</div>Belum ada data tidur</div>'; }
+  else {
+    histEl.innerHTML = `
+      <table class="history-table">
+        <tr><th>TANGGAL</th><th>TIDUR</th><th>BANGUN</th><th>DURASI</th></tr>
+        ${days.map(d => {
+          const s = state.sleep[d];
+          return `<tr>
+            <td>${fmt(d)}</td>
+            <td class="text-mono" style="color:var(--sleep)">${s.start}</td>
+            <td class="text-mono" style="color:var(--sleep)">${s.end}</td>
+            <td class="text-mono">${s.dur}</td>
+          </tr>`;
+        }).join('')}
+      </table>
+    `;
+  }
+
+  // Sleep chart
+  const chartEl = document.getElementById('sleepChart');
+  if (days.length === 0) { chartEl.innerHTML = ''; return; }
+  const MAX_H = 12;
+  chartEl.innerHTML = `
+    <div class="section-lbl" style="margin-bottom:8px;">DURASI TIDUR (7 HARI TERAKHIR)</div>
+    <div class="sleep-chart">
+      ${[...days].reverse().map(d => {
+        const s = state.sleep[d];
+        let [sh,sm] = s.start.split(':').map(Number);
+        let [eh,em] = s.end.split(':').map(Number);
+        let mins = (eh*60+em) - (sh*60+sm);
+        if (mins < 0) mins += 24*60;
+        const hours = mins/60;
+        const pct = Math.min(100, (hours/MAX_H)*100);
+        const label = d.slice(5);
+        return `
+          <div class="sleep-bar-row">
+            <span class="sleep-bar-lbl">${label}</span>
+            <div class="sleep-bar-track">
+              <div class="sleep-bar-fill" style="width:${pct}%">
+                <span class="sleep-bar-text">${s.dur}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+}
+
+// ========== SKINCARE ==========
+function checklistAllDone(period) {
+  const steps = period === 'am' ? state.skin.amSteps : state.skin.pmSteps;
+  const log = period === 'am' ? state.skin.amLog : state.skin.pmLog;
+  if (!steps || steps.length === 0) return false;
+  const todayLog = log[TODAY] || [];
+  return steps.every((_, i) => !!todayLog[i]);
+}
+function toggleSkinStep(period, i) {
+  const log = period === 'am' ? state.skin.amLog : state.skin.pmLog;
+  const steps = period === 'am' ? state.skin.amSteps : state.skin.pmSteps;
+  if (!log[TODAY]) log[TODAY] = new Array(steps.length).fill(false);
+  while (log[TODAY].length < steps.length) log[TODAY].push(false);
+  log[TODAY][i] = !log[TODAY][i];
+  saveState();
+  renderSkin();
+  renderDashboard();
+}
+function addSkinStep(period) {
+  const inputId = period === 'am' ? 'newSkinAmStep' : 'newSkinPmStep';
+  const val = document.getElementById(inputId).value.trim();
+  if (!val) return;
+  if (period === 'am') state.skin.amSteps.push(val);
+  else state.skin.pmSteps.push(val);
+  document.getElementById(inputId).value = '';
+  saveState();
+  renderSkin();
+}
+function removeSkinStep(period, i) {
+  if (period === 'am') { state.skin.amSteps.splice(i,1); if (state.skin.amLog[TODAY]) state.skin.amLog[TODAY].splice(i,1); }
+  else { state.skin.pmSteps.splice(i,1); if (state.skin.pmLog[TODAY]) state.skin.pmLog[TODAY].splice(i,1); }
+  saveState();
+  renderSkin();
+}
+function setSkinRating(val) {
+  state.skin.condition[TODAY] = val;
+  saveState();
+  renderSkin();
+}
+function renderChecklist(period, containerId) {
+  const steps = period === 'am' ? state.skin.amSteps : state.skin.pmSteps;
+  const log = period === 'am' ? state.skin.amLog : state.skin.pmLog;
+  const todayLog = log[TODAY] || [];
+  const el = document.getElementById(containerId);
+  if (steps.length === 0) { el.innerHTML = '<div class="empty">Tambah langkah dulu!</div>'; return; }
+  el.innerHTML = steps.map((step, i) => {
+    const done = !!todayLog[i];
+    return `
+      <div class="checklist-item ${done?'done':''}" onclick="toggleSkinStep('${period}',${i})">
+        <div class="check-box">${done?'✓':''}</div>
+        <div class="check-label">${step}</div>
+        <button onclick="event.stopPropagation();removeSkinStep('${period}',${i})" class="btn btn-danger btn-sm" style="margin-left:auto;padding:4px 8px;">✕</button>
+      </div>
+    `;
+  }).join('');
+}
+function renderSkin() {
+  const amSet = new Set(Object.keys(state.skin.amLog).filter(d => checklistAllDone('am')));
+  const pmSet = new Set(Object.keys(state.skin.pmLog).filter(d => checklistAllDone('pm')));
+  document.getElementById('skinAmStreak').textContent = `🔥 ${calcStreak(amSet)} hari`;
+  document.getElementById('skinPmStreak').textContent = `🔥 ${calcStreak(pmSet)} hari`;
+
+  renderChecklist('am', 'skinAmChecklist');
+  renderChecklist('pm', 'skinPmChecklist');
+
+  // Rating
+  const currentRating = state.skin.condition[TODAY] || 0;
+  document.querySelectorAll('.rating-btn').forEach(btn => {
+    btn.classList.toggle('active', parseInt(btn.dataset.val) === currentRating);
   });
+
+  // Skin history
+  const histEl = document.getElementById('skinHistoryContent');
+  const ratingEmoji = ['','😤','😕','😐','🙂','😊'];
+  const days = Object.keys(state.skin.condition).sort().reverse().slice(0,14);
+  if (days.length === 0) { histEl.innerHTML = '<div class="empty"><div class="empty-icon">📅</div>Belum ada history kondisi kulit</div>'; return; }
+  histEl.innerHTML = `
+    <table class="history-table">
+      <tr><th>TANGGAL</th><th>KONDISI</th><th>PAGI</th><th>MALAM</th></tr>
+      ${days.map(d => {
+        const rating = state.skin.condition[d] || 0;
+        const amDone = (state.skin.amLog[d] || []).every(Boolean) ? '✅' : '—';
+        const pmDone = (state.skin.pmLog[d] || []).every(Boolean) ? '✅' : '—';
+        return `<tr>
+          <td>${fmt(d)}</td>
+          <td>${ratingEmoji[rating] || '—'} ${rating || '—'}</td>
+          <td style="text-align:center">${amDone}</td>
+          <td style="text-align:center">${pmDone}</td>
+        </tr>`;
+      }).join('')}
+    </table>
+  `;
 }
 
-function toggleSkillNote(id){
-  const wrap=$(id);
-  if(wrap)wrap.classList.toggle('open');
+// ========== RENDER ALL ==========
+function renderAll() {
+  renderDashboard();
+  renderGym();
+  renderBulking();
+  renderPhotoProgress();
+  renderBoxing();
+  renderSleep();
+  renderSkin();
 }
 
-// ════════════════════════════════════════════
-// TOAST
-// ════════════════════════════════════════════
-let toastT;
-function toast(msg){const el=$('toast');el.textContent=msg;el.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove('on'),2400);}
-
-// ════════════════════════════════════════════
-// NAV
-// ════════════════════════════════════════════
-function nav(id,btn){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
-  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
-  $('pg-'+id).classList.add('on');btn.classList.add('on');
-  if(id==='chain'){renderCalendar();}
-  if(id==='stats'){renderStats();}
-  if(id==='boxing'){renderSkills();}
-  if(id==='settings'){renderSplitTplList();$('sleep-target-inp').value=S.get('sleepTarget')||7;$('water-target-inp').value=S.get('waterTarget')||8;$('boxing-phase-inp').value=S.get('boxingPhase')||1;}
-}
-
-// ════════════════════════════════════════════
-// INIT
-// ════════════════════════════════════════════
-function init(){
-  const now=new Date();
-  calYear=now.getFullYear();calMonth=now.getMonth();
-  $('th-date').textContent=DAYS[now.getDay()]+', '+now.getDate()+' '+MONTHS[now.getMonth()]+' '+now.getFullYear();
-  $('keramas-target').value=S.get('keramasTarget')||3;
-
-  renderGymSection();
-  renderMeals();
-  renderShake();
-  renderGlasses();
-  renderSleepBtns();
-  renderSkincareSteps();
-  renderHairList();
-  renderBoxingHabits();
-  // reset manual toggle flags on fresh init (new day)
-  ['gym','boxing','nutrisi','kulit','rambut'].forEach(id=>{
-    const sec=$('acc-'+id);if(sec)delete sec.dataset.manualToggle;
-  });
-  updateAllProgress();
-  renderCalendar();
-}
-
-init();
-window.addEventListener('resize',()=>{});
+// ========== INIT ==========
+window.addEventListener('DOMContentLoaded', () => {
+  loadState();
+  renderDate();
+  loadGymToday();
+  document.getElementById('weightDate').value = TODAY;
+  renderAll();
+});
 </script>
 </body>
 </html>
